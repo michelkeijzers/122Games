@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Games">
+      <UniqueIdentifier>{a86a4beb-560b-48bf-a518-bcb9cb72bd74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Games">
+      <UniqueIdentifier>{bb2b111e-7dbe-46f6-ac60-932296ba65c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{48d22f18-79d7-4c94-bd8c-091a557019a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{3ab4b7d1-f5f6-47b1-b96f-8db9509102c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{ee11f324-a630-4cc3-8842-c7bfc2cee420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{0c831ad4-eb6f-46ff-bcb8-d75d72a4853c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ArduinoStub">
+      <UniqueIdentifier>{649636f0-dc2d-4180-8035-0fc01e8bf407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ArduinoStub">
+      <UniqueIdentifier>{4b2a5a49-a78f-4950-8057-28e517dab8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Arduino">
+      <UniqueIdentifier>{77a31274-8015-4c71-a2be-6f2616445387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Arduino">
+      <UniqueIdentifier>{b38ea918-21a0-4b9e-914c-eaecb45bdd66}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="122Games.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Games.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="CppScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="LedStripScreen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Rgb.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Worms.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoStringStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="Buzzer.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassNames.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="BitsUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CharUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="LedColor.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="LedStrip.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="FastLedStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="LiquidCrystalStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="122Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo.cpp">
+      <Filter>Source Files\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="CppScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="LedStripScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Rgb.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Worms.cpp">
+      <Filter>Source Files\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="WinApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Buzzer.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoStringStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="ArduinoStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="AssertUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="BitsUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LiquidCrystalStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="LedStrip.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="LedColor.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="FastLedStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="CharUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="122Games.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="122Games.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Documentation.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RelayBox.ino">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
