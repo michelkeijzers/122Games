@@ -1,0 +1,12 @@
+Windows Keyboard Button mapping
+-------------------------------
+
+			Player 1		Player 2			  Main
+UP				W				P					-
+RIGHT			S				L					Page Down (34)
+DOWN			Z				;					-
+LEFT			A				.					Delete    (46)
+SELECT			X				/					Page Up   (33)
+START			-				-					Home      (36)
+STOP			-				-					End       (35)
+BACK			-				-					Insert    (45)
