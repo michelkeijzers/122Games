@@ -1,10 +1,14 @@
 #pragma once
 
 #include "Canvas.h"
+#include "Ui.h"
+
 
 class Game
 {
 public:
+	Game();
+
 	enum class EButton
 	{
 		Up,
@@ -14,14 +18,14 @@ public:
 		Select
 	};
 
+	void SetUi(Ui* ui);
+
 	virtual void Start() = 0;
 	virtual void Play() = 0;
 
 	virtual void HandleButton(int player, EButton button) = 0;
-
-	Canvas* GetCanvas();
 	
 protected:
-	Canvas _canvas;
+	Ui* _ui;
 };
 

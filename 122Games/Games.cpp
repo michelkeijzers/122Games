@@ -3,30 +3,47 @@
 #include "Worms.h"
 
 
-Games::Games()
+void Games::Init()
 {
+	SetActiveGameByIndex(0);
+	GetActiveGame()->Start();
+}
+
+Games::Games(Ui* ui)
+	: _activeGame(nullptr)
+{
+	_ui = ui;
+}
+
+Game* Games::GetActiveGame()
+{
+	return _activeGame;
 }
 
 
-void Games::SelectGameByIndex(int gameIndex, Game** activeGame)
+Game* Games::SetActiveGameByIndex(int gameIndex)
 {
-	if (*activeGame != nullptr)
+	if (_activeGame != nullptr)
 	{
-		delete *activeGame;
+		delete _activeGame;
 	}
 		
-	switch (gameIndex)
+	switch ((EGameId) gameIndex)
 	{
 	case GAME_DEMO:
-		*activeGame = new Demo();
+		_activeGame = new Demo();
 		break;
 
 	case GAME_WORMS:
-		*activeGame = new Worms();
+		_activeGame = new Worms();
 		break;
 
 	default:
 		throw "Illegal case";
 		break;
 	}
+
+	GetActiveGame()->SetUi(_ui);
+
+	return _activeGame;
 }

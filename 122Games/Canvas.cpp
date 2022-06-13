@@ -1,3 +1,5 @@
+/*
+
 #include "Canvas.h"
 
 #include "Rgb.h"
@@ -25,7 +27,7 @@ void Canvas::SetPixel(int x, int y, int red, int green, int blue)
 }
 
 
-bool Canvas::IsInvalidated(int x, int y)
+bool Canvas::IsPixelInvalidated(int x, int y)
 {
 	return _invalidated[x][y];
 }
@@ -41,3 +43,5 @@ void Canvas::ResetInvalidatedPixels()
 		}
 	}
 }
+
+*/

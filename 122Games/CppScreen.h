@@ -1,15 +1,15 @@
 #pragma once
 #include "Screen.h"
-#include "Canvas.h"
+#include "LedMatrix.h"
 
+class Ui;
 
-class CppScreen :
-    public Screen
+class CppScreen
 {
 public:
     CppScreen();
 
-    void Draw(Canvas* canvas, HDC hdc, HWND hwnd);
+    void Draw(Ui* canvas, HDC hdc, HWND hwnd);
 
     static RECT GetPixelRect(int x, int y);
 
@@ -19,6 +19,6 @@ private:
     RECT _pixelsBorderRectangle;
     HBRUSH _pixelsBorderColor;
 
-    RECT _rectangles[Canvas::MAX_X][Canvas::MAX_Y];
-    HBRUSH _brushes[Canvas::MAX_X][Canvas::MAX_Y];
+    RECT _rectangles[LedMatrix::MAX_X][LedMatrix::MAX_Y];
+    HBRUSH _brushes[LedMatrix::MAX_X][LedMatrix::MAX_Y];
 };

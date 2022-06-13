@@ -1,0 +1,94 @@
+@startuml
+
+class Ui
+{
+}
+
+class MainUi
+{
+}
+
+class PlayerUi
+{
+}
+
+
+class LedMatrix
+{
+  +int GetRows()
+  +Rgb GetLed(int x, int y)
+  +void SetLed(int x, int y, int red, int green, int blue)
+  +bool IsLedInvalidated(int x, int y)
+}
+
+class LedStrip <<Arduino>>
+{
+  +void SetNrOfLeds(int leds, int rows)
+  +int GetNrOfLeds()
+  +Rgb GetLed(int index)
+  +void SetLed(int index, int red, int green, int blue)
+  +bool IsLedInvalidated(int index)
+  +void ResetInvalidatedLeds()
+  -Rgb*_leds
+  -bool* _invalidated
+}
+
+class LcdDisplay <<Arduino>>
+{
+  +void SetLint(int lineNumber, char* text)
+  +char* GetLine(int lineNumber)
+  +void SetCursor(int x, int y)
+  +void EnableCursor(bool Enabled = true)
+  +void SetBackgroundLight(bool Enabled = true)
+  -String _lines[];
+}
+
+class LedSegments <<Arduino>>
+{
+  +void SetNumber(int number)
+  +int GetNumber()
+  +void SetMode(EMode mode)
+  +void SetDot(int dotIndex, bool enabled)
+  +int GetDot(int dotIndex)
+  +EMode GetMode()
+  -int _dots {4 bits}
+  -int _number
+  -EMode _mode
+  -type enum EMode  {Time, Number}
+}
+
+class Button <<Arduino>>
+{
+  +bool Read();
+  +bool GetCurrentState()
+  +bool GetPreviousState()
+  +bool SetBounceTime(int ms)
+  -bool _currentState
+  -bool _previousState
+  -int _bouceTimeInMs
+}
+
+class Speaker <<Arduino>>
+{
+  void SetToneFrequency(int frequency)
+  int GetToneFrequency()
+}
+
+Box *-- "1" Ui : _ui
+Ui *-- "1" MainUi : _mainUi
+Ui *-- "1" PlayerUi : _player1Ui
+Ui *-- "1" PlayerUi : _player2Ui
+MainUi *-- "6" Button : _buttonLeft/Right/Select/Start/Stop/Back
+MainUi *-- "1" LcdDisplay : _lcdDisplay
+MainUi *-- "1" LedMatrix : _ledMatrix
+LedMatrix *-- "1" LedStrip : _ledStrip
+MainUi *-- "1" Speaker : _speaker
+PlayerUi *-- "5" Button : _buttonUp/Right/Down/Left/Select
+PlayerUi *-- "1" LedSegments : _ledSegments
+
+LedStrip - LcdDisplay
+LcdDisplay - Speaker
+Speaker - Button
+Button - LedSegments
+
+@enduml

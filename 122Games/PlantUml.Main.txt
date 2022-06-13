@@ -1,0 +1,59 @@
+@startuml
+class Box 
+{
+  -Games _games
+  -UiToHwConverter _converter
+  +void setup()
+  +void loop()
+  +Games* GetGames();
+  +Ui* GetUi();
+}
+
+abstract class Games
+{
+  +Games(Ui* ui)
+  +Game* GetActiveGame()
+  +Game* SetActiveGameByIndex(int index)
+}
+
+class Game
+{
+  +void SetUi();
+  +{abstract} void Start() = 0
+  +{abstract} void Play() = 0
+  +{abstract} void HandleButton(int player, EButton button) = 0
+}
+
+class Demo
+{
+  +void Start()
+  +void Play()
+  +void HandleButton(int player, EButton button)
+  -bool _light
+}
+
+class Worms
+{
+  +void Start()
+  +void Play()
+  +void HandleButton(int player, EButton button)
+  -bool _light
+}
+
+
+class Ui
+{
+}
+
+Box *-- "1" Games : _games
+Box *-- "1" Ui : _ui
+Games *-- "1" Game : _activeGame
+Games "1" o-- Box : _box
+Games --> "1..*" Game : creation
+Games o-- "1" Ui : _ui
+Game <|-- Demo
+Game <|-- Worms
+Game o-right- "1" Ui : _ui
+
+
+@enduml

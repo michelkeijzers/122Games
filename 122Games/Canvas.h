@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include "Rgb.h"
 
@@ -10,7 +11,7 @@ public:
 	static const int MAX_Y = 12;
 
 	Rgb GetPixel(int x, int y);
-	bool IsInvalidated(int x, int y);
+	bool IsPixelInvalidated(int x, int y);
 	
 	void SetPixel(int x, int y, int red, int green, int blue);
 
@@ -20,3 +21,4 @@ private:
 	Rgb _pixels[MAX_X][MAX_Y];
 	bool _invalidated[MAX_X][MAX_Y];
 };
+*/

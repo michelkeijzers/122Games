@@ -1,6 +1,13 @@
 #include "Game.h"
 
-Canvas* Game::GetCanvas()
+Game::Game()
+	: _ui(nullptr)
 {
-	return &_canvas;
+
+}
+
+
+void Game::SetUi(Ui* ui)
+{
+	_ui = ui;
 }

@@ -19,12 +19,6 @@
     <Filter Include="Source Files\Games">
       <UniqueIdentifier>{bb2b111e-7dbe-46f6-ac60-932296ba65c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Screen">
-      <UniqueIdentifier>{48d22f18-79d7-4c94-bd8c-091a557019a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Screen">
-      <UniqueIdentifier>{3ab4b7d1-f5f6-47b1-b96f-8db9509102c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Utils">
       <UniqueIdentifier>{ee11f324-a630-4cc3-8842-c7bfc2cee420}</UniqueIdentifier>
     </Filter>
@@ -43,46 +37,40 @@
     <Filter Include="Source Files\Arduino">
       <UniqueIdentifier>{b38ea918-21a0-4b9e-914c-eaecb45bdd66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Framework">
+      <UniqueIdentifier>{e0747d16-12a8-4b14-a8f6-59afaa2ae1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework">
+      <UniqueIdentifier>{0318306f-5e1c-4d96-a04e-8f4743c3f8f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Screen">
+      <UniqueIdentifier>{48d22f18-79d7-4c94-bd8c-091a557019a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Screen">
+      <UniqueIdentifier>{3ab4b7d1-f5f6-47b1-b96f-8db9509102c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\UI">
+      <UniqueIdentifier>{0b0833e3-3eaf-4488-b8aa-df04ebd99cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Ui">
+      <UniqueIdentifier>{bcca3b33-2ff9-4d3e-8e7b-4ad4ab3d7a9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="122Games.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Games.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Demo.h">
       <Filter>Header Files\Games</Filter>
     </ClInclude>
     <ClInclude Include="CppScreen.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
     <ClInclude Include="LedStripScreen.h">
-      <Filter>Header Files\Screen</Filter>
-    </ClInclude>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Rgb.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Canvas.h">
-      <Filter>Header Files\Screen</Filter>
+      <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Worms.h">
       <Filter>Header Files\Games</Filter>
@@ -135,46 +123,67 @@
     <ClInclude Include="LiquidCrystalStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
+    <ClInclude Include="122Games.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Games.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Ui.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUi.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainUi.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="LedSegments.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="LedMatrix.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="122Games.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Demo.cpp">
       <Filter>Source Files\Games</Filter>
     </ClCompile>
     <ClCompile Include="Canvas.cpp">
-      <Filter>Source Files\Screen</Filter>
+      <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="CppScreen.cpp">
-      <Filter>Source Files\Screen</Filter>
+      <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="LedStripScreen.cpp">
-      <Filter>Source Files\Screen</Filter>
+      <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Rgb.cpp">
-      <Filter>Source Files\Screen</Filter>
+      <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Worms.cpp">
       <Filter>Source Files\Games</Filter>
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
       <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="WinApp.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Buzzer.cpp">
       <Filter>Source Files\Arduino</Filter>
@@ -218,6 +227,42 @@
     <ClCompile Include="CharUtils.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="WinApp.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="122Games.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Games.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Ui.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUi.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MainUi.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="LedSegments.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="LedMatrix.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="122Games.rc">
@@ -234,10 +279,12 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Documentation.txt" />
+    <Text Include="PlantUml.Main.txt" />
+    <Text Include="PlantUml.Ui.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RelayBox.ino">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Framework</Filter>
     </None>
   </ItemGroup>
 </Project>

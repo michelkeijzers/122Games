@@ -1,6 +1,9 @@
+#include <list>
+
 #include "framework.h"
 #include "CppScreen.h"
-#include <list>
+#include "LedMatrix.h"
+#include "Ui.h"
 
 static const int LEFT_MARGIN = 20;
 static const int PIXEL_WIDTH = 20;
@@ -10,8 +13,8 @@ static const int TOP_MARGIN = 20;
 static const int PIXEL_HEIGHT = 20;
 static const int BOTTOM_MARGIN = 20;
 
-static const int PIXELS_PLUS_MARGIN_WIDTH = LEFT_MARGIN + Canvas::MAX_X * PIXEL_WIDTH + RIGHT_MARGIN;
-static const int PIXELS_PLUS_MARGIN_HEIGHT = TOP_MARGIN + Canvas::MAX_Y * PIXEL_HEIGHT + BOTTOM_MARGIN;
+static const int PIXELS_PLUS_MARGIN_WIDTH = LEFT_MARGIN + LedMatrix::MAX_X * PIXEL_WIDTH + RIGHT_MARGIN;
+static const int PIXELS_PLUS_MARGIN_HEIGHT = TOP_MARGIN + LedMatrix::MAX_Y * PIXEL_HEIGHT + BOTTOM_MARGIN;
 
 
 CppScreen::CppScreen()
@@ -23,9 +26,9 @@ CppScreen::CppScreen()
         PIXELS_PLUS_MARGIN_HEIGHT - BOTTOM_MARGIN);
     _pixelsBorderColor = CreateSolidBrush(RGB(255, 0, 0));
 
-    for (int x = 0; x < Canvas::MAX_X; x++)
+    for (int x = 0; x < LedMatrix::MAX_X; x++)
     {
-        for (int y = 0; y < Canvas::MAX_Y; y++)
+        for (int y = 0; y < LedMatrix::MAX_Y; y++)
         {
             _rectangles[x][y] = GetPixelRect(x, y);
             _brushes[x][y] = CreateSolidBrush(RGB(0, 0, 0));
@@ -46,20 +49,20 @@ CppScreen::CppScreen()
 }
 
 
-/* virtual */ void CppScreen::Draw(Canvas* canvas, HDC hdc, HWND hwnd)
+/* virtual */ void CppScreen::Draw(Ui* ui, HDC hdc, HWND hwnd)
 {
     FillRect(hdc, &_backgroundPixelsRectangle, _backgroundPixelsColor);
     FrameRect(hdc, &_pixelsBorderRectangle, _pixelsBorderColor);
 
     HBRUSH brush;
 
-    for (int x = 0; x < Canvas::MAX_X; x++)
+    for (int x = 0; x < LedMatrix::MAX_X; x++)
     {
-        for (int y = 0; y < Canvas::MAX_Y; y++)
+        for (int y = 0; y < LedMatrix::MAX_Y; y++)
         {
             //DeleteObject(_brushes[x][y]);
-            Rgb rgb = canvas->GetPixel(x, y);
-            brush = CreateSolidBrush(RGB(rgb.GetRed(), rgb.GetGreen(), rgb.GetBlue()));
+            FastLedCRGB* rgb = ui->GetLedMatrix()->GetLed(x, y);
+            brush = CreateSolidBrush(RGB(rgb->red, rgb->green, rgb->blue));
             FillRect(hdc, &(_rectangles[x][y]), brush);
             DeleteObject(brush);
         }

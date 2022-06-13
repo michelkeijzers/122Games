@@ -5,15 +5,14 @@
 using namespace std;
 
 Box::Box()
-	: _screen(nullptr),
-	  _activeGame(nullptr)
+	: _games(&_ui)
 {
 }
 
 
 void Box::setup()
 {
-	// TODO Implement Arduino Setup
+	GetGames()->Init();
 }
 
 
@@ -23,30 +22,13 @@ void Box::loop()
 }
 
 
-void Box::SetScreen(Screen* screen)
+Games* Box::GetGames()
 {
-	_screen = screen;
+	return &_games;
 }
 
 
-void Box::SetActiveGame(int gameIndex)
+Ui* Box::GetUi()
 {
-	if (_activeGame != nullptr)
-	{
-		delete _activeGame;
-	}
-
-	_games.SelectGameByIndex(gameIndex, &_activeGame);
-}
-
-
-Game* Box::ActiveGame()
-{
-	return _activeGame;
-}
-
-
-void Box::StartGame()
-{
-	_activeGame->Start();
+	return &_ui;
 }

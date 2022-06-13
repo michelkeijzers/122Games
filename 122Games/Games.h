@@ -1,5 +1,7 @@
 #pragma once
+
 class Game;
+class Ui;
 
 class Games
 {
@@ -10,11 +12,19 @@ public:
 		GAME_WORMS
 	};
 
-	Games();
+	void Init();
+
+	Games(Ui* ui);
 
 	static const int NR_OF_GAMES = 1;
 
-	void SelectGameByIndex(int index, Game** activeGame);
+	Game* GetActiveGame();
 
+	Game* SetActiveGameByIndex(int index);
+
+private:
+	Game* _activeGame;
+
+	Ui* _ui;
 };
 

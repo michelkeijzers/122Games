@@ -36,11 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    _box.SetScreen(&_cppScreen);
-    _box.SetActiveGame(Games::GAME_WORMS);
-    _box.StartGame();
-
-
+    _box.setup();
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -138,6 +134,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    _box.loop();
+    _box.GetGames()->GetActiveGame()->Play();
+
     if (!_timersAreSet)
     {
         SetTimer(hWnd,             // handle to main window 
@@ -172,11 +171,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             
-            Game* activeGame = _box.ActiveGame();
+            Game* activeGame = _box.GetGames()->GetActiveGame();
             if (activeGame != nullptr)
             {
-                Canvas* canvas = activeGame->GetCanvas();
-                _cppScreen.Draw(canvas, hdc, hWnd);
+                _cppScreen.Draw(_box.GetUi(), hdc, hWnd);
             }
             
             EndPaint(hWnd, &ps);
@@ -187,6 +185,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wParam)
         {
         case IDT_TIMER1:
+            /*
             Game* activeGame = _box.ActiveGame();
             if (activeGame != nullptr)
             {
@@ -208,12 +207,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                  //RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
                 canvas->ResetInvalidatedPixels();
             }
+            */
             return 0;
         }
         break;
     
     case WM_KEYDOWN:
         {
+            /*
             Game* activeGame = _box.ActiveGame();
             if (activeGame == nullptr)
             {
@@ -292,6 +293,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 // Ignore other keys
                 break;
             }
+            */
         }
         break;
 

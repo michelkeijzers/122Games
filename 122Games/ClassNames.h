@@ -13,6 +13,7 @@
 #define ASYNC_TCP_CLASS             AsyncTcpStub
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperatureStub
 #define ESP_ASYNC_WEB_SERVER_CLASS  EspAsyncWebServerStub
+#define FAST_LED_CLASS              FastLedStub
 #define ONE_WIRE_CLASS              OneWireStub
 #define SERIAL_CLASS				SerialStub
 #define WEB_SERVER_CLASS            WebServerStub
@@ -36,6 +37,7 @@
 #define ASYNC_TCP_CLASS             AsyncTCP
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperature
 #define ESP_ASYNC_WEB_SERVER_CLASS  ESPAsyncWebServer
+#define FAST_LED_CLASS              FastLed
 #define ONE_WIRE_CLASS              OneWire
 #define SERIAL_CLASS				Arduino
 #define WEB_SERVER_CLASS            WebServer

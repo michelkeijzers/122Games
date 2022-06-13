@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Games.h"
+#include "Ui.h"
 
 class Game;
 class Screen;
@@ -14,14 +15,11 @@ public:
 	void setup();
 	void loop();
 
-	void SetScreen(Screen* screen);
-	void SetActiveGame(int gameIndex);
-	Game* ActiveGame();
-	void StartGame();
+	Games* GetGames();
+	Ui* GetUi();
 
 private:
-	Screen* _screen;
 	Games _games;
-    Game* _activeGame;
+	Ui _ui;
 };
 
