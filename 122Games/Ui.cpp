@@ -1,19 +1,19 @@
 #include "Ui.h"
 
 
+void Ui::Initialize()
+{
+	_mainUi.Initialize();
+}
+
+
 MainUi* Ui::GetMainUi()
 {
 	return &_mainUi;
 }
 
 
-PlayerUi* Ui::GetPlayerUi(int player)
+PlayerUi* Ui::GetPlayerUi(uint8_t player)
 {
-	return (player == 0) ? &_player1Ui : &_player2Ui;
-}
-
-
-LedMatrix* Ui::GetLedMatrix()
-{
-	return _mainUi.GetLedMatrix();
+	return (player == 0) ? &_playerUi1 : &_playerUi2;
 }

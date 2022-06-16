@@ -1,5 +1,6 @@
 #include "Worms.h"
 #include "MathUtils.h"
+#include "MainUi.h"
 #include "LedMatrix.h"
 
 Worms::Worms()
@@ -42,11 +43,11 @@ void Worms::DrawCursors()
 		switch (player)
 		{
 		case 0:
-			_player1y = MathUtils::Trim(_player1y - 1, 0, LedMatrix::MAX_Y - 1);
+			_player1y = MathUtils::Trim(_player1y - 1, 0, MainUi::MAX_Y - 1);
 			break;
 
 		case 1:
-			_player2y = MathUtils::Trim(_player2y - 1, 0, LedMatrix::MAX_Y - 1);
+			_player2y = MathUtils::Trim(_player2y - 1, 0, MainUi::MAX_Y - 1);
 			break;
 		}
 		break;
@@ -55,11 +56,11 @@ void Worms::DrawCursors()
 		switch (player)
 		{
 		case 0:
-			_player1x = MathUtils::Trim(_player1x + 1, 0, LedMatrix::MAX_X - 1);
+			_player1x = MathUtils::Trim(_player1x + 1, 0, MainUi::MAX_X - 1);
 			break;
 
 		case 1:
-			_player2x = MathUtils::Trim(_player2x + 1, 0, LedMatrix::MAX_X - 1);
+			_player2x = MathUtils::Trim(_player2x + 1, 0, MainUi::MAX_X - 1);
 			break;
 		}
 		break;
@@ -68,11 +69,11 @@ void Worms::DrawCursors()
 		switch (player)
 		{
 		case 0:
-			_player1y = MathUtils::Trim(_player1y + 1, 0, LedMatrix::MAX_Y - 1);
+			_player1y = MathUtils::Trim(_player1y + 1, 0, MainUi::MAX_Y - 1);
 			break;
 
 		case 1:
-			_player2y = MathUtils::Trim(_player2y + 1, 0, LedMatrix::MAX_Y - 1);
+			_player2y = MathUtils::Trim(_player2y + 1, 0, MainUi::MAX_Y - 1);
 			break;
 		}
 		break;
@@ -81,11 +82,11 @@ void Worms::DrawCursors()
 		switch (player)
 		{
 		case 0:
-			_player1x = MathUtils::Trim(_player1x - 1, 0, LedMatrix::MAX_X - 1);
+			_player1x = MathUtils::Trim(_player1x - 1, 0, MainUi::MAX_X - 1);
 			break;
 
 		case 1:
-			_player2x = MathUtils::Trim(_player2x - 1, 0, LedMatrix::MAX_X - 1);
+			_player2x = MathUtils::Trim(_player2x - 1, 0, MainUi::MAX_X - 1);
 			break;
 		}
 		break;

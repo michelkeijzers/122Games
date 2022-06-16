@@ -1,37 +1,66 @@
 @startuml
 
+title Ui, MainUi, EButton, PlayerUi
+
+class Box
+{
+  +Ui* GetUi
+  -Ui _ui;
+}
+
 class Ui
 {
+  +Ui* GetUi()
+  +PlayerUi* GetPlayerUi(int player)
+
+  -Ui _ui
+  -PlayerUi _player1Ui
+  -PlayerUi _player2Ui
+}
+
+enum EButton
+{
+  Up
+  Right
+  Down
+  Left 
+  Select
+  Start
+  Stop
+  Back
 }
 
 class MainUi
 {
+  +LedMatrix* GetLedMatrix()
+  +LcdDisplay* GetLcdDisplay()
+  +Speaker* GetSpeaker()
+  +Button* GetButton(EButton)
+
+  -LedMatrix _ledMatrix;
+  -LcdDisplay _lcdDisplay
+  -Speaker _speaker;
+  -Button[] _buttons
 }
 
 class PlayerUi
 {
+  +Button* GetButton(EButton)
+  +LedDisplay* GetLedDisplay()
+  -Button[] _buttons
+  -LedDisplay _ledDisplay
 }
 
 
-class LedMatrix
+class LedDisplay
 {
-  +int GetRows()
-  +Rgb GetLed(int x, int y)
-  +void SetLed(int x, int y, int red, int green, int blue)
-  +bool IsLedInvalidated(int x, int y)
+  +LedDisplay
+  +LedSegments* GetLedSegments()
+  -LedSegments _ledSegments
 }
 
-class LedStrip <<Arduino>>
-{
-  +void SetNrOfLeds(int leds, int rows)
-  +int GetNrOfLeds()
-  +Rgb GetLed(int index)
-  +void SetLed(int index, int red, int green, int blue)
-  +bool IsLedInvalidated(int index)
-  +void ResetInvalidatedLeds()
-  -Rgb*_leds
-  -bool* _invalidated
-}
+' ----------------- Arduino classes -----------------------------
+
 
 class LcdDisplay <<Arduino>>
 {
@@ -74,21 +103,27 @@ class Speaker <<Arduino>>
   int GetToneFrequency()
 }
 
+'-------------------- Class relations -----------------------------
+
 Box *-- "1" Ui : _ui
 Ui *-- "1" MainUi : _mainUi
 Ui *-- "1" PlayerUi : _player1Ui
 Ui *-- "1" PlayerUi : _player2Ui
-MainUi *-- "6" Button : _buttonLeft/Right/Select/Start/Stop/Back
+MainUi *-- "1" Button : _buttons[]
 MainUi *-- "1" LcdDisplay : _lcdDisplay
 MainUi *-- "1" LedMatrix : _ledMatrix
-LedMatrix *-- "1" LedStrip : _ledStrip
 MainUi *-- "1" Speaker : _speaker
-PlayerUi *-- "5" Button : _buttonUp/Right/Down/Left/Select
-PlayerUi *-- "1" LedSegments : _ledSegments
+PlayerUi *-- "1" Button : _buttons[]
+PlayerUi *-- "1" LedDisplay : _ledDisplay
+LedDisplay *-- "1" LedSegments
 
-LedStrip - LcdDisplay
+
+'-------------------- Grouping -----------------------------
+
 LcdDisplay - Speaker
 Speaker - Button
 Button - LedSegments
+MainUi - EButton
+EButton - PlayerUi
 
 @enduml

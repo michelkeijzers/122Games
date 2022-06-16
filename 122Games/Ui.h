@@ -8,13 +8,14 @@ class LedMatrix;
 class Ui
 {
 public:
+	void Initialize();
+
 	MainUi* GetMainUi();
-	LedMatrix* GetLedMatrix();
-	PlayerUi* GetPlayerUi(int player);
+	PlayerUi* GetPlayerUi(uint8_t player);
 
 private:
 	MainUi _mainUi;
-	PlayerUi _player1Ui;
-	PlayerUi _player2Ui;
+	PlayerUi _playerUi1;
+	PlayerUi _playerUi2;
 };
 

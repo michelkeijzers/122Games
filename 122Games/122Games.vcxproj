@@ -151,7 +151,9 @@
     <ClInclude Include="CharUtils.h" />
     <ClInclude Include="ClassNames.h" />
     <ClInclude Include="CppScreen.h" />
+    <ClInclude Include="DataPins.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="FadeInOutDemo.h" />
     <ClInclude Include="FastLedStub.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
@@ -160,10 +162,10 @@
     <ClInclude Include="LedMatrix.h" />
     <ClInclude Include="LedSegments.h" />
     <ClInclude Include="LedStrip.h" />
-    <ClInclude Include="LedStripScreen.h" />
     <ClInclude Include="LiquidCrystalStub.h" />
     <ClInclude Include="MainUi.h" />
     <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="MAX7219Stub.h" />
     <ClInclude Include="MemoryUtils.h" />
     <ClInclude Include="PlayerUi.h" />
     <ClInclude Include="Resource.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="CharUtils.cpp" />
     <ClCompile Include="CppScreen.cpp" />
     <ClCompile Include="Demo.cpp" />
+    <ClCompile Include="FadeInOutDemo.cpp" />
     <ClCompile Include="FastLedStub.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Games.cpp" />
@@ -195,10 +198,10 @@
     <ClCompile Include="LedMatrix.cpp" />
     <ClCompile Include="LedSegments.cpp" />
     <ClCompile Include="LedStrip.cpp" />
-    <ClCompile Include="LedStripScreen.cpp" />
     <ClCompile Include="LiquidCrystalStub.cpp" />
     <ClCompile Include="MainUi.cpp" />
     <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="MAX7219Stub.cpp" />
     <ClCompile Include="MemoryUtils.cpp" />
     <ClCompile Include="PlayerUi.cpp" />
     <ClCompile Include="Rgb.cpp" />
@@ -219,8 +222,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Documentation.txt" />
-    <Text Include="PlantUml.Main.txt" />
-    <Text Include="PlantUml.Ui.txt" />
+    <Text Include="FastLed.txt" />
+    <Text Include="LedDisplay.txt" />
+    <Text Include="Main.txt" />
+    <Text Include="Ui.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RelayBox.ino" />

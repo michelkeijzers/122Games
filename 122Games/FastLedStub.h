@@ -4,8 +4,6 @@
 
 #include <cstdint>
 
-#include "LedStrip.h"
-
 const uint8_t MAX_NR_OF_LED_STRIPS = 16;
 
 const uint8_t MAX_NR_OF_LEDS = 255;
@@ -27,7 +25,7 @@ class CLEDController
 
 class CFastLED {
 private:
-	static struct FastLedCRGB *_data[MAX_NR_OF_LED_STRIPS];
+	static struct FastLedCRGB* _data[MAX_NR_OF_LED_STRIPS];
 	static int _pinNumbers[MAX_NR_OF_LED_STRIPS];
 	static int _nrOfUsedLeds[MAX_NR_OF_LED_STRIPS];
 	//static int _nLedsOrOffset[MAX_NR_OF_LED_STRIPS];
@@ -40,11 +38,11 @@ public:
 	CFastLED();
 
 	static struct FastLedCRGB* GetData(int ledStrip);
-	static int GetPinNumber(int ledStrip);
-	static int GetNrOfUsedLeds(int ledStrip);
-	static int GetNrOfLedStrips();
+	static int STUB_GetPinNumber(int ledStrip);
+	static int STUB_GetNrOfUsedLeds(int ledStrip);
+	static int STUB_GetNrOfLedStrips();
 
-	static bool IsShowEnabled();
+	static bool STUB_IsShowEnabled();
 
 	static CLEDController& addLeds(CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset = 0);
 
@@ -73,15 +71,15 @@ public:
 
 	void clearData();
 
-	void showColor(const struct CRGB & color, uint8_t scale);
+	void showColor(const struct CRGB& color, uint8_t scale);
 
-	void showColor(const struct CRGB & color) {  }
+	void showColor(const struct CRGB& color) {  }
 
 	void delay(unsigned long ms);
 
-	void setTemperature(const struct CRGB & temp);
+	void setTemperature(const struct CRGB& temp);
 
-	void setCorrection(const struct CRGB & correction);
+	void setCorrection(const struct CRGB& correction);
 
 	void setDither(uint8_t ditherMode = 0);
 
@@ -93,7 +91,7 @@ public:
 
 	int count();
 
-	CLEDController & operator[](int x);
+	CLEDController& operator[](int x);
 
 	//int size() { return (*this)[0].size(); }
 

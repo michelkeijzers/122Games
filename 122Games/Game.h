@@ -18,6 +18,7 @@ public:
 		Select
 	};
 
+	Ui* GetUi();
 	void SetUi(Ui* ui);
 
 	virtual void Start() = 0;

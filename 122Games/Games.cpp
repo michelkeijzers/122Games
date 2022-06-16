@@ -1,11 +1,11 @@
 #include "Games.h"
 #include "Demo.h"
+#include "FadeInOutDemo.h"
 #include "Worms.h"
-
 
 void Games::Init()
 {
-	SetActiveGameByIndex(0);
+	SetActiveGameByIndex(Games::EGameId::FADE_IN_OUT_DEMO);
 	GetActiveGame()->Start();
 }
 
@@ -14,6 +14,7 @@ Games::Games(Ui* ui)
 {
 	_ui = ui;
 }
+
 
 Game* Games::GetActiveGame()
 {
@@ -30,11 +31,15 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		
 	switch ((EGameId) gameIndex)
 	{
-	case GAME_DEMO:
+	case DEMO:
 		_activeGame = new Demo();
 		break;
 
-	case GAME_WORMS:
+	case FADE_IN_OUT_DEMO:
+		_activeGame = new FadeInOutDemo();
+		break;
+
+	case WORMS:
 		_activeGame = new Worms();
 		break;
 

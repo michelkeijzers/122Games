@@ -23,16 +23,16 @@ CFastLED::CFastLED()
 }
 
 
-/* static */ int CFastLED::GetPinNumber(int ledStrip) { return _pinNumbers[ledStrip]; }
+/* static */ int CFastLED::STUB_GetPinNumber(int ledStrip) { return _pinNumbers[ledStrip]; }
 
 
-/* static */ int CFastLED::GetNrOfUsedLeds(int ledStrip) { return _nrOfUsedLeds[ledStrip]; }
+/* static */ int CFastLED::STUB_GetNrOfUsedLeds(int ledStrip) { return _nrOfUsedLeds[ledStrip]; }
 
 
-/* static */ int CFastLED::GetNrOfLedStrips() { return _nrOfLedStrips; }
+/* static */ int CFastLED::STUB_GetNrOfLedStrips() { return _nrOfLedStrips; }
 
 
-/* static */ bool CFastLED::IsShowEnabled() { return _showEnabled; }
+/* static */ bool CFastLED::STUB_IsShowEnabled() { return _showEnabled; }
 
 
 /* static */ CLEDController& CFastLED::addLeds(CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset /* = 0 */)

@@ -8,8 +8,10 @@ class Games
 public:
 	enum EGameId
 	{
-		GAME_DEMO,
-		GAME_WORMS
+		DEMO,
+		FADE_IN_OUT_DEMO,
+
+		WORMS,
 	};
 
 	void Init();

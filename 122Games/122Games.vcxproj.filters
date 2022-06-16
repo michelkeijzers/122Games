@@ -55,15 +55,15 @@
     <Filter Include="Source Files\Framework\Ui">
       <UniqueIdentifier>{bcca3b33-2ff9-4d3e-8e7b-4ad4ab3d7a9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlantUML">
+      <UniqueIdentifier>{b5c5ad1a-4916-46f1-bd6f-65f3345064b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Demo.h">
       <Filter>Header Files\Games</Filter>
     </ClInclude>
     <ClInclude Include="CppScreen.h">
-      <Filter>Header Files\Framework\Screen</Filter>
-    </ClInclude>
-    <ClInclude Include="LedStripScreen.h">
       <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Rgb.h">
@@ -111,12 +111,6 @@
     <ClInclude Include="StringUtils.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="LedColor.h">
-      <Filter>Header Files\ArduinoStub</Filter>
-    </ClInclude>
-    <ClInclude Include="LedStrip.h">
-      <Filter>Header Files\ArduinoStub</Filter>
-    </ClInclude>
     <ClInclude Include="FastLedStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
@@ -162,6 +156,21 @@
     <ClInclude Include="LedMatrix.h">
       <Filter>Header Files\Framework\UI</Filter>
     </ClInclude>
+    <ClInclude Include="FadeInOutDemo.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="MAX7219Stub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="LedStrip.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="LedColor.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="DataPins.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -171,9 +180,6 @@
       <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="CppScreen.cpp">
-      <Filter>Source Files\Framework\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="LedStripScreen.cpp">
       <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Rgb.cpp">
@@ -263,6 +269,12 @@
     <ClCompile Include="LedMatrix.cpp">
       <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
+    <ClCompile Include="FadeInOutDemo.cpp">
+      <Filter>Source Files\Games</Filter>
+    </ClCompile>
+    <ClCompile Include="MAX7219Stub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="122Games.rc">
@@ -279,8 +291,18 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Documentation.txt" />
-    <Text Include="PlantUml.Main.txt" />
-    <Text Include="PlantUml.Ui.txt" />
+    <Text Include="Main.txt">
+      <Filter>PlantUML</Filter>
+    </Text>
+    <Text Include="Ui.txt">
+      <Filter>PlantUML</Filter>
+    </Text>
+    <Text Include="FastLed.txt">
+      <Filter>PlantUML</Filter>
+    </Text>
+    <Text Include="LedDisplay.txt">
+      <Filter>PlantUML</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="RelayBox.ino">

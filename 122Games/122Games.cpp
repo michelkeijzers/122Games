@@ -174,7 +174,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             Game* activeGame = _box.GetGames()->GetActiveGame();
             if (activeGame != nullptr)
             {
-                _cppScreen.Draw(_box.GetUi(), hdc, hWnd);
+               _cppScreen.Draw(_box.GetUi(), hdc, hWnd);
             }
             
             EndPaint(hWnd, &ps);
@@ -185,37 +185,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wParam)
         {
         case IDT_TIMER1:
-            /*
-            Game* activeGame = _box.ActiveGame();
+            Game* activeGame = _box.GetGames()->GetActiveGame();
             if (activeGame != nullptr)
             {
                 activeGame->Play();
-                Canvas* canvas = activeGame->GetCanvas();
-
-                for (int x = 0; x < Canvas::MAX_X; x++)
-                {
-                    for (int y = 0; y < Canvas::MAX_Y; y++)
-                    {
-                        if (canvas->IsInvalidated(x, y))
-                        {
-                           const RECT rectangle = CppScreen::GetPixelRect(x, y);
-                            InvalidateRect(hWnd, &rectangle, true);
-                        }
-                    }
-                }
-
-                 //RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
-                canvas->ResetInvalidatedPixels();
+                RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
             }
-            */
+            
             return 0;
         }
         break;
     
     case WM_KEYDOWN:
         {
-            /*
-            Game* activeGame = _box.ActiveGame();
+            Game* activeGame = _box.GetGames()->GetActiveGame();
             if (activeGame == nullptr)
             {
                 return 0;
@@ -293,7 +276,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 // Ignore other keys
                 break;
             }
-            */
         }
         break;
 

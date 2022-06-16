@@ -2,6 +2,7 @@
 
 #include "Demo.h"
 #include "Canvas.h"
+#include "MainUi.h"
 #include "Ui.h"
 #include "LedMatrix.h"
 
@@ -16,14 +17,14 @@
 
 	for (int i = 0; i < 200; i++)
 	{
-		int x = rand() % LedMatrix::MAX_X;
-		int y = rand() % LedMatrix::MAX_Y;
+		int x = rand() % MainUi::MAX_X;
+		int y = rand() % MainUi::MAX_Y;
 
 		//for (int x = 0; x < Canvas::MAX_X; x++)
 		//{
 		//	for (int y = 0; y < Canvas::MAX_Y; y++)
 		//	{
-		_ui->GetLedMatrix()->SetLed(x, y, rand() % 255, rand() % 255, rand() % 255);
+		_ui->GetMainUi()->GetLedMatrix()->SetLed(x, y, rand() % 255, rand() % 255, rand() % 255);
 	//	}
 	//}
 	}

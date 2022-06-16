@@ -7,7 +7,7 @@
 #define HEADER_FILE(a) stringify(a.h)
 
 // Class names
-#ifdef WIN32
+#ifdef _WINDOWS
 
 #define ARDUINO_CLASS				ArduinoStub
 #define ASYNC_TCP_CLASS             AsyncTcpStub
@@ -15,6 +15,7 @@
 #define ESP_ASYNC_WEB_SERVER_CLASS  EspAsyncWebServerStub
 #define FAST_LED_CLASS              FastLedStub
 #define ONE_WIRE_CLASS              OneWireStub
+#define MAX_7219_CLASS              MAX7219Stub
 #define SERIAL_CLASS				SerialStub
 #define WEB_SERVER_CLASS            WebServerStub
 #define WIFI_CLASS                  WiFiStub
@@ -39,6 +40,7 @@
 #define ESP_ASYNC_WEB_SERVER_CLASS  ESPAsyncWebServer
 #define FAST_LED_CLASS              FastLed
 #define ONE_WIRE_CLASS              OneWire
+#define MAX_7219_CLASS              MAX7219
 #define SERIAL_CLASS				Arduino
 #define WEB_SERVER_CLASS            WebServer
 #define WIFI_CLASS                  WiFi

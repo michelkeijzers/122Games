@@ -9,16 +9,29 @@ class LedMatrix
 public:
 	LedMatrix();
 
-	static const int MAX_X = 12;
-	static const int MAX_Y = 12;
-	static const int NR_OF_LEDS = MAX_X * MAX_Y;
+	void Initialize(uint8_t nrOfColumns, uint8_t nrOfRows);
+
+	uint8_t GetNrOfColumns();
+	uint8_t GetNrOfRows();
+
+	uint8_t GetDataPin();
 
 	FastLedCRGB* GetLed(int x, int y);
 	void SetLed(int x, int y, int red, int green, int blue);
 
 	int ToLedIndex(int x, int y);
 
+	bool IsLedInvalidated(int x, int y);
+	void ResetInvalidatedLeds();
+
 private:
+	static const int MAX_LEDS = 144;
+
+	uint8_t _nrOfColumns;
+	uint8_t _nrOfRows;
+
 	LedStrip _ledStrip;
+
+	uint8_t _invalidateBits[MAX_LEDS / 8];
 };
 

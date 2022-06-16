@@ -5,6 +5,12 @@
 
 class PlayerUi
 {
+public:
+	int GetScore();
+	void SetScore(int score);
+
+	LedSegments* GetLedSegments();
+
 private:
 	Button _buttonUp;
 	Button _buttonRight;
