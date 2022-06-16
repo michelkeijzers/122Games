@@ -1,0 +1,104 @@
+@startuml
+
+title LedDisplay, LedSegments, Max7219
+
+class FourDigitsLed
+{
+  ..Enumerations..
+  +ESpecialChar { ... }
+  ..Setup/Initialization..
+  +FourDigitsLed(uint8_t pinClk, uint8_t pinDio, unsigned int bitDelay = 100)
+  ..Display..
+  +void SetSetments(const uint8_t segments[], uint8_t length, uint8_t pos)
+  +void DisplayNumber(int16_t number) 
+  +void DisplayText(const char* text)
+  +void DisplaySpecialChar(ESpecialChar specialChar, uint8_t pos)
+  +void DisplayChar(char character, uint8_t pos)
+  +void Clear()
+  ..Show/Brightness..
+  +void ShowDisplay(bool on)
+  +void ShowColon(bool on)
+  +void SetBrightness(uint8_t brightness)
+  +uint8_t GetBrightness(uint8_t brightness)
+  ..Blink..
+  +void Blink(uint16_t blinkSpeedInMs)
+  +void BlinkRefresh()
+  ..Library..
+  +TM1637Display* GetDisplay()
+  --Properties--
+  -uint16_t _blinkSpeed
+  -bool _blinkStatusOn
+  -int16_t _value
+  -uint8_t brightness
+}
+
+note right of FourDigitsLed::DisplayNumber
+  Decimal
+  Right justify
+  Range: -999..9999
+end note
+
+note right of FourDigitsLed::DisplaySpecialChar
+  https://en.wikipedia.org/wiki/Seven-segment_display
+end note
+
+note right of FourDigitsLed::Blink
+  0 means off
+end note
+
+note right of FourDigitsLed::BlinkRefresh
+  Call regularly to refresh blink on/off
+end note
+
+class LedSegments
+{
+  +void SetNumber(int number)
+  +int GetNumber()
+  +void SetMode(EMode mode)
+  +void SetDot(int dotIndex, bool enabled)
+  +int GetDot(int dotIndex)
+  +EMode GetMode()
+  -int _dots {4 bits}
+  -int _number
+  -EMode _mode
+  -type enum EMode  {Time, Number}
+}
+
+class Max7219 <<Arduino>>
+{
+}
+
+class TM1637Display <<Arduino>>
+{
+  +TM1637Display(uint8_t pinClk, uint8_t pinDIO, unsigned int bitDelay)
+  +void setBrightness(uint8_t brightness, bool on)
+  +void setSegments(const uint8_t segments[], uint8_t length, uint8_t pos)
+  +void clear()
+  +void showNumberDec(int num, bool leading_zero, uint8_t length, uint8_t pos)
+  +void showNumberDecExt(int num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+  +void showNumberHexEx(uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+  +void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+  +void bitDelay()
+  +void start()
+  +void stop()
+  +void writeByte(uint8_t b)
+  +void showDots(uint8_t dots, uint8_t* digits)
+  +void encodeDigit(uint8_t digit)
+}
+
+
+note top of TM1637Display
+  https://github.com/avishorp/TM1637/blob/master/TM1637Display.cpp
+end note
+
+'-------------------- Class relations -----------------------------
+
+FourDigitsLed *-down-> "1" TM1637Display : _tm1637Display
+
+LedDisplay *-- "1" LedSegments
+
+
+'-------------------- Grouping -----------------------------
+
+TM1637Display - Max7219
+@enduml

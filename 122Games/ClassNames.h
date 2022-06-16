@@ -14,9 +14,10 @@
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperatureStub
 #define ESP_ASYNC_WEB_SERVER_CLASS  EspAsyncWebServerStub
 #define FAST_LED_CLASS              FastLedStub
-#define ONE_WIRE_CLASS              OneWireStub
 #define MAX_7219_CLASS              MAX7219Stub
+#define ONE_WIRE_CLASS              OneWireStub
 #define SERIAL_CLASS				SerialStub
+#define TM1637_DISPLAY_CLASS        TM1637DisplayStub
 #define WEB_SERVER_CLASS            WebServerStub
 #define WIFI_CLASS                  WiFiStub
 
@@ -39,9 +40,10 @@
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperature
 #define ESP_ASYNC_WEB_SERVER_CLASS  ESPAsyncWebServer
 #define FAST_LED_CLASS              FastLed
-#define ONE_WIRE_CLASS              OneWire
 #define MAX_7219_CLASS              MAX7219
+#define ONE_WIRE_CLASS              OneWire
 #define SERIAL_CLASS				Arduino
+#define TM1637_DISPLAY_CLASS        TM1637Display
 #define WEB_SERVER_CLASS            WebServer
 #define WIFI_CLASS                  WiFi
 

@@ -171,6 +171,12 @@
     <ClInclude Include="DataPins.h">
       <Filter>Header Files\Framework\UI</Filter>
     </ClInclude>
+    <ClInclude Include="TM1637DisplayStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="FourDigitsLed.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -274,6 +280,12 @@
     </ClCompile>
     <ClCompile Include="MAX7219Stub.cpp">
       <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="TM1637DisplayStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="FourDigitsLed.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
