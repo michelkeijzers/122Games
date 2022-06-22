@@ -18,6 +18,7 @@
 #define ONE_WIRE_CLASS              OneWireStub
 #define SERIAL_CLASS				SerialStub
 #define TM1637_DISPLAY_CLASS        TM1637DisplayStub
+#define TONE_CLASS                  ToneStub
 #define WEB_SERVER_CLASS            WebServerStub
 #define WIFI_CLASS                  WiFiStub
 
@@ -44,6 +45,7 @@
 #define ONE_WIRE_CLASS              OneWire
 #define SERIAL_CLASS				Arduino
 #define TM1637_DISPLAY_CLASS        TM1637Display
+#define TONE_CLASS                  Tone
 #define WEB_SERVER_CLASS            WebServer
 #define WIFI_CLASS                  WiFi
 

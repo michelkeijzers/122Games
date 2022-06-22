@@ -141,7 +141,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         SetTimer(hWnd,             // handle to main window 
             IDT_TIMER1,            // timer identifier 
-            10,                    // milli second interval 
+            20,                    // milli second interval 
             (TIMERPROC)NULL);      // no timer callback 
         _timersAreSet = true;
     }
@@ -168,6 +168,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_PAINT:
         {
+            if (!_box.GetUi()->IsInitialized())
+            {
+                break;
+            }
+
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             
@@ -185,7 +190,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wParam)
         {
         case IDT_TIMER1:
+            if (!_box.GetUi()->IsInitialized())
+            {
+                break;
+            }
+                
             Game* activeGame = _box.GetGames()->GetActiveGame();
+
             if (activeGame != nullptr)
             {
                 activeGame->Play();

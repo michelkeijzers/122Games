@@ -11,6 +11,8 @@ public:
     /* virtual */ void HandleButton(int player, Game::EButton button);
 
 private:
-    int _light = 0;
+    int _light;
+
+    int _iteration;
 };
 

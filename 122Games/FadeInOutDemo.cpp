@@ -5,10 +5,12 @@
 #include "MainUi.h"
 #include "Ui.h"
 #include "LedMatrix.h"
+#include "FourDigitsLed.h"
+#include "Sound.h"
+
 
 /* virtual */ void FadeInOutDemo::Start()
 {
-	_ui->GetPlayerUi(0)->SetScore(0);
 }
 
 
@@ -23,6 +25,18 @@
 			_ui->GetMainUi()->GetLedMatrix()->SetLed(x, y, _light, _light, _light);
 		}
 	}
+
+	_iteration = (_iteration + 1) % 10000;
+	if (_iteration % 1000 == 100)
+	{
+		_ui->GetMainUi()->GetSound()->Play(500);
+	}
+	else if (_iteration % 1000 == 500)
+	{
+		_ui->GetMainUi()->GetSound()->Stop();
+	}
+
+	_ui->GetMainUi()->GetFourDigitsLed()->DisplayNumber(_iteration);
 }
 
 

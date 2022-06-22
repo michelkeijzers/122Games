@@ -168,7 +168,7 @@
     <ClInclude Include="LedColor.h">
       <Filter>Header Files\Arduino</Filter>
     </ClInclude>
-    <ClInclude Include="DataPins.h">
+    <ClInclude Include="HardwareProperties.h">
       <Filter>Header Files\Framework\UI</Filter>
     </ClInclude>
     <ClInclude Include="TM1637DisplayStub.h">
@@ -176,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="FourDigitsLed.h">
       <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ToneStub.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Arduino</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +292,12 @@
     </ClCompile>
     <ClCompile Include="FourDigitsLed.cpp">
       <Filter>Source Files\Framework\Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ToneStub.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Arduino</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

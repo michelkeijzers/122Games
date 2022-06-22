@@ -5,9 +5,10 @@
 #include "LedMatrix.h"
 #include "MainUi.h"
 #include "Ui.h"
+#include "FourDigitsLed.h"
+#include "AssertUtils.h"
+#include "Sound.h"
 
-#include "ClassNames.h"
-#include HEADER_FILE(MAX_7219_CLASS)
 
 static const int LEFT_MARGIN = 20;
 static const int PIXEL_WIDTH = 20;
@@ -31,27 +32,39 @@ CppScreen::CppScreen()
         PIXELS_PLUS_MARGIN_HEIGHT - BOTTOM_MARGIN);
     _pixelsBorderColor = CreateSolidBrush(RGB(255, 0, 0));
 
+    // 
     for (int x = 0; x < MainUi::MAX_X; x++)
     {
         for (int y = 0; y < MainUi::MAX_Y; y++)
         {
-            _rectangles[x][y] = GetPixelRect(x, y);
-            // _brushes[x][y] = CreateSolidBrush(RGB(0, 0, 0));
+            _LedMatrixRectangles[x][y] = GetPixelRect(x, y);
         }
     }
 
-    for (int player = 0; player < 2; player++)
+    for (int digit = 0; digit < 4; digit++)
     {
-        for (int digit = 0; digit < 8; digit++)
+        for (int segment = 0; segment < 8; segment++)
         {
-            for (int segment = 0; segment < 8; segment++)
-            {
-                _ledSegments[player][digit][segment] = GetLedSegmentRect(player, digit, segment);
-            }
+            _ledSegmentsRectangles[digit][segment] = GetLedSegmentRect(digit, segment);
         }
     }
-}
 
+    // Speaker
+    static const int SPEAKER_AREA_TOP = 290;
+    static const int SPEAKER_AREA_LEFT = 200;
+    static const int SPEAKER_AREA_WIDTH = 150;
+    static const int SPEAKER_AREA_HEIGHT = 50;
+    static const int SPEAKER_TEXT_LEFT_MARGIN = 10;
+    static const int SPEAKER_TEXT_LINE_MARGIN = 5;
+
+    SetRect(&_speakerTextRectangle, SPEAKER_AREA_LEFT, SPEAKER_AREA_TOP,
+        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
+    SetRect(&_speakerDurationTextRectangle, SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_TEXT_LINE_MARGIN,
+        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2);
+    SetRect(&_speakerFrequencyTextRectangle, SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2,
+        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
+
+} 
 
 RECT CppScreen::GetPixelRect(int x, int y)
 {
@@ -65,14 +78,82 @@ RECT CppScreen::GetPixelRect(int x, int y)
 }
 
 
-RECT CppScreen::GetLedSegmentRect(int player, int digit, int segment)
+RECT CppScreen::GetFullLedSegmentAreaRect()
 {
+    const uint8_t MARGIN = 10;
+
     RECT rect;
-    SetRect(&rect,
-        20 + 200 * player + digit * 10,
-        300 + segment * 20,
-        20 + 200 * player + digit * 10 + 7,
-        300 + segment * 20 - 5);
+    SetRect(&rect, 3 * LED_SEGMENT_LENGTH - MARGIN, 300 - MARGIN,
+        3 * LED_SEGMENT_LENGTH * (4 + 1) + MARGIN, 300 + 2 * LED_SEGMENT_LENGTH + MARGIN);
+    return rect;
+}
+
+RECT CppScreen::GetLedSegmentRect(int digit, int segment)
+{
+    int16_t left = 0;
+    int16_t right = 0;
+    int16_t top = 0;
+    int16_t bottom = 0;
+
+    switch (segment)
+    {
+    case 0: // Center segment
+        right = LED_SEGMENT_LENGTH;
+        top = LED_SEGMENT_LENGTH;
+        bottom = LED_SEGMENT_LENGTH;
+        break;
+
+    case 1: // Top left segment
+        bottom = LED_SEGMENT_LENGTH;
+        break;
+
+    case 2: // Bottom left segment
+        top = LED_SEGMENT_LENGTH;
+        bottom = 2 * LED_SEGMENT_LENGTH;
+        break;
+
+    case 3: // Bottom segment
+        right = LED_SEGMENT_LENGTH;
+        top = 2 * LED_SEGMENT_LENGTH;
+        bottom = 2 * LED_SEGMENT_LENGTH;
+        break;
+
+    case 4: // Right bottom segment
+        left = LED_SEGMENT_LENGTH;
+        right = LED_SEGMENT_LENGTH;
+        top = LED_SEGMENT_LENGTH;
+        bottom = 2 * LED_SEGMENT_LENGTH;
+        break;
+
+    case 5: // Top right segment
+        left = LED_SEGMENT_LENGTH;
+        right = LED_SEGMENT_LENGTH;
+        bottom = LED_SEGMENT_LENGTH;
+        break;
+
+    case 6: // Top segment
+        right = LED_SEGMENT_LENGTH;
+        break;
+
+    case 7:
+        // DP? 
+        break;
+
+    default:
+        AssertUtils::MyAssert(false);
+        break;
+    }
+
+    left += 3 * LED_SEGMENT_LENGTH * (digit + 1);
+    right += 3 * LED_SEGMENT_LENGTH * (digit + 1);
+
+    left -= LED_SEGMENT_WIDTH / 2;
+    right += LED_SEGMENT_WIDTH / 2;
+    top += 300 - LED_SEGMENT_WIDTH / 2;
+    bottom += 300 + LED_SEGMENT_WIDTH / 2;
+        
+    RECT rect;
+    SetRect(&rect, left, top, right, bottom);
     return rect;
 }
 
@@ -98,34 +179,53 @@ RECT CppScreen::GetLedSegmentRect(int player, int digit, int segment)
             {
                 FastLedCRGB* rgb = ledMatrix->GetLed(x, y);
                 brush = CreateSolidBrush(RGB(rgb->red, rgb->green, rgb->blue));
-                FillRect(hdc, &(_rectangles[x][y]), brush);
+                FillRect(hdc, &(_LedMatrixRectangles[x][y]), brush);
                 DeleteObject(brush);
             }
         }
     }
 
-    // Player 1 Segment
+    // Player Segment
+    brush = CreateSolidBrush(RGB(0, 0, 0));
+    RECT rect = GetFullLedSegmentAreaRect();
+    FillRect(hdc, &rect, brush);
+    DeleteObject(brush);
 
+    brush = CreateSolidBrush(RGB(255, 0, 0));
 
-    for (int player = 0; player < 2; player++)
+    for (int digit = 0; digit < 4 ; digit++)
     {
-        for (int digit = 0; digit < 8; digit++)
+        uint8_t segments = ui->GetMainUi()->GetFourDigitsLed()->GetSegments(digit);
+        for (uint8_t segment = 0; segment < 8; segment++)
         {
-            uint8_t segments = ui->GetPlayerUi(player)->GetLedSegments()->GetMax7219()->STUB_GetSegments(digit);
-            for (int segment = 0; segment < 8; segment++)
+            bool on = (segments & (1 << segment));
+            if (on)
             {
-                bool on = (segments & (1 << segment));
-                brush = CreateSolidBrush(RGB(on ? 255 : 0, 0, 0));
-                _ledSegments[player][digit][segment] = GetLedSegmentRect(player, digit, segment);
-                FillRect(hdc, &(_ledSegments[player][digit][segment]), brush);
-                DeleteObject(brush);
+                _ledSegmentsRectangles[digit][segment] = GetLedSegmentRect(digit, segment);
+                FillRect(hdc, &(_ledSegmentsRectangles[digit][segment]), brush);
             }
         }
     }
 
-    
-     
-    // Reset invalidation
+    DeleteObject(brush);
 
+    // Sound Texts
+    brush = CreateSolidBrush(RGB(0, ui->GetMainUi()->GetSound()->IsPlaying() ? 100 : 0, 0));
+    FillRect(hdc, &_speakerTextRectangle, brush);
+    wchar_t durationTextBuffer[256] = {};
+    wchar_t frequencyTextBuffer[256] = {};
+
+    std::swprintf(durationTextBuffer, sizeof(durationTextBuffer) / sizeof(*durationTextBuffer),
+        L"Duration   : %5d ms", ui->GetMainUi()->GetSound()->GetDuration());
+    std::swprintf(frequencyTextBuffer, sizeof(frequencyTextBuffer) / sizeof(*frequencyTextBuffer),
+        L"Frequency: %5d Hz", ui->GetMainUi()->GetSound()->GetFrequency());
+
+    SetBkMode(hdc, TRANSPARENT);
+    SetTextColor(hdc, RGB(255, 255, 255));
+    
+    DrawText(hdc, durationTextBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
+    DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
+
+    // Reset invalidation
     ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();
 }

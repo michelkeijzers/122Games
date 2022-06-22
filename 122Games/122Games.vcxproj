@@ -151,7 +151,7 @@
     <ClInclude Include="CharUtils.h" />
     <ClInclude Include="ClassNames.h" />
     <ClInclude Include="CppScreen.h" />
-    <ClInclude Include="DataPins.h" />
+    <ClInclude Include="HardwareProperties.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="FadeInOutDemo.h" />
     <ClInclude Include="FastLedStub.h" />
@@ -173,9 +173,11 @@
     <ClInclude Include="Rgb.h" />
     <ClInclude Include="SerialStub.h" />
     <ClInclude Include="SerialUtils.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TM1637DisplayStub.h" />
+    <ClInclude Include="ToneStub.h" />
     <ClInclude Include="Ui.h" />
     <ClInclude Include="Worms.h" />
   </ItemGroup>
@@ -211,8 +213,10 @@
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="SerialStub.cpp" />
     <ClCompile Include="SerialUtils.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TM1637DisplayStub.cpp" />
+    <ClCompile Include="ToneStub.cpp" />
     <ClCompile Include="Ui.cpp" />
     <ClCompile Include="WinApp.cpp" />
     <ClCompile Include="Worms.cpp" />

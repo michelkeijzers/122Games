@@ -4,8 +4,14 @@
 void Ui::Initialize()
 {
 	_mainUi.Initialize();
+	_isInitialized = true;
 }
 
+
+bool Ui::IsInitialized()
+{
+	return _isInitialized;
+}
 
 MainUi* Ui::GetMainUi()
 {
@@ -13,7 +19,7 @@ MainUi* Ui::GetMainUi()
 }
 
 
-PlayerUi* Ui::GetPlayerUi(uint8_t player)
+PlayerUi* Ui::GetPlayerUi()
 {
-	return (player == 0) ? &_playerUi1 : &_playerUi2;
+	return &_playerUi;
 }

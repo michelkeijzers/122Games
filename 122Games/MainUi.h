@@ -1,8 +1,8 @@
 #pragma once
 
-#include "LedMatrix.h"
-#include "PlayerUi.h"
-
+class LedMatrix;
+class FourDigitsLed;
+class Sound;
 
 class MainUi
 {
@@ -12,11 +12,16 @@ public:
 	static const int NR_OF_LEDS = MAX_X * MAX_Y;
 
 	MainUi();
+	~MainUi();
 	void Initialize();
 
 	LedMatrix* GetLedMatrix();
+	FourDigitsLed* GetFourDigitsLed();
+	Sound* GetSound();
 
 private:
-	LedMatrix _ledMatrix;
+	LedMatrix *_ledMatrix;
+	FourDigitsLed *_fourDigitsLed;
+	Sound* _sound;
 };
 

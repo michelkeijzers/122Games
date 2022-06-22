@@ -2,6 +2,14 @@
 
 title LedDisplay, LedSegments, Max7219
 
+class BlinkingFeature
+{
+  +void Blink(uint16_t blinkSpeedInMs)
+  +void BlinkRefresh()
+  -uint16_t _blinkSpeed
+  -bool _blinkStatusOn
+}
+
 class FourDigitsLed
 {
   ..Enumerations..
@@ -9,7 +17,8 @@ class FourDigitsLed
   ..Setup/Initialization..
   +FourDigitsLed(uint8_t pinClk, uint8_t pinDio, unsigned int bitDelay = 100)
   ..Display..
-  +void SetSetments(const uint8_t segments[], uint8_t length, uint8_t pos)
+  +void SetSegment(uint8_t position, const uint8_t segment)
+  +uint8_t GetSegment(uint8_t position)
   +void DisplayNumber(int16_t number) 
   +void DisplayText(const char* text)
   +void DisplaySpecialChar(ESpecialChar specialChar, uint8_t pos)
@@ -20,53 +29,35 @@ class FourDigitsLed
   +void ShowColon(bool on)
   +void SetBrightness(uint8_t brightness)
   +uint8_t GetBrightness(uint8_t brightness)
-  ..Blink..
-  +void Blink(uint16_t blinkSpeedInMs)
-  +void BlinkRefresh()
+  ..Blinking..
+  +void SetBlinkingFeature()
+  +BlinkingFeature* GetBlinkingFeature()
   ..Library..
   +TM1637Display* GetDisplay()
   --Properties--
-  -uint16_t _blinkSpeed
-  -bool _blinkStatusOn
+  -uint8_t _segments[4]
   -int16_t _value
   -uint8_t brightness
+  -BlinkingFeature* _blinkingFeature
 }
 
-note right of FourDigitsLed::DisplayNumber
+note left of FourDigitsLed::DisplayNumber
   Decimal
   Right justify
   Range: -999..9999
 end note
 
-note right of FourDigitsLed::DisplaySpecialChar
+note left of FourDigitsLed::DisplaySpecialChar
   https://en.wikipedia.org/wiki/Seven-segment_display
 end note
 
-note right of FourDigitsLed::Blink
+note left of BlinkingFeature::_blinkSpeed
   0 means off
 end note
 
-note right of FourDigitsLed::BlinkRefresh
+note left of BlinkingFeature::BlinkRefresh
   Call regularly to refresh blink on/off
 end note
-
-class LedSegments
-{
-  +void SetNumber(int number)
-  +int GetNumber()
-  +void SetMode(EMode mode)
-  +void SetDot(int dotIndex, bool enabled)
-  +int GetDot(int dotIndex)
-  +EMode GetMode()
-  -int _dots {4 bits}
-  -int _number
-  -EMode _mode
-  -type enum EMode  {Time, Number}
-}
-
-class Max7219 <<Arduino>>
-{
-}
 
 class TM1637Display <<Arduino>>
 {
@@ -87,7 +78,7 @@ class TM1637Display <<Arduino>>
 }
 
 
-note top of TM1637Display
+note right of TM1637Display
   https://github.com/avishorp/TM1637/blob/master/TM1637Display.cpp
 end note
 
@@ -95,10 +86,8 @@ end note
 
 FourDigitsLed *-down-> "1" TM1637Display : _tm1637Display
 
-LedDisplay *-- "1" LedSegments
-
+FourDigitsLed *-right-> "0, 1" BlinkingFeature : _blinkingFeature
 
 '-------------------- Grouping -----------------------------
 
-TM1637Display - Max7219
 @enduml

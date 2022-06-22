@@ -6,10 +6,6 @@
 class PlayerUi
 {
 public:
-	int GetScore();
-	void SetScore(int score);
-
-	LedSegments* GetLedSegments();
 
 private:
 	Button _buttonUp;
@@ -17,5 +13,4 @@ private:
 	Button _buttonDown;
 	Button _buttonLeft;
 	Button _buttonSelect;
-	LedSegments _ledSegments;
 };

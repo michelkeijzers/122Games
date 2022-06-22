@@ -4,7 +4,7 @@
 #include "LedColor.h"
 #include "ClassNames.h"
 #include "AssertUtils.h"
-#include "DataPins.h"
+#include "HardwareProperties.h"
 #include HEADER_FILE(FAST_LED_CLASS)
 
 /* static */ const uint8_t LedStrip::MAX_CURRENT_IN_MILLI_AMP_PER_SUB_LED =   20; // mA
@@ -22,13 +22,13 @@ void LedStrip::Initialize(uint8_t nrOfLeds)
 {
 	_nrOfLeds = nrOfLeds;
 	_leds = new FastLedCRGB[nrOfLeds];
-	_fastLed.addLeds<WS2813, DataPins::LED_STRIP, RGB>(_leds, nrOfLeds);
+	_fastLed.addLeds<WS2813, HardwareProperties::LED_STRIP_DATA_PIN, RGB>(_leds, nrOfLeds);
 }
 
 
 uint8_t LedStrip::GetDataPin()
 {
-	return DataPins::LED_STRIP;
+	return HardwareProperties::LED_STRIP_DATA_PIN;
 }
 
 

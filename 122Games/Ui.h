@@ -9,13 +9,14 @@ class Ui
 {
 public:
 	void Initialize();
+	bool IsInitialized();
 
 	MainUi* GetMainUi();
-	PlayerUi* GetPlayerUi(uint8_t player);
+	PlayerUi* GetPlayerUi();
 
 private:
 	MainUi _mainUi;
-	PlayerUi _playerUi1;
-	PlayerUi _playerUi2;
+	PlayerUi _playerUi;
+	bool _isInitialized;
 };
 

@@ -1,6 +1,7 @@
 #include "Box.h"
 #include "Game.h"
 #include "Demo.h"
+#include "Sound.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ void Box::setup()
 
 void Box::loop()
 {
+	_ui.GetMainUi()->GetSound()->Refresh();
 	// TODO Implement Arduino Loop
 }
 
