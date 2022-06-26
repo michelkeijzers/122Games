@@ -159,6 +159,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Games.h" />
+    <ClInclude Include="Joystick.h" />
     <ClInclude Include="LedColor.h" />
     <ClInclude Include="LedMatrix.h" />
     <ClInclude Include="LedSegments.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="FourDigitsLed.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Games.cpp" />
+    <ClCompile Include="Joystick.cpp" />
     <ClCompile Include="LedColor.cpp" />
     <ClCompile Include="LedMatrix.cpp" />
     <ClCompile Include="LedSegments.cpp" />

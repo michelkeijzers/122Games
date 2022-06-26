@@ -7,9 +7,10 @@
 #include "Box.h"
 #include "CppScreen.h"
 #include "Game.h"
+#include "Joystick.h"
 
 
-#define MAX_LOADSTRING 100
+constexpr auto MAX_LOADSTRING = 100;
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -209,6 +210,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     
     case WM_KEYDOWN:
         {
+            if (!_box.GetUi()->IsInitialized())
+            {
+                break;
+            }
+
             Game* activeGame = _box.GetGames()->GetActiveGame();
             if (activeGame == nullptr)
             {
@@ -217,70 +223,44 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             switch (wParam)
             {
-            case 'W':
-                activeGame->HandleButton(0, Game::EButton::Up);
+            case VK_NUMPAD0:
+                activeGame->HandleButton(Game::EButton::Select);
                 break;
 
-            case 'S':
-                activeGame->HandleButton(0, Game::EButton::Right);
+            case VK_NUMPAD1:
+                activeGame->HandleDirection(JoyStick::EDirection::LeftDown);
                 break;
 
-            case 'Z':
-                activeGame->HandleButton(0, Game::EButton::Down);
+            case VK_NUMPAD2:
+                activeGame->HandleDirection(JoyStick::EDirection::Down);
                 break;
 
-            case 'A':
-                activeGame->HandleButton(0, Game::EButton::Left);
+            case VK_NUMPAD3:
+                activeGame->HandleDirection(JoyStick::EDirection::RightDown);
                 break;
 
-            case 'X':
-                activeGame->HandleButton(0, Game::EButton::Select);
+            case VK_NUMPAD4:
+                activeGame->HandleDirection(JoyStick::EDirection::Left);
                 break;
 
-
-            case 'P':
-                activeGame->HandleButton(1, Game::EButton::Up);
+            case VK_NUMPAD5:
+                activeGame->HandleDirection(JoyStick::EDirection::Center);
                 break;
 
-            case VK_OEM_1: // :; key
-                activeGame->HandleButton(1, Game::EButton::Right);
+            case VK_NUMPAD6:
+                activeGame->HandleDirection(JoyStick::EDirection::Right);
                 break;
 
-            case VK_OEM_PERIOD:
-                activeGame->HandleButton(1, Game::EButton::Down);
+            case VK_NUMPAD7:
+                activeGame->HandleDirection(JoyStick::EDirection::LeftUp);
                 break;
 
-            case 'L':
-                activeGame->HandleButton(1, Game::EButton::Left);
+            case VK_NUMPAD8:
+                activeGame->HandleDirection(JoyStick::EDirection::Up);
                 break;
 
-            case VK_OEM_2: // /? key
-                activeGame->HandleButton(1, Game::EButton::Select);
-                break;
-
-
-            case VK_INSERT:
-                //_box.HandleButton()
-                break;
-
-            case VK_HOME:
-                // Start
-                break;
-
-            case VK_PRIOR: // Page Up key
-                // Select
-                break;
-
-            case VK_DELETE:
-                // Left
-                break;
-
-            case VK_END:
-                // Stop
-                break;
-
-            case VK_NEXT: // Page Down key
-                // Right
+            case VK_NUMPAD9:
+                activeGame->HandleDirection(JoyStick::EDirection::RightUp);
                 break;
 
             default:
@@ -291,7 +271,38 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_KEYUP:
+    {
+        if (!_box.GetUi()->IsInitialized())
+        {
+            break;
+        }
+
+        Game* activeGame = _box.GetGames()->GetActiveGame();
+        if (activeGame == nullptr)
+        {
+            return 0;
+        }
+
+        switch (wParam)
+        {
+        case '1': // Fall through
+        case '2': // Fall through
+        case '3': // Fall through
+        case '4': // Fall through
+        case '5': // Fall through
+        case '6': // Fall through
+        case '7': // Fall through
+        case '8': // Fall through
+        case '9': // Fall through
+            activeGame->HandleDirection(JoyStick::EDirection::Center);
+            break;
+
+        default:
+            // Ignore other keys
+            break;
+        }
         break;
+    }
 
     case WM_DESTROY:
         PostQuitMessage(0);

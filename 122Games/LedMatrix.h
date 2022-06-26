@@ -10,7 +10,7 @@ public:
 	LedMatrix();
 
 	void Initialize(uint8_t nrOfColumns, uint8_t nrOfRows);
-
+	
 	uint8_t GetNrOfColumns();
 	uint8_t GetNrOfRows();
 

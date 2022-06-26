@@ -14,4 +14,9 @@ public:
 	static const uint8_t FOUR_DIGITS_LED_CLOCK_PIN = 5; // TODO
 
 	static const uint8_t SPEAKER_PIN = 11; //TODO
+
+	static const uint8_t JOYSTICK_HORIZONTAL_PIN = 12; // TODO
+	static const uint8_t JOYSTICK_VERTICAL_PIN = 13; // TODO
+	static const uint8_t JOYSTICK_BUTTON_PIN = 14; // TODO
+
 };

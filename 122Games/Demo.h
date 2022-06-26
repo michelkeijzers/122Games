@@ -5,10 +5,14 @@ class Demo :
     public Game
 {
 public:
+    Demo();
+
     /* virtual */ void Start();
     /* virtual */ void Play();
 
-    /* virtual */ void HandleButton(int player, Game::EButton button);
+    /* virtual */ void HandleButton(Game::EButton button);
+
+    /* virtual */ void HandleDirection(JoyStick::EDirection direction);
 
 private:
     bool _light = false;

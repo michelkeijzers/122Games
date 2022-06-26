@@ -13,8 +13,8 @@ Box::Box()
 
 void Box::setup()
 {
-	GetGames()->Init();
 	_ui.Initialize();
+	GetGames()->Initialize();
 }
 
 

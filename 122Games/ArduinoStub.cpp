@@ -12,6 +12,10 @@
 
 timeb* _startupTime = nullptr;
 
+std::map<uint8_t, bool> _injectedDigitalValues;
+std::map<uint8_t, uint16_t> _injectedAnalogValues;
+
+
 // Digital I/O
 
 extern void pinMode(uint8_t pin, int state)
@@ -23,9 +27,17 @@ extern void pinMode(uint8_t pin, int state)
 
 extern bool digitalRead(uint8_t pin)
 {
-	(void)pin;
-	return rand() % 2 == 0 ? true : false;
+	auto it = _injectedDigitalValues.find(pin);
+	if (it == _injectedDigitalValues.end())
+	{
+		return rand() % 2 == 0 ? false : true;
+	}
+	else
+	{
+		return it->second; // Value
+	}
 }
+
 
 extern void digitalWrite(uint8_t pin, bool state)
 {
@@ -38,8 +50,36 @@ extern void digitalWrite(uint8_t pin, bool state)
 
 extern uint16_t analogRead(uint8_t pin)
 {
-	(void)pin;
-	return rand() % 4096;
+	auto it = _injectedAnalogValues.find(pin);
+	if (it == _injectedAnalogValues.end())
+	{
+		return rand() % 4096;
+	}
+	else
+	{
+		return it->second; // Value
+	}
+}
+
+
+// Injection functions
+extern void InjectDigitalValue(uint8_t pin, bool set, bool injectionValue)
+{
+	_injectedDigitalValues.erase(pin);
+	if (set)
+	{
+		_injectedDigitalValues.insert({ pin, injectionValue });
+	}
+}
+
+
+extern void InjectAnalogValue(uint8_t pin, bool set, uint16_t injectionValue)
+{
+	_injectedAnalogValues.erase(pin);
+	if (set)
+	{
+		_injectedAnalogValues.insert({ pin, injectionValue });
+	}
 }
 
 

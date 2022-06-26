@@ -183,6 +183,9 @@
     <ClInclude Include="Sound.h">
       <Filter>Header Files\Arduino</Filter>
     </ClInclude>
+    <ClInclude Include="Joystick.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -297,6 +300,9 @@
       <Filter>Source Files\ArduinoStub</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="Joystick.cpp">
       <Filter>Source Files\Arduino</Filter>
     </ClCompile>
   </ItemGroup>

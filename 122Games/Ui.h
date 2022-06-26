@@ -8,6 +8,8 @@ class LedMatrix;
 class Ui
 {
 public:
+	Ui();
+
 	void Initialize();
 	bool IsInitialized();
 

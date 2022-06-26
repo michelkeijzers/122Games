@@ -1,4 +1,5 @@
 #include <list>
+#include <string>
 
 #include "framework.h"
 #include "CppScreen.h"
@@ -212,18 +213,19 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     // Sound Texts
     brush = CreateSolidBrush(RGB(0, ui->GetMainUi()->GetSound()->IsPlaying() ? 100 : 0, 0));
     FillRect(hdc, &_speakerTextRectangle, brush);
-    wchar_t durationTextBuffer[256] = {};
-    wchar_t frequencyTextBuffer[256] = {};
+    wchar_t isPlayingBuffer[26] = {};
+    wchar_t frequencyTextBuffer[26] = {};
 
-    std::swprintf(durationTextBuffer, sizeof(durationTextBuffer) / sizeof(*durationTextBuffer),
-        L"Duration   : %5d ms", ui->GetMainUi()->GetSound()->GetDuration());
+    Sound* sound = ui->GetMainUi()->GetSound();
+    uint16_t duration = sound->GetDuration();
+    wcscpy_s(isPlayingBuffer, sound->IsPlaying() ? L"Duration  : ON" : L"Duration  : Off");
     std::swprintf(frequencyTextBuffer, sizeof(frequencyTextBuffer) / sizeof(*frequencyTextBuffer),
-        L"Frequency: %5d Hz", ui->GetMainUi()->GetSound()->GetFrequency());
+        L"Frequency: %5d Hz", sound->GetFrequency());
 
     SetBkMode(hdc, TRANSPARENT);
     SetTextColor(hdc, RGB(255, 255, 255));
     
-    DrawText(hdc, durationTextBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
+    DrawText(hdc, isPlayingBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
     DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
 
     // Reset invalidation

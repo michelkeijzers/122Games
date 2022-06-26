@@ -16,6 +16,7 @@ public:
 	static int Max(int a, int b, int c);
 
 	static int Trim(int a, int min, int max);
+	static int Map(int a, int fromMin, int fromMax, int toMin, int toMax);
 
 	static int Sin(int angle); // angle 0-255, return 0-255
 

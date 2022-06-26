@@ -9,6 +9,14 @@
 #include "Sound.h"
 
 
+FadeInOutDemo::FadeInOutDemo()
+	: Game(),
+	_light(0),
+	_iteration(0)
+{
+}
+
+
 /* virtual */ void FadeInOutDemo::Start()
 {
 }
@@ -40,6 +48,11 @@
 }
 
 
-/* virtual */ void FadeInOutDemo::HandleButton(int player, Game::EButton button)
+/* virtual */ void FadeInOutDemo::HandleDirection(JoyStick::EDirection direction)
+{
+}
+
+
+/* virtual */ void FadeInOutDemo::HandleButton(Game::EButton button)
 {
 }

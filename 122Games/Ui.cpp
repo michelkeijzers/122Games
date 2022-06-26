@@ -1,9 +1,15 @@
 #include "Ui.h"
 
 
+Ui::Ui()
+	: _isInitialized(false)
+{
+}
+
 void Ui::Initialize()
 {
 	_mainUi.Initialize();
+	_playerUi.Initialize();
 	_isInitialized = true;
 }
 

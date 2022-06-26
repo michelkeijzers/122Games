@@ -3,11 +3,12 @@
 #include "FadeInOutDemo.h"
 #include "Worms.h"
 
-void Games::Init()
+void Games::Initialize()
 {
-	SetActiveGameByIndex(Games::EGameId::FADE_IN_OUT_DEMO);
+	SetActiveGameByIndex(Games::EGameId::WORMS);
 	GetActiveGame()->Start();
 }
+
 
 Games::Games(Ui* ui)
 	: _activeGame(nullptr)
@@ -48,7 +49,7 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		break;
 	}
 
-	GetActiveGame()->SetUi(_ui);
+	GetActiveGame()->Initialize(_ui);
 
 	return _activeGame;
 }

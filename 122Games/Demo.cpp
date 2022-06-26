@@ -5,6 +5,14 @@
 #include "MainUi.h"
 #include "Ui.h"
 #include "LedMatrix.h"
+#include "Joystick.h"
+
+
+Demo::Demo()
+	: Game()
+{
+}
+
 
 /* virtual */ void Demo::Start()
 {
@@ -33,6 +41,11 @@
 }
 
 
-/* virtual */ void Demo::HandleButton(int player, Game::EButton button)
+/* virtual */ void Demo::HandleButton(Game::EButton button)
+{
+}
+
+
+/* virtual */ void Demo::HandleDirection(JoyStick::EDirection direction)
 {
 }

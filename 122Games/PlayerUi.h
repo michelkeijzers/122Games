@@ -1,16 +1,17 @@
 #pragma once
 
-#include "Button.h"
-#include "LedSegments.h"
+#include "Joystick.h"
+
 
 class PlayerUi
 {
 public:
+	PlayerUi();
+
+	void Initialize();
+	
+	JoyStick* GetJoyStick();
 
 private:
-	Button _buttonUp;
-	Button _buttonRight;
-	Button _buttonDown;
-	Button _buttonLeft;
-	Button _buttonSelect;
+	JoyStick* _joyStick;
 };

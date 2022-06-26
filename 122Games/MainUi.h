@@ -14,7 +14,7 @@ public:
 	MainUi();
 	~MainUi();
 	void Initialize();
-
+	
 	LedMatrix* GetLedMatrix();
 	FourDigitsLed* GetFourDigitsLed();
 	Sound* GetSound();
@@ -24,4 +24,3 @@ private:
 	FourDigitsLed *_fourDigitsLed;
 	Sound* _sound;
 };
-

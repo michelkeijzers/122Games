@@ -56,6 +56,12 @@ MathUtils::MathUtils()
 }
 
 
+/* static */ int MathUtils::Map(int a, int fromMin, int fromMax, int toMin, int toMax)
+{
+	return (a - fromMin) * (toMax - toMin) / (fromMax - fromMin) + toMin;
+}
+
+
 /* static */ int MathUtils::Sin(int angle)
 {
 	return _sineTable[angle];

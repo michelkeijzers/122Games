@@ -14,7 +14,7 @@ public:
 		WORMS,
 	};
 
-	void Init();
+	void Initialize();
 
 	Games(Ui* ui);
 

@@ -61,7 +61,6 @@ void MainUi::Initialize()
 }
 
 
-
 FourDigitsLed* MainUi::GetFourDigitsLed()
 {
 	return _fourDigitsLed;

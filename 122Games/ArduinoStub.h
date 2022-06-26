@@ -8,12 +8,14 @@
 #pragma once
 
 #include <cstdint>
-#include "MathUtils.h"
-#include "SerialStub.h"
+#include <map>
 #include <string>
 #include <cstring>
 #include <cstdio>
 #include <iostream>
+
+#include "MathUtils.h"
+#include "SerialStub.h"
 #include "ArduinoStringStub.h"
 
 #define F
@@ -51,6 +53,14 @@ extern void digitalWrite(uint8_t pin, bool state);
 // Analog I/O
 
 extern uint16_t analogRead(uint8_t pin);
+
+
+// Injection functions
+extern void InjectDigitalValue(uint8_t pin, bool set, bool injectionValue);
+extern void InjectAnalogValue(uint8_t pin, bool set, uint16_t injectionValue);
+
+extern std::map<uint8_t, bool> _injectedDigitalValues;
+extern std::map<uint8_t, uint16_t> _injectedAnalogValues;
 
 // Zero, Due & MKR Family
 
