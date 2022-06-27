@@ -39,5 +39,9 @@ private:
     RECT _speakerDurationTextRectangle;
     RECT _speakerFrequencyTextRectangle;
 
+    // Joystick Rectangle
+    RECT _joyStickRectangle;
+    RECT _joyStickLocationRectangle;
+
     bool _firstDraw;
 };

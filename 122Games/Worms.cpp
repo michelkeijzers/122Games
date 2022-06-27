@@ -7,16 +7,18 @@
 #include "Joystick.h"
 #include "ClassNames.h"
 #include "HardwareProperties.h"
+#include "FourDigitsLed.h"
 #include HEADER_FILE(ARDUINO_CLASS)
 
 
 static const uint16_t MILLIS_INTERVAL = 300; // 1 second
 
 Worms::Worms()
-	: Game(),
-	  _playerX(6),
-	  _playerY(6),
-	_nextPlayMillis(0)
+  : Game(),
+	_playerX(6),
+	_playerY(6),
+	_nextPlayMillis(0),
+	_rounds(0)
 {
 }
 
@@ -33,6 +35,9 @@ Worms::Worms()
 	if (millis() >= _nextPlayMillis)
 	{
 		_nextPlayMillis = millis() + MILLIS_INTERVAL;
+
+		_rounds++;
+		GetUi()->GetMainUi()->GetFourDigitsLed()->DisplayNumber(_rounds);
 	
 		if (GetUi()->IsInitialized())
 		{
@@ -115,7 +120,7 @@ void Worms::MakeLedGreen(uint8_t x, uint8_t y)
 
 	case JoyStick::EDirection::RightUp:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 4095);
-		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 4095);
+		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 0);
 		break;
 
 	case JoyStick::EDirection::Right:

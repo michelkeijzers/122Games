@@ -22,6 +22,13 @@ static const int BOTTOM_MARGIN = 20;
 static const int PIXELS_PLUS_MARGIN_WIDTH = LEFT_MARGIN + MainUi::MAX_X * PIXEL_WIDTH + RIGHT_MARGIN;
 static const int PIXELS_PLUS_MARGIN_HEIGHT = TOP_MARGIN + MainUi::MAX_Y * PIXEL_HEIGHT + BOTTOM_MARGIN;
 
+static const int JOYSTICK_AREA_TOP = 250;
+static const int JOYSTICK_AREA_LEFT = 400;
+static const int JOYSTICK_AREA_WIDTH = 50;
+static const int JOYSTICK_AREA_HEIGHT = 50;
+static const int JOYSTICK_LOCATION_WIDTH = 5;
+static const int JOYSTICK_MARGIN = 10;
+
 
 CppScreen::CppScreen()
     : _firstDraw(true)
@@ -65,7 +72,10 @@ CppScreen::CppScreen()
     SetRect(&_speakerFrequencyTextRectangle, SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2,
         SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
 
-} 
+    // Joystick
+    SetRect(&_joyStickRectangle, JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP - JOYSTICK_MARGIN,
+        JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN);
+}
 
 RECT CppScreen::GetPixelRect(int x, int y)
 {
@@ -228,6 +238,23 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     DrawText(hdc, isPlayingBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
     DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
 
+    // JoyStick
+    brush = CreateSolidBrush(RGB(0, 0, 0));
+    FillRect(hdc, &_joyStickRectangle, brush);
+
+    brush = CreateSolidBrush(RGB(255, 100, 100));
+    int x = (ui->GetPlayerUi()->GetJoyStick()->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
+    int y = (ui->GetPlayerUi()->GetJoyStick()->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
+
+    SetRect(&_joyStickLocationRectangle,
+        JOYSTICK_AREA_LEFT + x - JOYSTICK_LOCATION_WIDTH / 2,
+        JOYSTICK_AREA_TOP + y - JOYSTICK_LOCATION_WIDTH / 2,
+        JOYSTICK_AREA_LEFT + x + JOYSTICK_LOCATION_WIDTH / 2,
+        JOYSTICK_AREA_TOP + y + JOYSTICK_LOCATION_WIDTH / 2);
+        
+    FillRect(hdc, &_joyStickLocationRectangle, brush);
+
+     
     // Reset invalidation
     ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();
 }

@@ -19,8 +19,10 @@ private:
 	void MakeSurroundingLedsGreen();
 	void MakeLedGreen(uint8_t x, uint8_t y);
 
-	int _playerX;
-	int _playerY;
+	uint8_t _playerX;
+	uint8_t _playerY;
 	uint32_t _nextPlayMillis;
+	uint32_t _rounds;
+
 };
 
