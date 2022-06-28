@@ -48,29 +48,25 @@ Worms::Worms()
 
 			if (_rounds % CURSOR_DELAY == 0)
 			{
-				switch (GetJoystick()->GetDirection())
+				switch (GetJoystick()->GetNonDiagonalDirection())
 				{
-				case JoyStick::EDirection::Up:
+				case JoyStick::ENonDiagonalDirection::Up:
 					_playerY = MathUtils::Trim(_playerY - 1, 0, MainUi::MAX_Y - 1);
 					break;
 
-				case JoyStick::EDirection::RightUp: // Fall through
-				case JoyStick::EDirection::Right: // Fall through
-				case JoyStick::EDirection::RightDown:
+				case JoyStick::ENonDiagonalDirection::Right:
 					_playerX = MathUtils::Trim(_playerX + 1, 0, MainUi::MAX_X - 1);
 					break;
 
-				case JoyStick::EDirection::Down:
+				case JoyStick::ENonDiagonalDirection::Down:
 					_playerY = MathUtils::Trim(_playerY + 1, 0, MainUi::MAX_Y - 1);
 					break;
 
-				case JoyStick::EDirection::LeftUp: // Fall through
-				case JoyStick::EDirection::Left: // Fall through
-				case JoyStick::EDirection::LeftDown:
+				case JoyStick::ENonDiagonalDirection::Left:
 					_playerX = MathUtils::Trim(_playerX - 1, 0, MainUi::MAX_X - 1);
 					break;
 
-				case JoyStick::EDirection::Center:
+				case JoyStick::ENonDiagonalDirection::Center:
 					// Do nothing
 					break;
 

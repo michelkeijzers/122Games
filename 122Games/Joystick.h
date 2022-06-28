@@ -33,6 +33,15 @@ public:
 		Down
 	};
 
+	enum class ENonDiagonalDirection
+	{
+		Up,
+		Right,
+		Down,
+		Left,
+		Center
+	};
+
 	JoyStick();
 
 	void Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage);
@@ -43,6 +52,7 @@ public:
 	bool ReadButton();
 
 	EDirection GetDirection();
+	ENonDiagonalDirection GetNonDiagonalDirection();
 
 	EHorizontalDirection GetHorizontalDirection();
 	EVerticalDirection GetVerticalDirection();

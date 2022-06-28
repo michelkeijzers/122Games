@@ -119,6 +119,44 @@ JoyStick::EDirection JoyStick::GetDirection()
 }
 
 
+JoyStick::ENonDiagonalDirection JoyStick::GetNonDiagonalDirection()
+{
+	ENonDiagonalDirection direction = ENonDiagonalDirection::Center;
+
+	switch (GetDirection())
+	{
+	case EDirection::Up:
+		direction = ENonDiagonalDirection::Up;
+		break;
+
+	case EDirection::RightUp: // Fall through
+	case EDirection::Right: // Fall through
+	case EDirection::RightDown:
+		direction = ENonDiagonalDirection::Right;
+		break;
+
+	case EDirection::Down:
+		direction = ENonDiagonalDirection::Down;
+		break;
+
+	case EDirection::LeftUp: // Fall through
+	case EDirection::Left: // Fall through
+	case EDirection::LeftDown:
+		direction = ENonDiagonalDirection::Left;
+		break;
+
+	case EDirection::Center:
+		// Do nothing
+		break;
+
+	default:
+		// Do nothing
+		break;
+	}
+
+	return direction;
+}
+
 JoyStick::EHorizontalDirection JoyStick::GetHorizontalDirection()
 {
 	EHorizontalDirection direction = EHorizontalDirection::Center;

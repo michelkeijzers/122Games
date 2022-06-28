@@ -53,6 +53,8 @@ void Game::Start()
 {
 	_ledMatrix = GetUi()->GetMainUi()->GetLedMatrix();
 	_joystick = GetUi()->GetPlayerUi()->GetJoyStick();
+	_sound = GetUi()->GetMainUi()->GetSound();
+	_fourDigitsLed = GetUi()->GetMainUi()->GetFourDigitsLed();
 }
 
 
