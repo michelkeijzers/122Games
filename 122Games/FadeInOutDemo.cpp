@@ -30,29 +30,19 @@ FadeInOutDemo::FadeInOutDemo()
 	{
 		for (int y = 0; y < MainUi::MAX_Y; y++)
 		{
-			_ui->GetMainUi()->GetLedMatrix()->SetLed(x, y, _light, _light, _light);
+			GetLedMatrix()->SetLed(x, y, _light, _light, _light);
 		}
 	}
 
 	_iteration = (_iteration + 1) % 10000;
 	if (_iteration % 1000 == 100)
 	{
-		_ui->GetMainUi()->GetSound()->Play(500);
+		GetSound()->Play(500);
 	}
 	else if (_iteration % 1000 == 500)
 	{
-		_ui->GetMainUi()->GetSound()->Stop();
+		GetSound()->Stop();
 	}
 
-	_ui->GetMainUi()->GetFourDigitsLed()->DisplayNumber(_iteration);
-}
-
-
-/* virtual */ void FadeInOutDemo::HandleDirection(JoyStick::EDirection direction)
-{
-}
-
-
-/* virtual */ void FadeInOutDemo::HandleButton(Game::EButton button, bool pressed)
-{
+	GetFourDigitsLed()->DisplayNumber(_iteration);
 }

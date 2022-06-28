@@ -10,10 +10,6 @@ public:
     /* virtual */ void Start();
     /* virtual */ void Play();
 
-    /* virtual */ void HandleButton(Game::EButton button, bool pressed);
-
-    /* virtual */ void HandleDirection(JoyStick::EDirection direction);
-
 private:
     int _light;
 

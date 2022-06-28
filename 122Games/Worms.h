@@ -10,10 +10,6 @@ public:
 	/* virtual */ void Start();
 	/* virtual */ void Play();
 
-	/* virtual */ void HandleButton(Game::EButton button, bool pressed);
-
-	/* virtual */ void HandleDirection(JoyStick::EDirection direction);
-
 private:
 	void DrawCursors();
 	void MakeSurroundingLedsGreen();
@@ -25,6 +21,5 @@ private:
 	uint8_t _playerY;
 	uint32_t _nextPlayMillis;
 	uint32_t _rounds;
-
 };
 

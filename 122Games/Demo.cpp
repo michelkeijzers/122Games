@@ -32,20 +32,10 @@ Demo::Demo()
 		//{
 		//	for (int y = 0; y < Canvas::MAX_Y; y++)
 		//	{
-		_ui->GetMainUi()->GetLedMatrix()->SetLed(x, y, rand() % 255, rand() % 255, rand() % 255);
+		GetLedMatrix()->SetLed(x, y, rand() % 255, rand() % 255, rand() % 255);
 	//	}
 	//}
 	}
 
 	_light = !_light;
-}
-
-
-/* virtual */ void Demo::HandleButton(Game::EButton button, bool pressed)
-{
-}
-
-
-/* virtual */ void Demo::HandleDirection(JoyStick::EDirection direction)
-{
 }

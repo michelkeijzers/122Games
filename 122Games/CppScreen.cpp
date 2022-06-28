@@ -1,5 +1,8 @@
+#ifdef WIN32
+
 #include <list>
 #include <string>
+//#include <chrono>
 
 #include "framework.h"
 #include "CppScreen.h"
@@ -179,6 +182,8 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
 /* virtual */ void CppScreen::Draw(Ui* ui, HDC hdc, HWND hwnd)
 {
+    // clock_t clock_value = clock();
+
     if (_firstDraw)
     {
         FillRect(hdc, &_backgroundPixelsRectangle, _backgroundPixelsColor);
@@ -273,4 +278,9 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
      
     // Reset invalidation
     ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();
+
+    // clock_t clock_end_value = clock();
+    // int a = (clock_end_value - clock_value) / CLOCKS_PER_SEC;
 }
+
+#endif // WIN32

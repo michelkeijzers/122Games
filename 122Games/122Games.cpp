@@ -142,7 +142,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         SetTimer(hWnd,             // handle to main window 
             IDT_TIMER1,            // timer identifier 
-            5,                     // milli second interval 
+            10,                     // milli second interval 
             (TIMERPROC)NULL);      // no timer callback 
         _timersAreSet = true;
     }
