@@ -29,7 +29,7 @@ void PlayerUi::Initialize()
 }
 
 
-Joystick* PlayerUi::GetJoyStick()
+Joystick* PlayerUi::GetJoystick()
 {
 	return _joyStick;
 }

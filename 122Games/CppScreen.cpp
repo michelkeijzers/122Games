@@ -257,8 +257,8 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     FillRect(hdc, &_joyStickRectangle, brush);
 
     brush = CreateSolidBrush(RGB(255, 100, 100));
-    int x = (ui->GetPlayerUi()->GetJoyStick()->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
-    int y = (ui->GetPlayerUi()->GetJoyStick()->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
+    int x = (ui->GetPlayerUi()->GetJoystick()->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
+    int y = (ui->GetPlayerUi()->GetJoystick()->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
 
     SetRect(&_joyStickLocationRectangle,
         JOYSTICK_AREA_LEFT + x - JOYSTICK_LOCATION_WIDTH / 2,
@@ -270,7 +270,7 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
     brush = CreateSolidBrush(RGB(0, 0, 0));
     FillRect(hdc, &_joyStickButtonRectangle, brush);
-    if (ui->GetPlayerUi()->GetJoyStick()->ReadButton())
+    if (ui->GetPlayerUi()->GetJoystick()->ReadButton())
     {
         SetTextColor(hdc, RGB(255, 255, 255));
         DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);

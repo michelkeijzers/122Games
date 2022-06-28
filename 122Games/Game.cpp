@@ -52,7 +52,7 @@ FourDigitsLed* Game::GetFourDigitsLed()
 void Game::Start()
 {
 	_ledMatrix = GetUi()->GetMainUi()->GetLedMatrix();
-	_joystick = GetUi()->GetPlayerUi()->GetJoyStick();
+	_joystick = GetUi()->GetPlayerUi()->GetJoystick();
 	_sound = GetUi()->GetMainUi()->GetSound();
 	_fourDigitsLed = GetUi()->GetMainUi()->GetFourDigitsLed();
 }

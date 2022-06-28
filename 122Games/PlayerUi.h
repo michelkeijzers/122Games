@@ -10,7 +10,7 @@ public:
 
 	void Initialize();
 	
-	Joystick* GetJoyStick();
+	Joystick* GetJoystick();
 
 private:
 	Joystick* _joyStick;
