@@ -9,7 +9,7 @@ const uint16_t MAX_POT_VALUE = 4095;
 const uint16_t HALF_POT_RANGE = (MAX_POT_VALUE + 1) / 2;
 
 
-JoyStick::JoyStick()
+Joystick::Joystick()
 	: _button(nullptr),
 	  _xAxisPotPin(0),
 	  _yAxisPotPin(0),
@@ -20,7 +20,7 @@ JoyStick::JoyStick()
 }
 
 
-void JoyStick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage)
+void Joystick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage)
 {
 	_xAxisPotPin = xAxisPotPin;
 	_yAxisPotPin = yAxisPotPin;
@@ -36,37 +36,37 @@ void JoyStick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisP
 }
 
 
-int16_t JoyStick::ReadRawX()
+int16_t Joystick::ReadRawX()
 {
 	return analogRead(_xAxisPotPin);
 }
 
 
-int16_t JoyStick::ReadRawY()
+int16_t Joystick::ReadRawY()
 {
 	return analogRead(_yAxisPotPin);
 }
 
 
-int8_t JoyStick::ReadX()
+int8_t Joystick::ReadX()
 {
 	return RangeAndMap(MathUtils::Trim(ReadRawX() + (2048 - _xCenterValue), 0, 4095));
 }
 
 
-int8_t JoyStick::ReadY()
+int8_t Joystick::ReadY()
 {
 	return RangeAndMap(MathUtils::Trim(ReadRawY() + (2048 - _yCenterValue), 0, 4095));
 }
 
 
-bool JoyStick::ReadButton()
+bool Joystick::ReadButton()
 {
 	return _button->Read();
 }
 
 
-JoyStick::EDirection JoyStick::GetDirection()
+Joystick::EDirection Joystick::GetDirection()
 {
 	int8_t x = ReadX();
 	int8_t y = ReadY();
@@ -119,7 +119,7 @@ JoyStick::EDirection JoyStick::GetDirection()
 }
 
 
-JoyStick::ENonDiagonalDirection JoyStick::GetNonDiagonalDirection()
+Joystick::ENonDiagonalDirection Joystick::GetNonDiagonalDirection()
 {
 	ENonDiagonalDirection direction = ENonDiagonalDirection::Center;
 
@@ -157,7 +157,7 @@ JoyStick::ENonDiagonalDirection JoyStick::GetNonDiagonalDirection()
 	return direction;
 }
 
-JoyStick::EHorizontalDirection JoyStick::GetHorizontalDirection()
+Joystick::EHorizontalDirection Joystick::GetHorizontalDirection()
 {
 	EHorizontalDirection direction = EHorizontalDirection::Center;
 
@@ -184,7 +184,7 @@ JoyStick::EHorizontalDirection JoyStick::GetHorizontalDirection()
 }
 
 
-JoyStick::EVerticalDirection JoyStick::GetVerticalDirection()
+Joystick::EVerticalDirection Joystick::GetVerticalDirection()
 {
 	EVerticalDirection direction = EVerticalDirection::Center;
 
@@ -211,14 +211,14 @@ JoyStick::EVerticalDirection JoyStick::GetVerticalDirection()
 }
 
 
-void JoyStick::CalibrateCenter()
+void Joystick::CalibrateCenter()
 {
 	_xCenterValue = ReadRawX();
 	_yCenterValue = ReadRawY();
 }
 
 
-int8_t JoyStick::RangeAndMap(uint16_t calibratedValue)
+int8_t Joystick::RangeAndMap(uint16_t calibratedValue)
 {
 	uint16_t rangedValue = MathUtils::Trim(calibratedValue, -HALF_POT_RANGE, HALF_POT_RANGE - 1);
 	return MathUtils::Map(calibratedValue, 0, 4096 - 1, -100, 100);

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include "Button.h"
 
-class JoyStick
+class Joystick
 {
 public:
 	enum class EDirection
@@ -42,7 +42,7 @@ public:
 		Center
 	};
 
-	JoyStick();
+	Joystick();
 
 	void Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage);
 	

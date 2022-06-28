@@ -18,7 +18,7 @@ void PlayerUi::Initialize()
 		delete _joyStick;
 	}
 
-	_joyStick = new JoyStick();
+	_joyStick = new Joystick();
 
 	InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 2048);
 	InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 2048);
@@ -29,7 +29,7 @@ void PlayerUi::Initialize()
 }
 
 
-JoyStick* PlayerUi::GetJoyStick()
+Joystick* PlayerUi::GetJoyStick()
 {
 	return _joyStick;
 }

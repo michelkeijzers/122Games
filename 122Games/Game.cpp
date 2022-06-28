@@ -25,7 +25,7 @@ Ui* Game::GetUi()
 }
 
 
-JoyStick* Game::GetJoystick()
+Joystick* Game::GetJoystick()
 {
 	return _joystick;
 }
@@ -58,51 +58,51 @@ void Game::Start()
 }
 
 
-/* virtual */ void Game::HandleDirection(JoyStick::EDirection direction)
+/* virtual */ void Game::HandleDirection(Joystick::EDirection direction)
 {
 	switch (direction)
 	{
-	case JoyStick::EDirection::Up:
+	case Joystick::EDirection::Up:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 2048);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 0);
 		break;
 
-	case JoyStick::EDirection::RightUp:
+	case Joystick::EDirection::RightUp:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 4095);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 0);
 		break;
 
-	case JoyStick::EDirection::Right:
+	case Joystick::EDirection::Right:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 4095);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 2048);
 		break;
 
-	case JoyStick::EDirection::RightDown:
+	case Joystick::EDirection::RightDown:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 4095);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 4095);
 		break;
 
-	case JoyStick::EDirection::Down:
+	case Joystick::EDirection::Down:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 2048);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 4095);
 		break;
 
-	case JoyStick::EDirection::LeftDown:
+	case Joystick::EDirection::LeftDown:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 0);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 4095);
 		break;
 
-	case JoyStick::EDirection::Left:
+	case Joystick::EDirection::Left:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 0);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 2048);
 		break;
 
-	case JoyStick::EDirection::LeftUp:
+	case Joystick::EDirection::LeftUp:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 0);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 0);
 		break;
 
-	case JoyStick::EDirection::Center:
+	case Joystick::EDirection::Center:
 		InjectAnalogValue(HardwareProperties::JOYSTICK_HORIZONTAL_PIN, true, 2048);
 		InjectAnalogValue(HardwareProperties::JOYSTICK_VERTICAL_PIN, true, 2048);
 		break;

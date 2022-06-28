@@ -23,7 +23,7 @@ public:
 	};
 
 	Ui* GetUi();
-	JoyStick* GetJoystick();
+	Joystick* GetJoystick();
 	LedMatrix* GetLedMatrix();
 	Sound* GetSound();
 	FourDigitsLed* GetFourDigitsLed();
@@ -32,12 +32,12 @@ public:
 	virtual void Play() = 0;
 
 	virtual void HandleButton(Game::EButton button, bool pressed);
-	virtual void HandleDirection(JoyStick::EDirection direction);
+	virtual void HandleDirection(Joystick::EDirection direction);
 	
 private:
 	Ui* _ui;
 	LedMatrix* _ledMatrix;
-	JoyStick* _joystick;
+	Joystick* _joystick;
 	Sound* _sound;
 	FourDigitsLed* _fourDigitsLed;
 };

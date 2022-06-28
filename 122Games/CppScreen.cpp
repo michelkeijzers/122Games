@@ -252,7 +252,7 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     DrawText(hdc, isPlayingBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
     DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
 
-    // JoyStick
+    // Joystick
     brush = CreateSolidBrush(RGB(0, 0, 0));
     FillRect(hdc, &_joyStickRectangle, brush);
 

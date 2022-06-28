@@ -228,39 +228,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
 
             case VK_NUMPAD1:
-                activeGame->HandleDirection(JoyStick::EDirection::LeftDown);
+                activeGame->HandleDirection(Joystick::EDirection::LeftDown);
                 break;
 
             case VK_NUMPAD2:
-                activeGame->HandleDirection(JoyStick::EDirection::Down);
+                activeGame->HandleDirection(Joystick::EDirection::Down);
                 break;
 
             case VK_NUMPAD3:
-                activeGame->HandleDirection(JoyStick::EDirection::RightDown);
+                activeGame->HandleDirection(Joystick::EDirection::RightDown);
                 break;
 
             case VK_NUMPAD4:
-                activeGame->HandleDirection(JoyStick::EDirection::Left);
+                activeGame->HandleDirection(Joystick::EDirection::Left);
                 break;
 
             case VK_NUMPAD5:
-                activeGame->HandleDirection(JoyStick::EDirection::Center);
+                activeGame->HandleDirection(Joystick::EDirection::Center);
                 break;
 
             case VK_NUMPAD6:
-                activeGame->HandleDirection(JoyStick::EDirection::Right);
+                activeGame->HandleDirection(Joystick::EDirection::Right);
                 break;
 
             case VK_NUMPAD7:
-                activeGame->HandleDirection(JoyStick::EDirection::LeftUp);
+                activeGame->HandleDirection(Joystick::EDirection::LeftUp);
                 break;
 
             case VK_NUMPAD8:
-                activeGame->HandleDirection(JoyStick::EDirection::Up);
+                activeGame->HandleDirection(Joystick::EDirection::Up);
                 break;
 
             case VK_NUMPAD9:
-                activeGame->HandleDirection(JoyStick::EDirection::RightUp);
+                activeGame->HandleDirection(Joystick::EDirection::RightUp);
                 break;
 
             default:
@@ -299,7 +299,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case VK_NUMPAD8: // Fall through
         case VK_NUMPAD9:
         default:
-            activeGame->HandleDirection(JoyStick::EDirection::Center);
+            activeGame->HandleDirection(Joystick::EDirection::Center);
             break;
         }
         break;

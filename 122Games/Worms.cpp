@@ -50,23 +50,23 @@ Worms::Worms()
 			{
 				switch (GetJoystick()->GetNonDiagonalDirection())
 				{
-				case JoyStick::ENonDiagonalDirection::Up:
+				case Joystick::ENonDiagonalDirection::Up:
 					_playerY = MathUtils::Trim(_playerY - 1, 0, MainUi::MAX_Y - 1);
 					break;
 
-				case JoyStick::ENonDiagonalDirection::Right:
+				case Joystick::ENonDiagonalDirection::Right:
 					_playerX = MathUtils::Trim(_playerX + 1, 0, MainUi::MAX_X - 1);
 					break;
 
-				case JoyStick::ENonDiagonalDirection::Down:
+				case Joystick::ENonDiagonalDirection::Down:
 					_playerY = MathUtils::Trim(_playerY + 1, 0, MainUi::MAX_Y - 1);
 					break;
 
-				case JoyStick::ENonDiagonalDirection::Left:
+				case Joystick::ENonDiagonalDirection::Left:
 					_playerX = MathUtils::Trim(_playerX - 1, 0, MainUi::MAX_X - 1);
 					break;
 
-				case JoyStick::ENonDiagonalDirection::Center:
+				case Joystick::ENonDiagonalDirection::Center:
 					// Do nothing
 					break;
 
