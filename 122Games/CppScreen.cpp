@@ -28,6 +28,8 @@ static const int JOYSTICK_AREA_WIDTH = 50;
 static const int JOYSTICK_AREA_HEIGHT = 50;
 static const int JOYSTICK_LOCATION_WIDTH = 5;
 static const int JOYSTICK_MARGIN = 10;
+static const int JOYSTICK_TEXT_WIDTH = 100;
+static const int JOYSTICK_TEXT_HEIGHT = 20;
 
 
 CppScreen::CppScreen()
@@ -65,16 +67,23 @@ CppScreen::CppScreen()
     static const int SPEAKER_TEXT_LEFT_MARGIN = 10;
     static const int SPEAKER_TEXT_LINE_MARGIN = 5;
 
-    SetRect(&_speakerTextRectangle, SPEAKER_AREA_LEFT, SPEAKER_AREA_TOP,
+    SetRect(&_speakerTextRectangle,
+        SPEAKER_AREA_LEFT, SPEAKER_AREA_TOP,
         SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
-    SetRect(&_speakerDurationTextRectangle, SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_TEXT_LINE_MARGIN,
+    SetRect(&_speakerDurationTextRectangle,
+        SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_TEXT_LINE_MARGIN,
         SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2);
-    SetRect(&_speakerFrequencyTextRectangle, SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2,
+    SetRect(&_speakerFrequencyTextRectangle, 
+        SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2,
         SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
 
     // Joystick
-    SetRect(&_joyStickRectangle, JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP - JOYSTICK_MARGIN,
+    SetRect(&_joyStickRectangle, 
+        JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP - JOYSTICK_MARGIN,
         JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN);
+    SetRect(&_joyStickButtonRectangle, 
+        JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN,
+        JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN + JOYSTICK_TEXT_HEIGHT);
 }
 
 RECT CppScreen::GetPixelRect(int x, int y)
@@ -254,6 +263,13 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
         
     FillRect(hdc, &_joyStickLocationRectangle, brush);
 
+    brush = CreateSolidBrush(RGB(0, 0, 0));
+    FillRect(hdc, &_joyStickButtonRectangle, brush);
+    if (ui->GetPlayerUi()->GetJoyStick()->ReadButton())
+    {
+        SetTextColor(hdc, RGB(255, 255, 255));
+        DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
+    }
      
     // Reset invalidation
     ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();

@@ -26,7 +26,7 @@ public:
 	virtual void Start() = 0;
 	virtual void Play() = 0;
 
-	virtual void HandleButton(Game::EButton button) = 0;
+	virtual void HandleButton(Game::EButton button, bool pressed) = 0;
 
 	virtual void HandleDirection(JoyStick::EDirection direction) = 0;
 	

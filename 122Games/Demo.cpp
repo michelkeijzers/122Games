@@ -41,7 +41,7 @@ Demo::Demo()
 }
 
 
-/* virtual */ void Demo::HandleButton(Game::EButton button)
+/* virtual */ void Demo::HandleButton(Game::EButton button, bool pressed)
 {
 }
 

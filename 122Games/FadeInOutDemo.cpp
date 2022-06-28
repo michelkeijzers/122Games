@@ -53,6 +53,6 @@ FadeInOutDemo::FadeInOutDemo()
 }
 
 
-/* virtual */ void FadeInOutDemo::HandleButton(Game::EButton button)
+/* virtual */ void FadeInOutDemo::HandleButton(Game::EButton button, bool pressed)
 {
 }

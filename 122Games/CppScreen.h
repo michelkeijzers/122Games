@@ -42,6 +42,7 @@ private:
     // Joystick Rectangle
     RECT _joyStickRectangle;
     RECT _joyStickLocationRectangle;
+    RECT _joyStickButtonRectangle;
 
     bool _firstDraw;
 };

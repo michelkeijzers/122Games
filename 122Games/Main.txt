@@ -21,14 +21,14 @@ class Game
   +void SetUi();
   +{abstract} void Start() = 0
   +{abstract} void Play() = 0
-  +{abstract} void HandleButton(int player, EButton button) = 0
+  +{abstract} void HandleButton(int player, EButton button, bool pressed) = 0
 }
 
 class Demo
 {
   +void Start()
   +void Play()
-  +void HandleButton(int player, EButton button)
+  +void HandleButton(EButton button, bool pressed)
   -bool _light
 }
 

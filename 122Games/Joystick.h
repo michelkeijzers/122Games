@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "Button.h"
 
 class JoyStick
 {
@@ -38,6 +39,8 @@ public:
 	
 	int16_t ReadRawX();
 	int16_t ReadRawY();
+	
+	bool ReadButton();
 
 	EDirection GetDirection();
 
@@ -55,7 +58,6 @@ public:
 private:
 	int8_t RangeAndMap(uint16_t calibratedValue);
 
-	uint8_t _switchPin;
 	uint8_t _xAxisPotPin;
 	uint8_t _yAxisPotPin;
 
@@ -63,5 +65,7 @@ private:
 	uint16_t _yCenterValue;
 
 	uint8_t _centerPercentage;
+
+	Button* _button;
 };
 

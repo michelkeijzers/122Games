@@ -142,7 +142,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         SetTimer(hWnd,             // handle to main window 
             IDT_TIMER1,            // timer identifier 
-            20,                    // milli second interval 
+            5,                     // milli second interval 
             (TIMERPROC)NULL);      // no timer callback 
         _timersAreSet = true;
     }
@@ -224,7 +224,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wParam)
             {
             case VK_NUMPAD0:
-                activeGame->HandleButton(Game::EButton::Select);
+                activeGame->HandleButton(Game::EButton::Select, true);
                 break;
 
             case VK_NUMPAD1:
@@ -285,20 +285,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         switch (wParam)
         {
-        case '1': // Fall through
-        case '2': // Fall through
-        case '3': // Fall through
-        case '4': // Fall through
-        case '5': // Fall through
-        case '6': // Fall through
-        case '7': // Fall through
-        case '8': // Fall through
-        case '9': // Fall through
-            activeGame->HandleDirection(JoyStick::EDirection::Center);
+        case VK_NUMPAD0: 
+            activeGame->HandleButton(Game::EButton::Select, false);
             break;
 
+        case VK_NUMPAD1: // Fall through
+        case VK_NUMPAD2: // Fall through
+        case VK_NUMPAD3: // Fall through
+        case VK_NUMPAD4: // Fall through
+        case VK_NUMPAD5: // Fall through
+        case VK_NUMPAD6: // Fall through
+        case VK_NUMPAD7: // Fall through
+        case VK_NUMPAD8: // Fall through
+        case VK_NUMPAD9:
         default:
-            // Ignore other keys
+            activeGame->HandleDirection(JoyStick::EDirection::Center);
             break;
         }
         break;

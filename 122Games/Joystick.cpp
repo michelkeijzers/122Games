@@ -1,6 +1,7 @@
 #include "Joystick.h"
 #include "MathUtils.h"
 #include "ClassNames.h"
+#include "Button.h"
 #include HEADER_FILE(ARDUINO_CLASS)
 
 
@@ -9,7 +10,7 @@ const uint16_t HALF_POT_RANGE = (MAX_POT_VALUE + 1) / 2;
 
 
 JoyStick::JoyStick()
-	: _switchPin(0),
+	: _button(nullptr),
 	  _xAxisPotPin(0),
 	  _yAxisPotPin(0),
 	  _xCenterValue(0),
@@ -21,11 +22,16 @@ JoyStick::JoyStick()
 
 void JoyStick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage)
 {
-	_switchPin = switchPin;
 	_xAxisPotPin = xAxisPotPin;
 	_yAxisPotPin = yAxisPotPin;
 	_centerPercentage = centerPercentage;
 
+	if (_button != nullptr)
+	{
+		delete _button;
+	}
+	_button = new Button();
+	_button->Initialize(switchPin);
 	CalibrateCenter();
 }
 
@@ -51,6 +57,12 @@ int8_t JoyStick::ReadX()
 int8_t JoyStick::ReadY()
 {
 	return RangeAndMap(MathUtils::Trim(ReadRawY() + (2048 - _yCenterValue), 0, 4095));
+}
+
+
+bool JoyStick::ReadButton()
+{
+	return _button->Read();
 }
 
 
