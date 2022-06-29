@@ -31,7 +31,7 @@ void Joystick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisP
 		delete _button;
 	}
 	_button = new Button();
-	_button->Initialize(switchPin);
+	_button->Initialize(switchPin, INPUT_PULLUP, 20);
 	CalibrateCenter();
 }
 

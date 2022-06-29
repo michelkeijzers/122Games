@@ -38,12 +38,14 @@ static const int JOYSTICK_TEXT_HEIGHT = 20;
 CppScreen::CppScreen()
     : _firstDraw(true)
 {
+    _blackBrush = CreateSolidBrush(RGB(0, 0, 0));
+    _redBrush = CreateSolidBrush(RGB(255, 0, 0));
+    _darkGreenBrush = CreateSolidBrush(RGB(0, 100, 0));
+    
     SetRect(&_backgroundPixelsRectangle, 0, 0, PIXELS_PLUS_MARGIN_WIDTH, PIXELS_PLUS_MARGIN_HEIGHT);
-    _backgroundPixelsColor = CreateSolidBrush(RGB(0, 0, 0));
     SetRect(&_pixelsBorderRectangle, LEFT_MARGIN - 1, TOP_MARGIN - 1,
         PIXELS_PLUS_MARGIN_WIDTH - RIGHT_MARGIN,
         PIXELS_PLUS_MARGIN_HEIGHT - BOTTOM_MARGIN);
-    _pixelsBorderColor = CreateSolidBrush(RGB(255, 0, 0));
 
     // 
     for (int x = 0; x < MainUi::MAX_X; x++)
@@ -88,6 +90,26 @@ CppScreen::CppScreen()
         JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN,
         JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN + JOYSTICK_TEXT_HEIGHT);
 }
+
+
+CppScreen::~CppScreen()
+{
+    if (_blackBrush != nullptr)
+    {
+        DeleteObject(&_blackBrush);
+    }
+
+    if (_redBrush != nullptr)
+    {
+        DeleteObject(&_redBrush);
+    }
+
+    if (_darkGreenBrush != nullptr)
+    {
+        DeleteObject(&_darkGreenBrush);
+    }
+}
+
 
 RECT CppScreen::GetPixelRect(int x, int y)
 {
@@ -186,8 +208,8 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
     if (_firstDraw)
     {
-        FillRect(hdc, &_backgroundPixelsRectangle, _backgroundPixelsColor);
-        FrameRect(hdc, &_pixelsBorderRectangle, _pixelsBorderColor);
+        FillRect(hdc, &_backgroundPixelsRectangle, _blackBrush);
+        FrameRect(hdc, &_pixelsBorderRectangle, _redBrush);
         _firstDraw = false;
     }
 
@@ -211,12 +233,8 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     }
 
     // Player Segment
-    brush = CreateSolidBrush(RGB(0, 0, 0));
     RECT rect = GetFullLedSegmentAreaRect();
-    FillRect(hdc, &rect, brush);
-    DeleteObject(brush);
-
-    brush = CreateSolidBrush(RGB(255, 0, 0));
+    FillRect(hdc, &rect, _blackBrush);
 
     for (int digit = 0; digit < 4 ; digit++)
     {
@@ -227,16 +245,14 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
             if (on)
             {
                 _ledSegmentsRectangles[digit][segment] = GetLedSegmentRect(digit, segment);
-                FillRect(hdc, &(_ledSegmentsRectangles[digit][segment]), brush);
+                FillRect(hdc, &(_ledSegmentsRectangles[digit][segment]), _redBrush);
             }
         }
     }
 
-    DeleteObject(brush);
-
     // Sound Texts
-    brush = CreateSolidBrush(RGB(0, ui->GetMainUi()->GetSound()->IsPlaying() ? 100 : 0, 0));
-    FillRect(hdc, &_speakerTextRectangle, brush);
+    FillRect(hdc, &_speakerTextRectangle, ui->GetMainUi()->GetSound()->IsPlaying() ? _darkGreenBrush : _blackBrush);
+    
     wchar_t isPlayingBuffer[26] = {};
     wchar_t frequencyTextBuffer[26] = {};
 
@@ -253,10 +269,8 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
 
     // Joystick
-    brush = CreateSolidBrush(RGB(0, 0, 0));
-    FillRect(hdc, &_joyStickRectangle, brush);
+    FillRect(hdc, &_joyStickRectangle, _blackBrush);
 
-    brush = CreateSolidBrush(RGB(255, 100, 100));
     int x = (ui->GetPlayerUi()->GetJoystick()->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
     int y = (ui->GetPlayerUi()->GetJoystick()->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
 
@@ -266,16 +280,15 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
         JOYSTICK_AREA_LEFT + x + JOYSTICK_LOCATION_WIDTH / 2,
         JOYSTICK_AREA_TOP + y + JOYSTICK_LOCATION_WIDTH / 2);
         
-    FillRect(hdc, &_joyStickLocationRectangle, brush);
+    FillRect(hdc, &_joyStickLocationRectangle, _redBrush);
 
-    brush = CreateSolidBrush(RGB(0, 0, 0));
-    FillRect(hdc, &_joyStickButtonRectangle, brush);
+    FillRect(hdc, &_joyStickButtonRectangle, _blackBrush);
     if (ui->GetPlayerUi()->GetJoystick()->ReadButton())
     {
         SetTextColor(hdc, RGB(255, 255, 255));
         DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
     }
-     
+
     // Reset invalidation
     ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();
 

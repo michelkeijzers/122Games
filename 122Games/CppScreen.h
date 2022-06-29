@@ -10,6 +10,7 @@ class CppScreen
 {
 public:
     CppScreen();
+    ~CppScreen();
 
     void Draw(Ui* canvas, HDC hdc, HWND hwnd);
 
@@ -19,9 +20,10 @@ private:
     const static int LED_SEGMENT_WIDTH = 4;
 
     RECT _backgroundPixelsRectangle;
-    HBRUSH _backgroundPixelsColor;
     RECT _pixelsBorderRectangle;
-    HBRUSH _pixelsBorderColor;
+    HBRUSH _blackBrush;
+    HBRUSH _redBrush;
+    HBRUSH _darkGreenBrush;
 
     // LED Matrix
     RECT _LedMatrixRectangles[MainUi::MAX_X][MainUi::MAX_Y];

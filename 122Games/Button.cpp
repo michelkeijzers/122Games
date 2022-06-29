@@ -6,7 +6,8 @@ Button::Button()
   : _pinNumber(),
 	_pinResistorMode(INPUT_PULLUP),
 	_debouncePeriod(0),
-	_debouncePollingTime(0)
+	_debouncePollingTime(0),
+    _firstPressed(false)
 {
 }
 
@@ -17,9 +18,11 @@ void Button::Initialize(uint8_t pinNumber, uint8_t pinResistorMode, uint16_t deb
     _pinResistorMode = pinResistorMode;
     _debouncePeriod = debouncePeriod;
     _debouncePollingTime = 0;
+    _firstPressed = false;
 
     pinMode(_pinNumber, _pinResistorMode);
     InjectDigitalValue(pinNumber, true, true); // Depress (HIGH)
+
 }
 
 
@@ -31,14 +34,15 @@ uint8_t Button::GetPinNumber()
 
 bool Button::Read()
 {
-    if (millis() - _debouncePollingTime < _debouncePeriod) 
+    if (_firstPressed && (millis() - _debouncePollingTime < _debouncePeriod))
     {
-        return false;
+        return true;
     }
 
     if (digitalRead(_pinNumber) == LOW) 
     {
-        if (millis() - _debouncePollingTime > _debouncePeriod) 
+        _firstPressed = true;
+        if (millis() - _debouncePollingTime > _debouncePeriod)
         {
             _debouncePollingTime = millis();
             return true;

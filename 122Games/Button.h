@@ -22,5 +22,6 @@ private:
 	uint8_t _pinResistorMode;
 	uint16_t _debouncePeriod;
 	uint32_t _debouncePollingTime;
+	bool _firstPressed;
 };
 

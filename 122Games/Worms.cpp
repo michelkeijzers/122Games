@@ -29,6 +29,8 @@ Worms::Worms()
 	DrawCursors();
 }
 
+bool _prevState = false;
+
 
 /* virtual */ void Worms::Play()
 {
@@ -41,7 +43,15 @@ Worms::Worms()
 	
 		if (GetUi()->IsInitialized())
 		{
-			if (GetJoystick()->ReadButton())
+			bool buttonPressed = GetJoystick()->ReadButton();
+			
+			if (_prevState != buttonPressed)
+			{
+				_prevState = buttonPressed;
+				Serial.print(buttonPressed);
+			}
+
+			if (buttonPressed)
 			{
 				ClearScreen();
 			}
