@@ -69,6 +69,7 @@ extern std::map<uint8_t, uint16_t> _injectedAnalogValues;
 
 #endif
 
+
 // Zero, Due & MKR Family
 
 // Advanced I/O
@@ -78,6 +79,7 @@ extern std::map<uint8_t, uint16_t> _injectedAnalogValues;
 extern void delay(uint32_t milliSeconds);
 
 extern uint32_t millis();
+
 
 // Math
 
@@ -92,15 +94,12 @@ extern int map(int value, int fromLower, int fromUpper, int toLower, int toUpper
 #define MAX(x, y) MathUtils::Max(x, y)
 
 
-// Trigonometry
-
-// Characters
-
 // Random Numbers
 
 extern uint32_t random(uint32_t number);
 
 extern void randomSeed(uint16_t seed);
+
 
 // Bits and Bytes
 
@@ -112,10 +111,17 @@ extern void randomSeed(uint16_t seed);
 
 // USB
 
-// ESP32 
+// Tone
 
-void ledcSetup(int ledChannel, int frequency, int resolution);
-void ledcAttachPin(int pin, int ledChannel);
-void ledcWriteTone(int ledCHannel, float frequency);
+void tone(uint8_t pinNumber, uint16_t frequency, uint16_t duration = 0);
+void noTone();
+
+
+// Tone (ESP32)
+
+void ledcSetup(uint8_t channel, double frequency, uint8_t resolutionBits);
+void ledcAttachPin(uint8_t pin, int channel);
+void ledcWrite(uint8_t channel, uint32_t duty);
+void ledcWriteTone(uint8_t channel, double frequency);
 
 #endif // WIN32

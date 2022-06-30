@@ -17,7 +17,6 @@ class Sound
 {
 public:
 	Sound();
-	~Sound();
 
 	void Initialize(uint8_t dataPin);
 
@@ -32,7 +31,6 @@ public:
 
 private:
 	uint8_t _dataPin;
-	TONE_CLASS* _tone;
 
 	bool _isPlaying;
 	uint16_t _frequency;

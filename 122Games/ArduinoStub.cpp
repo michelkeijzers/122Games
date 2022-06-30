@@ -190,26 +190,48 @@ extern void randomSeed(uint16_t seed)
 
 // USB
 
-// ESP32
-
-void ledcSetup(int ledChannel, int frequency, int resolution)
+// Tone (Arduino)
+ 
+void tone(uint8_t pinNumber, uint16_t frequency, uint16_t duration /* = 0 */ )
 {
-	(void)ledChannel;
+	(void)pinNumber;
 	(void)frequency;
-	(void)resolution;
+	(void)duration;
 }
 
 
-void ledcAttachPin(int pin, int ledChannel)
+void noTone()
+{
+}
+
+
+// Tone (ESP32), see https://espressif-docs.readthedocs-hosted.com/projects/arduino-esp32/en/latest/api/ledc.html
+
+void ledcSetup(uint8_t channel, double frequency, uint8_t resolutionBits)
+{
+	(void)channel;
+	(void)frequency;
+	(void)resolutionBits;
+}
+
+
+void ledcAttachPin(uint8_t pin, int channel)
 {
 	(void)pin;
-	(void)ledChannel;
+	(void)channel;
 }
 
 
-void ledcWriteTone(int ledChannel, float frequency)
+void ledcWrite(uint8_t channel, uint32_t duty)
 {
-	(void)ledChannel;
+	(void)channel;
+	(void)duty;
+}
+
+
+void ledcWriteTone(uint8_t channel, double frequency)
+{
+	(void)channel;
 	(void)frequency;
 }
 
