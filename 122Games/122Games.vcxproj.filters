@@ -69,9 +69,6 @@
     <ClInclude Include="Rgb.h">
       <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas.h">
-      <Filter>Header Files\Framework\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="Worms.h">
       <Filter>Header Files\Games</Filter>
     </ClInclude>
@@ -111,7 +108,7 @@
     <ClInclude Include="FastLedStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
-    <ClInclude Include="LiquidCrystalStub.h">
+    <ClInclude Include="LiquidCrystalI2cStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
     <ClInclude Include="122Games.h">
@@ -147,17 +144,11 @@
     <ClInclude Include="Button.h">
       <Filter>Header Files\Arduino</Filter>
     </ClInclude>
-    <ClInclude Include="LedSegments.h">
-      <Filter>Header Files\Arduino</Filter>
-    </ClInclude>
     <ClInclude Include="LedMatrix.h">
       <Filter>Header Files\Framework\UI</Filter>
     </ClInclude>
     <ClInclude Include="FadeInOutDemo.h">
       <Filter>Header Files\Games</Filter>
-    </ClInclude>
-    <ClInclude Include="MAX7219Stub.h">
-      <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
     <ClInclude Include="LedStrip.h">
       <Filter>Header Files\Arduino</Filter>
@@ -180,13 +171,16 @@
     <ClInclude Include="Joystick.h">
       <Filter>Header Files\Arduino</Filter>
     </ClInclude>
+    <ClInclude Include="LcdDisplay.h">
+      <Filter>Header Files\Arduino</Filter>
+    </ClInclude>
+    <ClInclude Include="Print.h">
+      <Filter>Header Files\ArduinoStub</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
       <Filter>Source Files\Games</Filter>
-    </ClCompile>
-    <ClCompile Include="Canvas.cpp">
-      <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
     <ClCompile Include="CppScreen.cpp">
       <Filter>Source Files\Framework\Screen</Filter>
@@ -221,7 +215,7 @@
     <ClCompile Include="MemoryUtils.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="LiquidCrystalStub.cpp">
+    <ClCompile Include="LiquidCrystalI2cStub.cpp">
       <Filter>Source Files\ArduinoStub</Filter>
     </ClCompile>
     <ClCompile Include="LedStrip.cpp">
@@ -254,9 +248,6 @@
     <ClCompile Include="Games.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Screen.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Ui.cpp">
       <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
@@ -269,17 +260,11 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Arduino</Filter>
     </ClCompile>
-    <ClCompile Include="LedSegments.cpp">
-      <Filter>Source Files\Arduino</Filter>
-    </ClCompile>
     <ClCompile Include="LedMatrix.cpp">
       <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
     <ClCompile Include="FadeInOutDemo.cpp">
       <Filter>Source Files\Games</Filter>
-    </ClCompile>
-    <ClCompile Include="MAX7219Stub.cpp">
-      <Filter>Source Files\ArduinoStub</Filter>
     </ClCompile>
     <ClCompile Include="TM1637DisplayStub.cpp">
       <Filter>Source Files\ArduinoStub</Filter>
@@ -292,6 +277,12 @@
     </ClCompile>
     <ClCompile Include="Joystick.cpp">
       <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="LcdDisplay.cpp">
+      <Filter>Source Files\Arduino</Filter>
+    </ClCompile>
+    <ClCompile Include="Print.cpp">
+      <Filter>Source Files\ArduinoStub</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +312,7 @@
     <Text Include="LedDisplay.txt">
       <Filter>PlantUML</Filter>
     </Text>
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RelayBox.ino">

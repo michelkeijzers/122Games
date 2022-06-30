@@ -1,9 +1,12 @@
 #include "Box.h"
 #include "Game.h"
+#include "LcdDisplay.h"
 #include "Demo.h"
 #include "Sound.h"
 
+
 using namespace std;
+
 
 Box::Box()
 	: _games(&_ui)
@@ -14,6 +17,7 @@ Box::Box()
 void Box::setup()
 {
 	_ui.Initialize();
+	_ui.GetMainUi()->GetLcdDisplay()->DisplayText(1, 10, "12 Square Games");
 	GetGames()->Initialize();
 }
 

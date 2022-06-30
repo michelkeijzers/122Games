@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
 #include "Demo.h"
-#include "Canvas.h"
 #include "MainUi.h"
 #include "Ui.h"
 #include "LedMatrix.h"

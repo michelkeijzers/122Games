@@ -26,7 +26,7 @@ bool Sound::IsPlaying()
 }
 
 
-void Sound::Play(uint16_t frequency, uint16_t duration /* = 0 */)
+void Sound::Play(uint16_t frequency, uint32_t duration /* = 0 */)
 {
 	ledcWriteTone(_dataPin, frequency);
 

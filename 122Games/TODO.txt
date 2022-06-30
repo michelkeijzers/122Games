@@ -1,0 +1,20 @@
+Technical debt
+==============
+- Copy Joystick functionality to Game class instead of within each game (if not already done)
+- Retest Sound/Tone class (in Worms?)
+
+IMPROVEMENTS
+============
+- Joystick: 4 direction mode (taking into lowest/highest X/Y coordinte to define 4 directions), make a class variable for 4 or 8 direction mode
+
+NEW FEATURES
+============
+- Add LCD on cppscreen 
+- Add buttons for main UI
+- Create menu
+- Check if bouncing works
+- Save to Flash
+- OTA
+
+
+

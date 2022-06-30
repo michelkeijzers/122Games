@@ -6,7 +6,6 @@
 
 
 #include <sys/timeb.h>
-#include <cstdint>
 #include <time.h>
 #include <stdlib.h>
 #include "ArduinoStub.h"

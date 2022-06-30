@@ -6,35 +6,38 @@
 #include "ArduinoStub.h"
 #include "ArduinoStringStub.h"
 
-// Decimal
-constexpr auto DEC = 1;
-constexpr auto HEX = 2;
+#include "Print.h"
 
-
-class SerialClass
+class SerialClass : public Print
 {
 public:
+	SerialClass();
+
 	void begin(int baudrate);
 
-	void println();
-	void println(const char* str);
-	void println(ArduinoStringStub str);
-	void println(char value);
-	void println(unsigned int value);
-	void println(int value);
-	void println(int value, int mode);
-	void println(float value);
+	/* override */ size_t write(uint8_t character);
 
-	void print();
-	void print(const char* str);
-	void print(ArduinoStringStub str);
-	void print(char value);
-	void print(unsigned int value);
-	void print(int value);
-	void print(int value, int mode);
-	void print(float value);
+	/*
+	size_t println();
+	size_t println(const char* str);
+	size_t println(ArduinoStringStub str);
+	size_t println(char value);
+	size_t println(unsigned int value);
+	size_t println(int value);
+	size_t println(int value, int mode);
+	size_t println(float value);
 
-	void printf(ArduinoStringStub str, int arg1 = NULL, const char* arg2 = NULL);
+	size_t print();
+	size_t print(const char* str);
+	size_t print(ArduinoStringStub str);
+	size_t print(char value);
+	size_t print(unsigned int value);
+	size_t print(int value);
+	size_t print(int value, int mode);
+	size_t print(float value);
+	*/
+
+	size_t printf(ArduinoStringStub str, int arg1 = NULL, const char* arg2 = NULL);
 	static void flush();
 
 private:

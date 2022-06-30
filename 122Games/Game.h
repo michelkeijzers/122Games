@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Canvas.h"
 #include "Ui.h"
 #include "Joystick.h"
 #include "Sound.h"
 #include "FourDigitsLed.h"
+
 
 class Game
 {

@@ -2,6 +2,14 @@
 
 #pragma once
 
+
+#ifdef WIN32
+#include <cstdint>
+#else
+#include <stdint.h>
+#endif // WIN32
+
+
 // Used to include variable class names
 #define stringify(x) #x
 #define HEADER_FILE(a) stringify(a.h)
@@ -14,6 +22,7 @@
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperatureStub
 #define ESP_ASYNC_WEB_SERVER_CLASS  EspAsyncWebServerStub
 #define FAST_LED_CLASS              FastLedStub
+#define LIQUID_CRYSTAL_I2C_CLASS    LiquidCrystalI2cStub
 #define MAX_7219_HEADER_FILE_NAME	MAX7219Stub
 #define MAX_7219_CLASS              MAX7219Stub
 #define ONE_WIRE_CLASS              OneWireStub
@@ -41,6 +50,7 @@
 #define DALLAS_TEMPERATURE_CLASS    DallasTemperature
 #define ESP_ASYNC_WEB_SERVER_CLASS  ESPAsyncWebServer
 #define FAST_LED_CLASS              FastLED
+#define LIQUID_CRYSTAL_I2C_CLASS    LiquidCrystal_I2C
 #define MAX_7219_HEADER_FILE_NAME	max7219
 #define MAX_7219_CLASS              MAX7219
 #define ONE_WIRE_CLASS              OneWire

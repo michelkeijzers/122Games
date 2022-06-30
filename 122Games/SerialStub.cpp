@@ -9,131 +9,160 @@ SerialClass Serial;
 SerialPort SoftwareSerial;
 SerialPort HardwareSerial;
 
+SerialClass::SerialClass()
+  : _message{},
+	_string{}
+{
+}
+
 void SerialClass::begin(int baudrate)
 {
 	static_cast<int>(baudrate);
 }
 
 
-void SerialClass::println()
+/* override */ size_t SerialClass::write(uint8_t character)
 {
-	OutputDebugString(L"\n");
+	size_t size;
+	char text[] = { (char) character, '\0' };
+	wchar_t wtext[20];
+	mbstowcs_s(&size, wtext, text, 2);
+	OutputDebugString(wtext);
+	return 1;
 }
 
 
-void SerialClass::println(const char* str)
+/*
+size_t SerialClass::println()
+{
+	OutputDebugString(L"\n");
+	return 0;
+}
+
+
+size_t SerialClass::println(const char* str)
 {
 	size_t sizet;
 	mbstowcs_s(&sizet, _string, str, strlen(str) + 1);
 	swprintf_s(_message, L"%s\n", _string);
 	OutputDebugString(_message);
+	return strlen(str);
 }
 
 
-void SerialClass::println(ArduinoStringStub str)
+size_t SerialClass::println(ArduinoStringStub str)
 {
 	println(str.c_str());
+	return str.length();
 }
 
 
-void SerialClass::println(char value)
+size_t SerialClass::println(char value)
 {
 	swprintf_s(_message, L"%c\n", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::println(int value, int mode)
+size_t SerialClass::println(int value, int mode)
 {
 	(void)mode;
 
 	swprintf_s(_message, L"%d\n", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
 
-void SerialClass::println(unsigned int value)
+size_t SerialClass::println(unsigned int value)
 {
-	println(value, DEC);
+	return println(value, DEC);
 }
 
 
-void SerialClass::println(int value)
+size_t SerialClass::println(int value)
 {
-	println(value, DEC);
+	return println(value, DEC);
 }
 
 
-void SerialClass::println(float value)
+size_t SerialClass::println(float value)
 {
 	swprintf_s(_message, L"%f\n", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::print()
+size_t SerialClass::print()
 {
 	swprintf_s(_message, L"");
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::print(const char* str)
+size_t SerialClass::print(const char* str)
 {
 	size_t sizet;
 	mbstowcs_s(&sizet, _string, str, strlen(str) + 1);
 	swprintf_s(_message, L"%s", _string);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::print(ArduinoStringStub str)
+size_t SerialClass::print(ArduinoStringStub str)
 {
-	print(str.c_str());
+	return print(str.c_str());
 }
 
 
-void SerialClass::print(int value, int mode)
+size_t SerialClass::print(int value, int mode)
 {
 	(void)mode;
 
 	swprintf_s(_message, L"%d", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::print(char value)
+size_t SerialClass::print(char value)
 {
 	swprintf_s(_message, L"%c", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
 
 
-void SerialClass::print(unsigned int value)
+size_t SerialClass::print(unsigned int value)
 {
-	print(value, DEC);
+	return print(value, DEC);
 }
 
 
-void SerialClass::print(int value)
+size_t SerialClass::print(int value)
 {
-	print(value, DEC);
+	return print(value, DEC);
 }
 
 
-void SerialClass::print(float value)
+size_t SerialClass::print(float value)
 {
 	swprintf_s(_message, L"%f", value);
 	OutputDebugString(_message);
+	return lstrlen(_message);
 }
+*/
 
-
-void SerialClass::printf(ArduinoStringStub str, int arg1 /* = NULL */, const char* arg2 /* = NULL */)
+size_t SerialClass::printf(ArduinoStringStub str, int arg1 /* = NULL */, const char* arg2 /* = NULL */)
 {
 	(void) arg1;
 	(void) arg2;
-	print(str.c_str());
+	return print(str.c_str());
 }
 
 

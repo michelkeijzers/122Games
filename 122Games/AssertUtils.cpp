@@ -3,10 +3,6 @@
 #include "AssertUtils.h"
 #include <stdio.h>
 
-#ifdef _WIN32
-#include <cstdlib>
-#endif
-
 
 void AssertUtils::MyAssert(bool expression)
 {

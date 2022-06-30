@@ -9,6 +9,7 @@
 #include "ClassNames.h"
 #include HEADER_FILE(ARDUINO_CLASS)
 
+
 StringUtils::StringUtils()
 {
 }

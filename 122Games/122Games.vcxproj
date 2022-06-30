@@ -146,7 +146,6 @@
     <ClInclude Include="BitsUtils.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Canvas.h" />
     <ClInclude Include="CharUtils.h" />
     <ClInclude Include="ClassNames.h" />
     <ClInclude Include="CppScreen.h" />
@@ -159,16 +158,16 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Games.h" />
     <ClInclude Include="Joystick.h" />
+    <ClInclude Include="LcdDisplay.h" />
     <ClInclude Include="LedColor.h" />
     <ClInclude Include="LedMatrix.h" />
-    <ClInclude Include="LedSegments.h" />
     <ClInclude Include="LedStrip.h" />
-    <ClInclude Include="LiquidCrystalStub.h" />
+    <ClInclude Include="LiquidCrystalI2cStub.h" />
     <ClInclude Include="MainUi.h" />
     <ClInclude Include="MathUtils.h" />
-    <ClInclude Include="MAX7219Stub.h" />
     <ClInclude Include="MemoryUtils.h" />
     <ClInclude Include="PlayerUi.h" />
+    <ClInclude Include="Print.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Rgb.h" />
     <ClInclude Include="SerialStub.h" />
@@ -188,7 +187,6 @@
     <ClCompile Include="BitsUtils.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CharUtils.cpp" />
     <ClCompile Include="CppScreen.cpp" />
     <ClCompile Include="Demo.cpp" />
@@ -198,18 +196,17 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Games.cpp" />
     <ClCompile Include="Joystick.cpp" />
+    <ClCompile Include="LcdDisplay.cpp" />
     <ClCompile Include="LedColor.cpp" />
     <ClCompile Include="LedMatrix.cpp" />
-    <ClCompile Include="LedSegments.cpp" />
     <ClCompile Include="LedStrip.cpp" />
-    <ClCompile Include="LiquidCrystalStub.cpp" />
+    <ClCompile Include="LiquidCrystalI2cStub.cpp" />
     <ClCompile Include="MainUi.cpp" />
     <ClCompile Include="MathUtils.cpp" />
-    <ClCompile Include="MAX7219Stub.cpp" />
     <ClCompile Include="MemoryUtils.cpp" />
     <ClCompile Include="PlayerUi.cpp" />
+    <ClCompile Include="Print.cpp" />
     <ClCompile Include="Rgb.cpp" />
-    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="SerialStub.cpp" />
     <ClCompile Include="SerialUtils.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -231,6 +228,7 @@
     <Text Include="FastLed.txt" />
     <Text Include="LedDisplay.txt" />
     <Text Include="Main.txt" />
+    <Text Include="TODO.txt" />
     <Text Include="Ui.txt" />
   </ItemGroup>
   <ItemGroup>

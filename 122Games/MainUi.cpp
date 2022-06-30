@@ -1,4 +1,5 @@
 #include "MainUi.h"
+#include "LcdDisplay.h"
 #include "FourDigitsLed.h"
 #include "LedMatrix.h"
 #include "HardwareProperties.h"
@@ -6,7 +7,8 @@
 
 
 MainUi::MainUi()
-  : _fourDigitsLed(nullptr),
+  : _lcdDisplay(nullptr),
+	_fourDigitsLed(nullptr),
 	_ledMatrix(nullptr),
 	_sound(nullptr)
 {
@@ -15,6 +17,10 @@ MainUi::MainUi()
 
 MainUi::~MainUi()
 {
+	if (_lcdDisplay != nullptr)
+	{
+		delete _lcdDisplay; 
+	}
 	if (_fourDigitsLed != nullptr)
 	{
 		delete _fourDigitsLed;
@@ -34,6 +40,16 @@ MainUi::~MainUi()
 
 void MainUi::Initialize()
 {
+	if (_lcdDisplay != nullptr)
+	{
+		_lcdDisplay = new LcdDisplay(
+			HardwareProperties::LCD_I2C_ADDRESS,
+			HardwareProperties::LCD_NR_OF_ROW, 
+			HardwareProperties::LCD_NR_OF_COLUMNS);
+	}
+
+	_lcdDisplay->Inititalize();
+
 	if (_fourDigitsLed == nullptr)
 	{
 		_fourDigitsLed = new FourDigitsLed();
@@ -58,6 +74,12 @@ void MainUi::Initialize()
 	}
 
 	_sound->Initialize(HardwareProperties::SPEAKER_PIN);
+}
+
+
+LcdDisplay* MainUi::GetLcdDisplay()
+{
+	return _lcdDisplay;
 }
 
 

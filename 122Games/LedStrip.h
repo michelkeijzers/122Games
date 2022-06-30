@@ -1,13 +1,6 @@
 #pragma once
 
 
-#ifdef WIN32
-#include <cstdint>
-#else
-#include <stdint.h>
-#endif // WIN32
-
-
 #include "ClassNames.h"
 #include HEADER_FILE(FAST_LED_CLASS)
 #include "LedColor.h"
