@@ -31,8 +31,10 @@ public:
 	virtual void Start() = 0;
 	virtual void Play() = 0;
 
+#ifdef WIN32
 	virtual void HandleButton(Game::EButton button, bool pressed);
 	virtual void HandleDirection(Joystick::EDirection direction);
+#endif // WIN32
 	
 private:
 	Ui* _ui;

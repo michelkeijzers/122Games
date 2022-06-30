@@ -2,7 +2,12 @@
 
 // See https://en.wikipedia.org/wiki/Seven-segment_display
 
+
+#ifdef WIN32
 #include <cstdint>
+#else
+#include <stdint.h>
+#endif // WIN32
 
 #include "ClassNames.h"
 #include HEADER_FILE(TM1637_DISPLAY_CLASS)

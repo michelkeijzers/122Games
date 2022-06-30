@@ -1,6 +1,12 @@
+#ifdef WIN32
+
 #pragma once
 
+// Based on TM1637 library by Avishay Orpaz.
+
+
 #include <cstdint>
+
 
 class TM1637DisplayStub
 {
@@ -21,3 +27,4 @@ public:
 	void encodeDigit(uint8_t digit);
 };
 
+#endif // WIN32

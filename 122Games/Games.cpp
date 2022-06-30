@@ -1,3 +1,4 @@
+#include "AssertUtils.h"
 #include "Games.h"
 #include "Demo.h"
 #include "FadeInOutDemo.h"
@@ -45,7 +46,7 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		break;
 
 	default:
-		throw "Illegal case";
+		AssertUtils::MyAssert(false);
 		break;
 	}
 

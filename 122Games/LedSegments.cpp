@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 #include "ClassNames.h"
-#include HEADER_FILE(MAX_7219_CLASS)
+#include HEADER_FILE(MAX_7219_HEADER_FILE_NAME)
 
 LedSegments::LedSegments()
 {
@@ -25,10 +25,15 @@ void LedSegments::Initialize()
 }
 
 
+#ifdef WIN32
+
 int LedSegments::GetValue()
 {
 	return _max7219->STUB_GetDisplayedValue();
 }
+
+#endif //WIN32
+
 
 void LedSegments::SetValue(int value)
 {

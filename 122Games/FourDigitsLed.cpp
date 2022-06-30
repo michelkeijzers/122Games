@@ -22,7 +22,7 @@ void FourDigitsLed::Initialize(uint8_t pinClk, uint8_t pinDio, unsigned int bitD
 		delete _tm1637Display;
 	}
 
-	_tm1637Display = new TM1637DisplayStub(pinClk, pinDio, bitDelay);
+	_tm1637Display = new TM1637_DISPLAY_CLASS(pinClk, pinDio, bitDelay);
 } 
 
 

@@ -1,4 +1,11 @@
-#ifdef _WINDOWS
+#ifdef WIN32
+
+// Based on max7219, Jonathan Evans
+// Changes:
+//   in max7219.cpp, change:
+//     static void MAX7219::MAX7219_ShutdownStop (void)
+//   into
+//     /* static */ void MAX7219::MAX7219_ShutdownStop (void)
 
 #pragma once
 
@@ -28,8 +35,8 @@ public:
 	// void clearDisplay();
 	void Clear(void);
 
-	// void MAX7219_ShutdownStart(void);
-	// void MAX7219_ShutdownStop(void);
+	void MAX7219_ShutdownStart(void);
+	void MAX7219_ShutdownStop(void);
  
 	// void MAX7219_DisplayTestStart(void);
 	// void MAX7219_DisplayTestStop(void);
@@ -51,4 +58,4 @@ private:
 };
 
 
-#endif // _WINDOWS
+#endif // WIN32

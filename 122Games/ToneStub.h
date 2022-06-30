@@ -1,8 +1,13 @@
+#ifdef WIN32
+
 #pragma once
 
-#include <cstdint>
+// Based on Tone library by Brett Hagman
 
+
+#include <cstdint>
 #include "ClassNames.h"
+
 
 class ToneStub
 {
@@ -13,3 +18,4 @@ public:
     void stop();
 };
 
+#endif // WIN32

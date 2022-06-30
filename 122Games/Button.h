@@ -1,6 +1,12 @@
 #pragma once
 
+
+#ifdef WIN32
 #include <cstdint>
+#else
+#include <stdint.h>
+#endif // WIN32
+
 #include "ClassNames.h"
 #include HEADER_FILE(ARDUINO_CLASS)
 

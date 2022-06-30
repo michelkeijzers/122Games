@@ -1,3 +1,4 @@
+#include "AssertUtils.h"
 #include "Game.h"
 #include "Joystick.h"
 #include "HardwareProperties.h"
@@ -51,12 +52,16 @@ FourDigitsLed* Game::GetFourDigitsLed()
 
 void Game::Start()
 {
-	_ledMatrix = GetUi()->GetMainUi()->GetLedMatrix();
-	_joystick = GetUi()->GetPlayerUi()->GetJoystick();
-	_sound = GetUi()->GetMainUi()->GetSound();
-	_fourDigitsLed = GetUi()->GetMainUi()->GetFourDigitsLed();
+	Ui* ui = GetUi();
+	MainUi* mainUi = ui->GetMainUi();
+	_joystick = ui->GetPlayerUi()->GetJoystick();
+	_ledMatrix = mainUi->GetLedMatrix();
+	_sound = mainUi->GetSound();
+	_fourDigitsLed = mainUi->GetFourDigitsLed();
 }
 
+
+#ifdef WIN32
 
 /* virtual */ void Game::HandleDirection(Joystick::EDirection direction)
 {
@@ -108,13 +113,18 @@ void Game::Start()
 		break;
 
 	default:
-		throw "Illegal case";
+		AssertUtils::MyAssert(false);
 		break;
 	}
 }
 
+#endif // WIN32
+
+#ifdef WIN32
 
 /* virtual */ void Game::HandleButton(Game::EButton button, bool pressed)
 {
 	InjectDigitalValue(HardwareProperties::JOYSTICK_BUTTON_PIN, true, !pressed);
 }
+
+#endif // WIN32

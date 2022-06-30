@@ -1,8 +1,8 @@
 #include "Sound.h"
-
 #include "ClassNames.h"
 #include HEADER_FILE(TONE_CLASS)
 #include HEADER_FILE(ARDUINO_CLASS)
+
 
 Sound::Sound()
    : _tone(nullptr),

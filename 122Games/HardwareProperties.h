@@ -1,12 +1,23 @@
 #pragma once
 
+
+#ifdef WIN32
 #include <cstdint>
+#else
+#include <stdint.h>
+#endif // WIN32
+
 #include "MainUi.h"
+
 
 class HardwareProperties
 {
 public:
-	static const uint8_t LED_STRIP_DATA_PIN = 8; // TODO
+	// ESP32:
+	static const uint8_t LED_STRIP_DATA_PIN = 22; // TODO; for FastLED, cannot use all numbers (some give error for pin number, e.g. 0, 8, 9)
+	// Uno
+	//static const uint8_t LED_STRIP_DATA_PIN = 8;
+
 	static const uint8_t LED_STRIP_NR_OF_COLUMNS = MainUi::MAX_X; 
 	static const uint8_t LED_STRIP_NR_OF_ROWS = MainUi::MAX_Y;
 

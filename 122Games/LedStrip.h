@@ -1,12 +1,20 @@
 #pragma once
 
+
+#ifdef WIN32
 #include <cstdint>
+#else
+#include <stdint.h>
+#endif // WIN32
+
 
 #include "ClassNames.h"
 #include HEADER_FILE(FAST_LED_CLASS)
 #include "LedColor.h"
 
+
 constexpr auto LED_STRIP_MAX_NR_OF_LEDS = 255;
+
 
 class LedStrip
 {

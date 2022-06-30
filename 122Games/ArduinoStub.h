@@ -7,6 +7,7 @@
 
 #pragma once
 
+
 #include <cstdint>
 #include <map>
 #include <string>
@@ -17,6 +18,7 @@
 #include "MathUtils.h"
 #include "SerialStub.h"
 #include "ArduinoStringStub.h"
+
 
 #define F
 #define PROGMEM
@@ -55,12 +57,17 @@ extern void digitalWrite(uint8_t pin, bool state);
 extern uint16_t analogRead(uint8_t pin);
 
 
-// Injection functions
+// Injection functions (Windows only)
+
+#ifdef WIN32
+
 extern void InjectDigitalValue(uint8_t pin, bool set, bool injectionValue);
 extern void InjectAnalogValue(uint8_t pin, bool set, uint16_t injectionValue);
 
 extern std::map<uint8_t, bool> _injectedDigitalValues;
 extern std::map<uint8_t, uint16_t> _injectedAnalogValues;
+
+#endif
 
 // Zero, Due & MKR Family
 
@@ -111,4 +118,4 @@ void ledcSetup(int ledChannel, int frequency, int resolution);
 void ledcAttachPin(int pin, int ledChannel);
 void ledcWriteTone(int ledCHannel, float frequency);
 
-#endif // _WINDOWS
+#endif // WIN32

@@ -1,3 +1,4 @@
+#include "AssertUtils.h"
 #include "Worms.h"
 #include "MathUtils.h"
 #include "PlayerUi.h"
@@ -81,7 +82,7 @@ bool _prevState = false;
 					break;
 
 				default:
-					throw "Illegal case";
+					AssertUtils::MyAssert(false);
 					break;
 				}
 

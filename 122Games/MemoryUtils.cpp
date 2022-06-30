@@ -1,4 +1,4 @@
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include <malloc.h>
 #include "MemoryUtils.h"
@@ -23,4 +23,4 @@
     return used;
 }
 
-#endif
+#endif //WIN32

@@ -251,12 +251,12 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     }
 
     // Sound Texts
-    FillRect(hdc, &_speakerTextRectangle, ui->GetMainUi()->GetSound()->IsPlaying() ? _darkGreenBrush : _blackBrush);
+    Sound* sound = ui->GetMainUi()->GetSound();
+    FillRect(hdc, &_speakerTextRectangle, sound->IsPlaying() ? _darkGreenBrush : _blackBrush);
     
     wchar_t isPlayingBuffer[26] = {};
     wchar_t frequencyTextBuffer[26] = {};
 
-    Sound* sound = ui->GetMainUi()->GetSound();
     uint16_t duration = sound->GetDuration();
     wcscpy_s(isPlayingBuffer, sound->IsPlaying() ? L"Duration  : ON" : L"Duration  : Off");
     std::swprintf(frequencyTextBuffer, sizeof(frequencyTextBuffer) / sizeof(*frequencyTextBuffer),
@@ -270,9 +270,9 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
     // Joystick
     FillRect(hdc, &_joyStickRectangle, _blackBrush);
-
-    int x = (ui->GetPlayerUi()->GetJoystick()->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
-    int y = (ui->GetPlayerUi()->GetJoystick()->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
+    Joystick* joystick = ui->GetPlayerUi()->GetJoystick();
+    int x = (joystick->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
+    int y = (joystick->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
 
     SetRect(&_joyStickLocationRectangle,
         JOYSTICK_AREA_LEFT + x - JOYSTICK_LOCATION_WIDTH / 2,
@@ -283,14 +283,14 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     FillRect(hdc, &_joyStickLocationRectangle, _redBrush);
 
     FillRect(hdc, &_joyStickButtonRectangle, _blackBrush);
-    if (ui->GetPlayerUi()->GetJoystick()->ReadButton())
+    if (joystick->ReadButton())
     {
         SetTextColor(hdc, RGB(255, 255, 255));
         DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
     }
 
     // Reset invalidation
-    ui->GetMainUi()->GetLedMatrix()->ResetInvalidatedLeds();
+    ledMatrix->ResetInvalidatedLeds();
 
     // clock_t clock_end_value = clock();
     // int a = (clock_end_value - clock_value) / CLOCKS_PER_SEC;

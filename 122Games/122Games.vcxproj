@@ -146,7 +146,6 @@
     <ClInclude Include="BitsUtils.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="Buzzer.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CharUtils.h" />
     <ClInclude Include="ClassNames.h" />
@@ -190,7 +189,6 @@
     <ClCompile Include="BitsUtils.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Buzzer.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="CharUtils.cpp" />
     <ClCompile Include="CppScreen.cpp" />

@@ -1,3 +1,5 @@
+#ifdef WIN32
+
 // 122Games.cpp : Defines the entry point for the application.
 //
 
@@ -334,3 +336,5 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+#endif // WIN32

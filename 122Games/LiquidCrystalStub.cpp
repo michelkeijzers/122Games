@@ -1,4 +1,4 @@
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include "LiquidCrystalStub.h"
 
@@ -59,4 +59,4 @@ void LiquidCrystal::clear()
 
 
 
-#endif // _WINDOWS
+#endif // WIN32

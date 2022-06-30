@@ -1,4 +1,4 @@
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include "MAX7219Stub.h"
 #include "AssertUtils.h"
@@ -153,8 +153,17 @@ void MAX7219Stub::Clear(void)
 	DisplayText((char*)"", false);
 }
 
-//void MAX7219Stub::MAX7219_ShutdownStart(void);
-//void MAX7219Stub::MAX7219_ShutdownStop(void);
+void MAX7219Stub::MAX7219_ShutdownStart(void)
+{
+
+}
+
+
+void MAX7219Stub::MAX7219_ShutdownStop(void)
+{
+
+}
+
 
 //void MAX7219Stub::MAX7219_DisplayTestStart(void);
 //void MAX7219Stub::MAX7219_DisplayTestStop(void);
@@ -186,4 +195,4 @@ uint8_t MAX7219Stub::STUB_GetSegments(uint8_t digit)
 
 }
 
-#endif // _WINDOWS
+#endif // WIN32

@@ -1,4 +1,4 @@
-#ifdef _WINDOWS
+#ifdef WIN32
 
 #include "FastLedStub.h"
 
@@ -50,4 +50,4 @@ CFastLED::CFastLED()
 	_showEnabled = true;
 }
 
-#endif // _WINDOWS
+#endif // WIN32

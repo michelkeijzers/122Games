@@ -1,3 +1,5 @@
+#ifdef WIN32
+
 #include "TM1637DisplayStub.h"
 
 TM1637DisplayStub::TM1637DisplayStub(uint8_t pinClk, uint8_t pinDIO, unsigned int bitDelay)
@@ -82,3 +84,5 @@ void TM1637DisplayStub::encodeDigit(uint8_t digit)
 {
 
 }
+
+#endif

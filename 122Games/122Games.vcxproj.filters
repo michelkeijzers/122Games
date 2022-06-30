@@ -87,9 +87,6 @@
     <ClInclude Include="SerialStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
-    <ClInclude Include="Buzzer.h">
-      <Filter>Header Files\Arduino</Filter>
-    </ClInclude>
     <ClInclude Include="ClassNames.h">
       <Filter>Header Files\Arduino</Filter>
     </ClInclude>
@@ -205,9 +202,6 @@
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
       <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Buzzer.cpp">
-      <Filter>Source Files\Arduino</Filter>
     </ClCompile>
     <ClCompile Include="SerialStub.cpp">
       <Filter>Source Files\ArduinoStub</Filter>

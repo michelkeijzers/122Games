@@ -4,11 +4,13 @@
 
 #ifdef WIN32
 
+
 #include <sys/timeb.h>
 #include <cstdint>
 #include <time.h>
 #include <stdlib.h>
 #include "ArduinoStub.h"
+
 
 timeb* _startupTime = nullptr;
 
@@ -61,8 +63,10 @@ extern uint16_t analogRead(uint8_t pin)
 	}
 }
 
-
 // Injection functions
+
+#ifdef WIN32
+
 extern void InjectDigitalValue(uint8_t pin, bool set, bool injectionValue)
 {
 	_injectedDigitalValues.erase(pin);
@@ -72,6 +76,9 @@ extern void InjectDigitalValue(uint8_t pin, bool set, bool injectionValue)
 	}
 }
 
+#endif // WIN32
+
+#ifdef WIN32
 
 extern void InjectAnalogValue(uint8_t pin, bool set, uint16_t injectionValue)
 {
@@ -82,6 +89,7 @@ extern void InjectAnalogValue(uint8_t pin, bool set, uint16_t injectionValue)
 	}
 }
 
+#endif // WIN32
 
 // Zero, Due & MKR Family
 
