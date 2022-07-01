@@ -31,4 +31,9 @@ public:
 	static const uint8_t JOYSTICK_VERTICAL_PIN = 13; // TODO
 	static const uint8_t JOYSTICK_BUTTON_PIN = 14; // TODO
 
+	static const uint8_t BUTTON_START_STOP = 28; //TODO
+	static const uint8_t BUTTON_SELECT = 29; //TODO
+	static const uint8_t BUTTON_LEFT = 30; //TODO
+	static const uint8_t BUTTON_RIGHT = 31; //TODO
+
 };
