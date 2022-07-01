@@ -25,7 +25,7 @@ LcdDisplay::LcdDisplay(uint32_t i2cAddress, uint8_t nrOfRows, uint8_t nrOfColumn
 }
 
 
-void LcdDisplay::Inititalize()
+void LcdDisplay::Initialize()
 {
 	_liquidCrystalI2c->init();
 }
@@ -61,6 +61,7 @@ void LcdDisplay::Clear()
 
 void LcdDisplay::SetCursor(uint8_t row, uint8_t column)
 {
+	VerifyRowAndColumn(row, column);
 	_liquidCrystalI2c->setCursor(column, row);
 	_cursorColumn = column;
 	_cursorRow = row;
@@ -111,9 +112,34 @@ void LcdDisplay::Refresh()
 }
 
 
-void LcdDisplay::DisplayText(uint8_t row, uint8_t column, const char* text)
+void LcdDisplay::DisplayText(uint8_t row, uint8_t startColumn, const char* text)
 {
+	VerifyRowAndColumn(row, startColumn);
 	_liquidCrystalI2c->print(text);
+	
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(startColumn + strlen(text), _nrOfColumns - 1); textIndex++)
+	{
+		_content[row][startColumn + textIndex] = text[textIndex];
+	}
+}
+
+
+uint8_t LcdDisplay::GetNrOfRows()
+{
+	return _nrOfRows;
+}
+
+
+uint8_t LcdDisplay::GetNrOfColumns()
+{
+	return _nrOfColumns;
+}
+
+
+char LcdDisplay::GetContentCharacter(uint8_t row, uint8_t column)
+{
+	VerifyRowAndColumn(row, column);
+	return _content[row][column];
 }
 
 
@@ -121,12 +147,16 @@ size_t LcdDisplay::write(uint8_t character)
 {
 	_liquidCrystalI2c->write(character);
 
-	AssertUtils::MyAssert(_cursorColumn < _nrOfColumns);
-	AssertUtils::MyAssert(_cursorRow < _nrOfRows);
-
-	_content[_cursorColumn][_cursorRow] = character;
+	VerifyRowAndColumn(_cursorRow, _cursorColumn);
+	_content[_cursorRow][_cursorColumn] = character;
 	_cursorColumn++;
 
 	return 1;
 }
 
+
+void LcdDisplay::VerifyRowAndColumn(uint8_t row, uint8_t column)
+{
+	AssertUtils::MyAssert(column < _nrOfColumns);
+	AssertUtils::MyAssert(row < _nrOfRows);
+}

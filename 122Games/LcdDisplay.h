@@ -15,7 +15,7 @@ public:
 
 	LcdDisplay(uint32_t i2cAddress, uint8_t nrOfRows, uint8_t nrOfColumns);
 
-	void Inititalize();
+	void Initialize();
 	void DisplayOn(bool on = true);
 
 	void Clear();
@@ -27,11 +27,17 @@ public:
 
 	void Refresh();
 
-	void DisplayText(uint8_t row, uint8_t column, const char* text);
+	void DisplayText(uint8_t row, uint8_t startColumn, const char* text);
+
+	uint8_t GetNrOfRows();
+	uint8_t GetNrOfColumns();
+	char GetContentCharacter(uint8_t row, uint8_t column);
 
 	size_t write(uint8_t character);
 
 private:
+	void VerifyRowAndColumn(uint8_t row, uint8_t column);
+
 	uint32_t _i2cAddress;
 	uint8_t _nrOfColumns;
 	uint8_t _nrOfRows;

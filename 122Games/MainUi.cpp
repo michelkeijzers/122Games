@@ -40,7 +40,7 @@ MainUi::~MainUi()
 
 void MainUi::Initialize()
 {
-	if (_lcdDisplay != nullptr)
+	if (_lcdDisplay == nullptr)
 	{
 		_lcdDisplay = new LcdDisplay(
 			HardwareProperties::LCD_I2C_ADDRESS,
@@ -48,7 +48,7 @@ void MainUi::Initialize()
 			HardwareProperties::LCD_NR_OF_COLUMNS);
 	}
 
-	_lcdDisplay->Inititalize();
+	_lcdDisplay->Initialize();
 
 	if (_fourDigitsLed == nullptr)
 	{

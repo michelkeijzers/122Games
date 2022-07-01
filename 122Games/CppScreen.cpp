@@ -9,6 +9,8 @@
 #include "LedMatrix.h"
 #include "MainUi.h"
 #include "Ui.h"
+#include "LcdDisplay.h"
+#include "Joystick.h"
 #include "FourDigitsLed.h"
 #include "AssertUtils.h"
 #include "Sound.h"
@@ -34,6 +36,13 @@ static const int JOYSTICK_MARGIN = 10;
 static const int JOYSTICK_TEXT_WIDTH = 100;
 static const int JOYSTICK_TEXT_HEIGHT = 20;
 
+static const int LCD_AREA_TOP = 250;
+static const int LCD_AREA_LEFT = 600;
+static const int LCD_CHARACTER_WIDTH = 16;
+static const int LCD_CHARACTER_HEIGHT = 16;
+static const int LCD_AREA_WIDTH = LCD_CHARACTER_WIDTH * 20;
+static const int LCD_AREA_HEIGHT = LCD_CHARACTER_HEIGHT * 4;
+static const int LCD_MARGIN = 10;
 
 CppScreen::CppScreen()
     : _firstDraw(true)
@@ -89,6 +98,10 @@ CppScreen::CppScreen()
     SetRect(&_joyStickButtonRectangle, 
         JOYSTICK_AREA_LEFT - JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN,
         JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN + JOYSTICK_TEXT_HEIGHT);
+
+    // LCD Display
+    SetRect(&_lcdDisplayRectangle, LCD_AREA_LEFT - LCD_MARGIN, LCD_AREA_TOP - LCD_MARGIN, 
+        LCD_AREA_LEFT + LCD_AREA_WIDTH + LCD_MARGIN, LCD_AREA_TOP + LCD_AREA_HEIGHT + LCD_MARGIN);
 }
 
 
@@ -287,6 +300,29 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
     {
         SetTextColor(hdc, RGB(255, 255, 255));
         DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
+    }
+
+    // LCD Display
+    FillRect(hdc, &_lcdDisplayRectangle, _blackBrush);
+    LcdDisplay* lcdDisplay = ui->GetMainUi()->GetLcdDisplay();
+
+    for (uint8_t row = 0; row < lcdDisplay->GetNrOfRows(); row++)
+    {
+        for (uint8_t column = 0; column < lcdDisplay->GetNrOfColumns(); column++)
+        {
+            size_t size;
+            char text[] = { lcdDisplay->GetContentCharacter(row, column), '\0'};
+            wchar_t wtext[2];
+            mbstowcs_s(&size, wtext, text, 2);
+
+            RECT charRectangle;
+            SetRect(&charRectangle, 
+                _lcdDisplayRectangle.left + LCD_MARGIN + LCD_CHARACTER_WIDTH * column, 
+                _lcdDisplayRectangle.top + row * LCD_CHARACTER_WIDTH,
+                _lcdDisplayRectangle.left + LCD_MARGIN + LCD_CHARACTER_WIDTH * column + LCD_CHARACTER_HEIGHT, 
+                _lcdDisplayRectangle.top + row * LCD_CHARACTER_WIDTH + LCD_CHARACTER_WIDTH);
+            DrawText(hdc, wtext, -1, &charRectangle, DT_SINGLELINE | DT_NOCLIP);
+        }
     }
 
     // Reset invalidation

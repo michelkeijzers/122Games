@@ -25,7 +25,7 @@ void SerialClass::begin(int baudrate)
 {
 	size_t size;
 	char text[] = { (char) character, '\0' };
-	wchar_t wtext[20];
+	wchar_t wtext[2];
 	mbstowcs_s(&size, wtext, text, 2);
 	OutputDebugString(wtext);
 	return 1;

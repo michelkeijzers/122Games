@@ -46,5 +46,8 @@ private:
     RECT _joyStickLocationRectangle;
     RECT _joyStickButtonRectangle;
 
+    // LCD Display Rectangle
+    RECT _lcdDisplayRectangle;
+
     bool _firstDraw;
 };

@@ -6,15 +6,18 @@ Technical debt
 IMPROVEMENTS
 ============
 - Joystick: 4 direction mode (taking into lowest/highest X/Y coordinte to define 4 directions), make a class variable for 4 or 8 direction mode
+- Separate cppscreen classes to easier reuse physical components in windows simulation.
 
 NEW FEATURES
 ============
-- Add LCD on cppscreen 
 - Add buttons for main UI
 - Create menu
 - Check if bouncing works
 - Save to Flash
 - OTA
 
+DOCUMENTATION
+=============
+- Update class diagrams
 
 
