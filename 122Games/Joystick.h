@@ -67,6 +67,10 @@ public:
 
 	//TODO: Full Calibration (moving joystick to left/right/up/down and save values (in EEPROM?)
 
+	bool IsDirectionInvalidated();
+	bool IsButtonInvalidated();
+	void ResetInvalidation();
+
 private:
 	int8_t RangeAndMap(uint16_t calibratedValue);
 
@@ -79,5 +83,11 @@ private:
 	uint8_t _centerPercentage;
 
 	Button* _button;
+
+	bool _directionIsInvalidated;
+	EHorizontalDirection _currentHorizontalDirection;
+	EVerticalDirection _currentVerticalDirection;
+	ENonDiagonalDirection _currentNonDiagonalDirection;
+	EDirection _currentDirection;
 };
 

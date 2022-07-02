@@ -24,10 +24,17 @@ public:
 
 	void Refresh();
 
+	bool IsInvalidated();
+	bool IsFrequencyInvalidated();
+	bool IsDurationInvalidated();
+	void ResetInvalidation();
+
 private:
 	uint8_t _dataPin;
 	bool _isPlaying;
 	uint16_t _frequency;
 	uint32_t _stopAtMillis;
+	bool _isFrequencyInvalidated;
+	bool _isDurationInvalidated;
 };
 

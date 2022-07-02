@@ -15,7 +15,12 @@ Joystick::Joystick()
 	  _yAxisPotPin(0),
 	  _xCenterValue(0),
       _yCenterValue(0),
-	  _centerPercentage(0)
+	  _centerPercentage(0),
+	  _directionIsInvalidated(true),
+	  _currentHorizontalDirection(EHorizontalDirection::Center),
+	  _currentVerticalDirection(EVerticalDirection::Center),
+	  _currentNonDiagonalDirection(ENonDiagonalDirection::Center),
+	  _currentDirection(EDirection::Center)
 {
 }
 
@@ -71,78 +76,84 @@ Joystick::EDirection Joystick::GetDirection()
 	int8_t x = ReadX();
 	int8_t y = ReadY();
 
-	EDirection direction = EDirection::Center;
+	EDirection newDirection = EDirection::Center;
 
 	if (x <= -_centerPercentage)
 	{
 		if (y <= -_centerPercentage)
 		{
-			direction = EDirection::LeftUp;
+			newDirection = EDirection::LeftUp;
 		}
 		else if (y >= _centerPercentage)
 		{
-			direction = EDirection::LeftDown;
+			newDirection = EDirection::LeftDown;
 		}
 		else
 		{
-			direction = EDirection::Left;
+			newDirection = EDirection::Left;
 		}
 	}
 	else if (x >= _centerPercentage)
 	{
 		if (y <= -_centerPercentage)
 		{
-			direction = EDirection::RightUp;
+			newDirection = EDirection::RightUp;
 		}
 		else if (y >= _centerPercentage)
 		{
-			direction = EDirection::RightDown;
+			newDirection = EDirection::RightDown;
 		}
 		else
 		{
-			direction = EDirection::Right;
+			newDirection = EDirection::Right;
 		}
 	}
 	else
 	{
 		if (y <= -_centerPercentage)
 		{
-			direction = EDirection::Up;
+			newDirection = EDirection::Up;
 		}
 		else if (y >= _centerPercentage)
 		{
-			direction = EDirection::Down;
+			newDirection = EDirection::Down;
 		}
 	}
 
-	return direction;
+	if (_currentDirection != newDirection)
+	{
+		_currentDirection = newDirection;
+		_directionIsInvalidated = true;
+	}
+
+	return newDirection;
 }
 
 
 Joystick::ENonDiagonalDirection Joystick::GetNonDiagonalDirection()
 {
-	ENonDiagonalDirection direction = ENonDiagonalDirection::Center;
+	ENonDiagonalDirection newDirection = ENonDiagonalDirection::Center;
 
 	switch (GetDirection())
 	{
 	case EDirection::Up:
-		direction = ENonDiagonalDirection::Up;
+		newDirection = ENonDiagonalDirection::Up;
 		break;
 
 	case EDirection::RightUp: // Fall through
 	case EDirection::Right: // Fall through
 	case EDirection::RightDown:
-		direction = ENonDiagonalDirection::Right;
+		newDirection = ENonDiagonalDirection::Right;
 		break;
 
 	case EDirection::Down:
-		direction = ENonDiagonalDirection::Down;
+		newDirection = ENonDiagonalDirection::Down;
 		break;
 
 	case EDirection::LeftUp: // Fall through
 	case EDirection::Left: // Fall through
 	case EDirection::LeftDown:
-		direction = ENonDiagonalDirection::Left;
+		newDirection = ENonDiagonalDirection::Left;
 		break;
 
 	case EDirection::Center:
@@ -154,25 +165,32 @@ Joystick::ENonDiagonalDirection Joystick::GetNonDiagonalDirection()
 		break;
 	}
 
-	return direction;
+	if (_currentNonDiagonalDirection != newDirection)
+	{
+		_currentNonDiagonalDirection = newDirection;
+		_directionIsInvalidated = true;
+	}
+
+	return newDirection;
 }
+
 
 Joystick::EHorizontalDirection Joystick::GetHorizontalDirection()
 {
-	EHorizontalDirection direction = EHorizontalDirection::Center;
+	EHorizontalDirection newDirection = EHorizontalDirection::Center;
 
 	switch (GetDirection())
 	{
 	case EDirection::Left: // fall through
 	case EDirection::LeftUp: // fall through
 	case EDirection::LeftDown:
-		direction = EHorizontalDirection::Left;
+		newDirection = EHorizontalDirection::Left;
 		break;
 
 	case EDirection::Right: // fall through
 	case EDirection::RightUp: // fall through
 	case EDirection::RightDown:
-		direction = EHorizontalDirection::Right;
+		newDirection = EHorizontalDirection::Right;
 		break;
 
 	default:
@@ -180,26 +198,32 @@ Joystick::EHorizontalDirection Joystick::GetHorizontalDirection()
 		break;
 	}
 
-	return direction;
+	if (_currentHorizontalDirection != newDirection)
+	{
+		_currentHorizontalDirection = newDirection;
+		_directionIsInvalidated = true;
+	}
+
+	return newDirection;
 }
 
 
 Joystick::EVerticalDirection Joystick::GetVerticalDirection()
 {
-	EVerticalDirection direction = EVerticalDirection::Center;
+	EVerticalDirection newDirection = EVerticalDirection::Center;
 
 	switch (GetDirection())
 	{
 	case EDirection::LeftUp: // fall through
 	case EDirection::Up: // fall through
 	case EDirection::RightUp:
-		direction = EVerticalDirection::Up;
+		newDirection = EVerticalDirection::Up;
 		break;
 
 	case EDirection::LeftDown: // fall through
 	case EDirection::Down: // fall through
 	case EDirection::RightDown:
-		direction = EVerticalDirection::Down;
+		newDirection = EVerticalDirection::Down;
 		break;
 
 	default:
@@ -207,7 +231,13 @@ Joystick::EVerticalDirection Joystick::GetVerticalDirection()
 		break;
 	}
 
-	return direction;
+	if (_currentVerticalDirection != newDirection)
+	{
+		_currentVerticalDirection = newDirection;
+		_directionIsInvalidated = true;
+	}
+
+	return newDirection;
 }
 
 
@@ -223,4 +253,23 @@ int8_t Joystick::RangeAndMap(uint16_t calibratedValue)
 	uint16_t rangedValue = MathUtils::Trim(calibratedValue, -HALF_POT_RANGE, HALF_POT_RANGE - 1);
 	return MathUtils::Map(calibratedValue, 0, 4096 - 1, -100, 100);
 
+}
+
+
+bool Joystick::IsDirectionInvalidated()
+{
+	return _directionIsInvalidated;
+}
+
+
+bool Joystick::IsButtonInvalidated()
+{
+	return _button->IsInvalidated();
+}
+
+
+void Joystick::ResetInvalidation()
+{
+	_directionIsInvalidated = false;
+	_button->ResetInvalidation();
 }

@@ -39,7 +39,7 @@ static const int JOYSTICK_TEXT_HEIGHT = 20;
 static const int LCD_AREA_TOP = 250;
 static const int LCD_AREA_LEFT = 600;
 static const int LCD_CHARACTER_WIDTH = 16;
-static const int LCD_CHARACTER_HEIGHT = 16;
+static const int LCD_CHARACTER_HEIGHT = 20;
 static const int LCD_AREA_WIDTH = LCD_CHARACTER_WIDTH * 20;
 static const int LCD_AREA_HEIGHT = LCD_CHARACTER_HEIGHT * 4;
 static const int LCD_MARGIN = 10;
@@ -49,7 +49,8 @@ CppScreen::CppScreen()
 {
     _blackBrush = CreateSolidBrush(RGB(0, 0, 0));
     _redBrush = CreateSolidBrush(RGB(255, 0, 0));
-    _darkGreenBrush = CreateSolidBrush(RGB(0, 100, 0));
+    _darkGreenBrush = CreateSolidBrush(RGB(30, 230, 30));
+    _greenBrush = CreateSolidBrush(RGB(100, 255, 100));
     
     SetRect(&_backgroundPixelsRectangle, 0, 0, PIXELS_PLUS_MARGIN_WIDTH, PIXELS_PLUS_MARGIN_HEIGHT);
     SetRect(&_pixelsBorderRectangle, LEFT_MARGIN - 1, TOP_MARGIN - 1,
@@ -74,22 +75,22 @@ CppScreen::CppScreen()
     }
 
     // Speaker
-    static const int SPEAKER_AREA_TOP = 290;
-    static const int SPEAKER_AREA_LEFT = 200;
-    static const int SPEAKER_AREA_WIDTH = 150;
-    static const int SPEAKER_AREA_HEIGHT = 50;
-    static const int SPEAKER_TEXT_LEFT_MARGIN = 10;
-    static const int SPEAKER_TEXT_LINE_MARGIN = 5;
+    static const int SOUND_AREA_TOP = 290;
+    static const int SOUND_AREA_LEFT = 200;
+    static const int SOUND_AREA_WIDTH = 150;
+    static const int SOUND_AREA_HEIGHT = 50;
+    static const int SOUND_TEXT_LEFT_MARGIN = 10;
+    static const int SOUND_TEXT_LINE_MARGIN = 5;
 
-    SetRect(&_speakerTextRectangle,
-        SPEAKER_AREA_LEFT, SPEAKER_AREA_TOP,
-        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
-    SetRect(&_speakerDurationTextRectangle,
-        SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_TEXT_LINE_MARGIN,
-        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2);
-    SetRect(&_speakerFrequencyTextRectangle, 
-        SPEAKER_AREA_LEFT + SPEAKER_TEXT_LEFT_MARGIN, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT / 2,
-        SPEAKER_AREA_LEFT + SPEAKER_AREA_WIDTH, SPEAKER_AREA_TOP + SPEAKER_AREA_HEIGHT);
+    SetRect(&_soundTextRectangle,
+        SOUND_AREA_LEFT, SOUND_AREA_TOP,
+        SOUND_AREA_LEFT + SOUND_AREA_WIDTH, SOUND_AREA_TOP + SOUND_AREA_HEIGHT);
+    SetRect(&_soundDurationTextRectangle,
+        SOUND_AREA_LEFT + SOUND_TEXT_LEFT_MARGIN, SOUND_AREA_TOP + SOUND_TEXT_LINE_MARGIN,
+        SOUND_AREA_LEFT + SOUND_AREA_WIDTH - SOUND_TEXT_LEFT_MARGIN, SOUND_AREA_TOP + SOUND_AREA_HEIGHT / 2 - SOUND_TEXT_LINE_MARGIN);
+    SetRect(&_soundFrequencyTextRectangle, 
+        SOUND_AREA_LEFT + SOUND_TEXT_LEFT_MARGIN, SOUND_AREA_TOP + SOUND_AREA_HEIGHT / 2,
+        SOUND_AREA_LEFT + SOUND_AREA_WIDTH - SOUND_TEXT_LEFT_MARGIN, SOUND_AREA_TOP + SOUND_AREA_HEIGHT - SOUND_TEXT_LINE_MARGIN);
 
     // Joystick
     SetRect(&_joyStickRectangle, 
@@ -100,8 +101,10 @@ CppScreen::CppScreen()
         JOYSTICK_AREA_LEFT + JOYSTICK_AREA_WIDTH + JOYSTICK_MARGIN, JOYSTICK_AREA_TOP + JOYSTICK_AREA_HEIGHT + JOYSTICK_MARGIN + JOYSTICK_TEXT_HEIGHT);
 
     // LCD Display
-    SetRect(&_lcdDisplayRectangle, LCD_AREA_LEFT - LCD_MARGIN, LCD_AREA_TOP - LCD_MARGIN, 
+    SetRect(&_lcdDisplayBezelRectangle, LCD_AREA_LEFT - LCD_MARGIN, LCD_AREA_TOP - LCD_MARGIN,
         LCD_AREA_LEFT + LCD_AREA_WIDTH + LCD_MARGIN, LCD_AREA_TOP + LCD_AREA_HEIGHT + LCD_MARGIN);
+    SetRect(&_lcdDisplayScreenRectangle, LCD_AREA_LEFT - LCD_MARGIN / 2, LCD_AREA_TOP - LCD_MARGIN / 2,
+        LCD_AREA_LEFT + LCD_AREA_WIDTH + LCD_MARGIN / 2, LCD_AREA_TOP + LCD_AREA_HEIGHT + LCD_MARGIN / 2);
 }
 
 
@@ -221,8 +224,16 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
     if (_firstDraw)
     {
+        RECT rect = GetFullLedSegmentAreaRect();
+        FillRect(hdc, &rect, _blackBrush);
+
+        FillRect(hdc, &_soundTextRectangle, _blackBrush);
         FillRect(hdc, &_backgroundPixelsRectangle, _blackBrush);
         FrameRect(hdc, &_pixelsBorderRectangle, _redBrush);
+        FillRect(hdc, &_joyStickRectangle, _blackBrush);
+        FillRect(hdc, &_lcdDisplayBezelRectangle, _blackBrush);
+        FillRect(hdc, &_lcdDisplayScreenRectangle, _greenBrush);
+        
         _firstDraw = false;
     }
 
@@ -265,68 +276,99 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
     // Sound Texts
     Sound* sound = ui->GetMainUi()->GetSound();
-    FillRect(hdc, &_speakerTextRectangle, sound->IsPlaying() ? _darkGreenBrush : _blackBrush);
-    
-    wchar_t isPlayingBuffer[26] = {};
-    wchar_t frequencyTextBuffer[26] = {};
-
-    uint16_t duration = sound->GetDuration();
-    wcscpy_s(isPlayingBuffer, sound->IsPlaying() ? L"Duration  : ON" : L"Duration  : Off");
-    std::swprintf(frequencyTextBuffer, sizeof(frequencyTextBuffer) / sizeof(*frequencyTextBuffer),
-        L"Frequency: %5d Hz", sound->GetFrequency());
-
-    SetBkMode(hdc, TRANSPARENT);
-    SetTextColor(hdc, RGB(255, 255, 255));
-    
-    DrawText(hdc, isPlayingBuffer, -1, &_speakerDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
-    DrawText(hdc, frequencyTextBuffer, -1, &_speakerFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
-
-    // Joystick
-    FillRect(hdc, &_joyStickRectangle, _blackBrush);
-    Joystick* joystick = ui->GetPlayerUi()->GetJoystick();
-    int x = (joystick->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
-    int y = (joystick->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
-
-    SetRect(&_joyStickLocationRectangle,
-        JOYSTICK_AREA_LEFT + x - JOYSTICK_LOCATION_WIDTH / 2,
-        JOYSTICK_AREA_TOP + y - JOYSTICK_LOCATION_WIDTH / 2,
-        JOYSTICK_AREA_LEFT + x + JOYSTICK_LOCATION_WIDTH / 2,
-        JOYSTICK_AREA_TOP + y + JOYSTICK_LOCATION_WIDTH / 2);
-        
-    FillRect(hdc, &_joyStickLocationRectangle, _redBrush);
-
-    FillRect(hdc, &_joyStickButtonRectangle, _blackBrush);
-    if (joystick->ReadButton())
+    if (sound->IsInvalidated())
     {
-        SetTextColor(hdc, RGB(255, 255, 255));
-        DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
+        if (sound->IsDurationInvalidated())
+        {
+            FillRect(hdc, &_soundDurationTextRectangle, sound->IsPlaying() ? _redBrush : _blackBrush);
+
+            wchar_t isPlayingBuffer[26] = {};
+            uint16_t duration = sound->GetDuration();
+            wcscpy_s(isPlayingBuffer, sound->IsPlaying() ? L"Duration  : ON" : L"Duration  : Off");
+
+            SetBkMode(hdc, TRANSPARENT);
+            SetTextColor(hdc, RGB(255, 255, 255));
+            DrawText(hdc, isPlayingBuffer, -1, &_soundDurationTextRectangle, DT_SINGLELINE | DT_NOCLIP);
+        }
+
+        if (sound->IsFrequencyInvalidated())
+        {
+            FillRect(hdc, &_soundFrequencyTextRectangle, sound->IsPlaying() ? _redBrush : _blackBrush);
+
+            wchar_t frequencyTextBuffer[26] = {};
+            std::swprintf(frequencyTextBuffer, sizeof(frequencyTextBuffer) / sizeof(*frequencyTextBuffer),
+                L"Frequency: %5d Hz", sound->GetFrequency());
+
+            SetBkMode(hdc, TRANSPARENT);
+            SetTextColor(hdc, RGB(255, 255, 255));
+            DrawText(hdc, frequencyTextBuffer, -1, &_soundFrequencyTextRectangle, DT_SINGLELINE | DT_NOCLIP);
+        }
     }
 
+    // Joystick
+    Joystick* joystick = ui->GetPlayerUi()->GetJoystick();
+    if (joystick->IsDirectionInvalidated())
+    {
+        FillRect(hdc, &_joyStickLocationRectangle, _blackBrush);
+        int x = (joystick->ReadX() + 100) * JOYSTICK_AREA_WIDTH / 200;
+        int y = (joystick->ReadY() + 100) * JOYSTICK_AREA_HEIGHT / 200;
+
+        SetRect(&_joyStickLocationRectangle,
+            JOYSTICK_AREA_LEFT + x - JOYSTICK_LOCATION_WIDTH / 2,
+            JOYSTICK_AREA_TOP + y - JOYSTICK_LOCATION_WIDTH / 2,
+            JOYSTICK_AREA_LEFT + x + JOYSTICK_LOCATION_WIDTH / 2,
+            JOYSTICK_AREA_TOP + y + JOYSTICK_LOCATION_WIDTH / 2);
+
+        FillRect(hdc, &_joyStickLocationRectangle, _redBrush);
+    }
+
+    if (joystick->ReadButton())
+    {
+        FillRect(hdc, &_joyStickButtonRectangle, _blackBrush);
+
+        if (joystick->IsButtonInvalidated())
+        {
+            SetTextColor(hdc, RGB(255, 255, 255));
+            DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
+        }
+    }
+    
     // LCD Display
-    FillRect(hdc, &_lcdDisplayRectangle, _blackBrush);
     LcdDisplay* lcdDisplay = ui->GetMainUi()->GetLcdDisplay();
 
     for (uint8_t row = 0; row < lcdDisplay->GetNrOfRows(); row++)
     {
         for (uint8_t column = 0; column < lcdDisplay->GetNrOfColumns(); column++)
         {
-            size_t size;
-            char text[] = { lcdDisplay->GetContentCharacter(row, column), '\0'};
-            wchar_t wtext[2];
-            mbstowcs_s(&size, wtext, text, 2);
+            if (lcdDisplay->IsContentInvalidated(row, column))
+            {
+                size_t size;
+                char text[] = { lcdDisplay->GetContentCharacter(row, column), '\0' };
+                wchar_t wtext[2];
+                mbstowcs_s(&size, wtext, text, 2);
 
-            RECT charRectangle;
-            SetRect(&charRectangle, 
-                _lcdDisplayRectangle.left + LCD_MARGIN + LCD_CHARACTER_WIDTH * column, 
-                _lcdDisplayRectangle.top + row * LCD_CHARACTER_WIDTH,
-                _lcdDisplayRectangle.left + LCD_MARGIN + LCD_CHARACTER_WIDTH * column + LCD_CHARACTER_HEIGHT, 
-                _lcdDisplayRectangle.top + row * LCD_CHARACTER_WIDTH + LCD_CHARACTER_WIDTH);
-            DrawText(hdc, wtext, -1, &charRectangle, DT_SINGLELINE | DT_NOCLIP);
+                RECT charRectangle;
+                SetRect(&charRectangle,
+                    _lcdDisplayScreenRectangle.left + 5 + LCD_MARGIN + LCD_CHARACTER_WIDTH * column,
+                    _lcdDisplayScreenRectangle.top + 5 + row * LCD_CHARACTER_HEIGHT,
+                    _lcdDisplayScreenRectangle.left + 5 + LCD_MARGIN + LCD_CHARACTER_WIDTH * column + LCD_CHARACTER_WIDTH - 4,
+                    _lcdDisplayScreenRectangle.top + 5 + row * LCD_CHARACTER_HEIGHT + LCD_CHARACTER_HEIGHT - 4);
+                FillRect(hdc, &charRectangle, _darkGreenBrush);
+                charRectangle.left = charRectangle.left + 1;
+                charRectangle.top = charRectangle.top + 1;
+                SetBkMode(hdc, TRANSPARENT);
+                SetTextColor(hdc, RGB(0, 0, 0));
+                DrawText(hdc, wtext, -1, &charRectangle, DT_SINGLELINE | DT_NOCLIP);
+            }
         }
     }
 
     // Reset invalidation
+    sound->ResetInvalidation(); 
     ledMatrix->ResetInvalidatedLeds();
+    joystick->ResetInvalidation();
+    lcdDisplay->ResetInvalidation();
+    
 
     // clock_t clock_end_value = clock();
     // int a = (clock_end_value - clock_value) / CLOCKS_PER_SEC;

@@ -6,6 +6,9 @@
 #include "HardwareProperties.h"
 #include "Game.h"
 #include "LedMatrix.h"
+#include "FourDigitsLed.h"
+#include "LcdDisplay.h"
+#include "Sound.h"
 #include HEADER_FILE(ARDUINO_CLASS)
 
 
@@ -28,7 +31,16 @@ Worms::Worms()
 	_nextPlayMillis = millis() + MILLIS_INTERVAL;
 	Game::Start();
 	DrawCursors();
+
+	LcdDisplay* lcdDisplay = GetLcdDisplay();
+	lcdDisplay->Clear();
+
+	lcdDisplay->DisplayText(0, 2, "WORMS GAME");
+	lcdDisplay->DisplayText(1, 0, "Created");
+	lcdDisplay->DisplayText(2, 3, "by");
+	lcdDisplay->DisplayText(3, 4, "Michel Keijzers");
 }
+
 
 bool _prevState = false;
 
@@ -40,7 +52,25 @@ bool _prevState = false;
 		_nextPlayMillis = millis() + MILLIS_INTERVAL;
 
 		_rounds++;
-		GetFourDigitsLed()->DisplayNumber(_rounds);
+
+		Sound* sound = GetSound();
+		if (millis() % 1000 < 300)
+		{
+			if (!sound->IsPlaying())
+			{
+				sound->Play(440);
+			}
+		}
+		else
+		{
+			if (sound->IsPlaying())
+			{
+				sound->Stop();
+			}
+		}
+
+		GetFourDigitsLed()->DisplayNumber(_rounds % 10000);
+		GetLcdDisplay()->DisplayNumber(1, 10, _rounds % 10000, 4);
 	
 		if (GetUi()->IsInitialized())
 		{

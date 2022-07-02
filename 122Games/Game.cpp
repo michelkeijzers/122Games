@@ -2,14 +2,15 @@
 #include "Game.h"
 #include "Joystick.h"
 #include "HardwareProperties.h"
-
+#include "LcdDisplay.h"
 
 Game::Game()
   : _ui(nullptr),
 	_joystick(nullptr),
 	_ledMatrix(nullptr),
 	_sound(nullptr),
-	_fourDigitsLed(nullptr)
+	_fourDigitsLed(nullptr),
+	_lcdDisplay(nullptr)
 {
 }
 
@@ -50,6 +51,12 @@ FourDigitsLed* Game::GetFourDigitsLed()
 }
 
 
+LcdDisplay* Game::GetLcdDisplay()
+{
+	return _lcdDisplay;
+}
+
+
 void Game::Start()
 {
 	Ui* ui = GetUi();
@@ -58,6 +65,9 @@ void Game::Start()
 	_ledMatrix = mainUi->GetLedMatrix();
 	_sound = mainUi->GetSound();
 	_fourDigitsLed = mainUi->GetFourDigitsLed();
+	_lcdDisplay = mainUi->GetLcdDisplay();
+
+	_lcdDisplay->Clear();
 }
 
 

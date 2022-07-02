@@ -7,7 +7,9 @@ Sound::Sound()
   : _dataPin(0),
  	_isPlaying(false),
 	_frequency(0),
-	_stopAtMillis(0)
+	_stopAtMillis(0),
+	_isFrequencyInvalidated(true),
+    _isDurationInvalidated(true)
 {
 }
 
@@ -30,9 +32,24 @@ void Sound::Play(uint16_t frequency, uint32_t duration /* = 0 */)
 {
 	ledcWriteTone(_dataPin, frequency);
 
-	_isPlaying = true;
-	_frequency = frequency;
-	_stopAtMillis = duration == 0 ? UINT16_MAX : millis() + duration;
+	if (IsPlaying())
+	{
+		_stopAtMillis = duration == 0 ? UINT16_MAX : millis() + duration;
+		_isDurationInvalidated = true;
+		if (_frequency != frequency)
+		{
+			_frequency = frequency;
+			_isFrequencyInvalidated = true;
+		}
+	}
+	else
+	{
+		_isPlaying = true;
+		_stopAtMillis = duration == 0 ? UINT16_MAX : millis() + duration;
+		_isDurationInvalidated = true;
+		_frequency = frequency;
+		_isFrequencyInvalidated = true;
+	}
 }
 
 
@@ -40,9 +57,14 @@ void Sound::Stop()
 {
 	ledcWrite(_dataPin, 0);
 
-	_isPlaying = false;
-	_frequency = 0;
-	_stopAtMillis = 0;
+	if (IsPlaying())
+	{
+		_isPlaying = false;
+		_stopAtMillis = 0;
+		_isDurationInvalidated = true;
+		_frequency = 0;
+		_isFrequencyInvalidated = true;
+	}
 }
 
 
@@ -52,6 +74,31 @@ void Sound::Refresh()
 	{
 		Stop();
 	}
+}
+
+
+bool Sound::IsInvalidated()
+{
+	return _isFrequencyInvalidated || _isDurationInvalidated;
+}
+
+
+bool Sound::IsFrequencyInvalidated()
+{
+	return _isFrequencyInvalidated;
+}
+
+
+bool Sound::IsDurationInvalidated()
+{
+	return _isDurationInvalidated;
+}
+
+
+void Sound::ResetInvalidation()
+{
+	_isFrequencyInvalidated = false;
+	_isDurationInvalidated = false;
 }
 
 

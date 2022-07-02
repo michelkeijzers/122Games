@@ -17,11 +17,16 @@ public:
 
 	bool Read();
 
+	bool IsInvalidated();
+	void ResetInvalidation();
+
 private:
 	uint8_t _pinNumber;
 	uint8_t _pinResistorMode;
 	uint16_t _debouncePeriod;
 	uint32_t _debouncePollingTime;
+	bool _currentState;
 	bool _firstPressed;
+	bool _isInvalidated;
 };
 

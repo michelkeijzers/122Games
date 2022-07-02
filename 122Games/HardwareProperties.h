@@ -7,8 +7,8 @@
 class HardwareProperties
 {
 public:
-	static constexpr uint8_t NR_OF_LEDS_X = 12;
-	static constexpr uint8_t NR_OF_LEDS_Y = 12;
+	static constexpr uint8_t NR_OF_LEDS_X = 15;
+	static constexpr uint8_t NR_OF_LEDS_Y = 10;
 
 	static constexpr uint32_t LCD_I2C_ADDRESS = 0x123456; //TODO
 	static constexpr uint8_t  LCD_NR_OF_ROW = 4;

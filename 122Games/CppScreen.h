@@ -24,6 +24,7 @@ private:
     HBRUSH _blackBrush;
     HBRUSH _redBrush;
     HBRUSH _darkGreenBrush;
+    HBRUSH _greenBrush;
 
     // LED Matrix
     RECT _LedMatrixRectangles[MainUi::MAX_X][MainUi::MAX_Y];
@@ -37,9 +38,9 @@ private:
     RECT _ledSegmentsRectangles[8][8]; // 8 ->4 digits, 8 segments
 
     // Sound show
-    RECT _speakerTextRectangle; 
-    RECT _speakerDurationTextRectangle;
-    RECT _speakerFrequencyTextRectangle;
+    RECT _soundTextRectangle; 
+    RECT _soundDurationTextRectangle;
+    RECT _soundFrequencyTextRectangle;
 
     // Joystick Rectangle
     RECT _joyStickRectangle;
@@ -47,7 +48,8 @@ private:
     RECT _joyStickButtonRectangle;
 
     // LCD Display Rectangle
-    RECT _lcdDisplayRectangle;
+    RECT _lcdDisplayBezelRectangle;
+    RECT _lcdDisplayScreenRectangle;
 
     bool _firstDraw;
 };

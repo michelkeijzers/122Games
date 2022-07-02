@@ -1,4 +1,5 @@
 #include "AssertUtils.h"
+#include "MathUtils.h"
 #include "LcdDisplay.h"
 #include "ClassNames.h"
 #include HEADER_FILE(ARDUINO_CLASS)
@@ -16,7 +17,8 @@ LcdDisplay::LcdDisplay(uint32_t i2cAddress, uint8_t nrOfRows, uint8_t nrOfColumn
 	_cursorOn(false),
 	_cursorBlinking(false),
 	_content{},
-	_liquidCrystalI2c(nullptr)
+	_liquidCrystalI2c(nullptr),
+	_contentIsInvalidated {}
 {
 	AssertUtils::MyAssert(nrOfRows <= MAX_ROWS);
 	AssertUtils::MyAssert(nrOfColumns <= MAX_COLUMNS);
@@ -48,13 +50,12 @@ void LcdDisplay::DisplayOn(bool on /* = true */)
 
 void LcdDisplay::Clear()
 {
-	_liquidCrystalI2c->clear();
-
 	for (uint8_t row = 0; row < _nrOfRows; row++)
 	{
 		for (uint8_t column = 0; column < _nrOfColumns; column++)
 		{
-			_content[row][column] = ' ';
+			SetCursor(row, column);
+			write(' ');
 		}
 	}
 }
@@ -117,10 +118,20 @@ void LcdDisplay::DisplayText(uint8_t row, uint8_t startColumn, const char* text)
 	VerifyRowAndColumn(row, startColumn);
 	_liquidCrystalI2c->print(text);
 	
-	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(startColumn + strlen(text), _nrOfColumns - 1); textIndex++)
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(strlen(text), _nrOfColumns - 1); textIndex++)
 	{
-		_content[row][startColumn + textIndex] = text[textIndex];
+		SetCursor(row, startColumn + textIndex);
+		write(text[textIndex]);
 	}
+}
+
+
+void LcdDisplay::DisplayNumber(uint8_t row, uint8_t startColumn, int32_t number, uint8_t maxLength)
+{
+	char buffer[20] = {};
+	size_t size = sprintf_s(buffer, "%*lu", maxLength, number);
+	AssertUtils::MyAssert(strlen(buffer) <= maxLength);
+	DisplayText(row, startColumn, buffer);
 }
 
 
@@ -149,12 +160,32 @@ size_t LcdDisplay::write(uint8_t character)
 
 	VerifyRowAndColumn(_cursorRow, _cursorColumn);
 	_content[_cursorRow][_cursorColumn] = character;
+	_contentIsInvalidated[_cursorRow][_cursorColumn] = true;
 	_cursorColumn++;
 
 	return 1;
 }
 
 
+bool LcdDisplay::IsContentInvalidated(uint8_t row, uint8_t column)
+{
+	VerifyRowAndColumn(row, column);
+	return _contentIsInvalidated[row][column];
+}
+
+
+void LcdDisplay::ResetInvalidation()
+{
+	for (uint8_t row = 0; row < _nrOfRows; row++)
+	{
+		for (uint8_t column = 0; column < _nrOfColumns; column++)
+		{
+			_contentIsInvalidated[_cursorRow][_cursorColumn] = false;
+		}
+	}
+}
+
+	
 void LcdDisplay::VerifyRowAndColumn(uint8_t row, uint8_t column)
 {
 	AssertUtils::MyAssert(column < _nrOfColumns);

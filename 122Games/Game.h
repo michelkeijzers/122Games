@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Ui.h"
-#include "Joystick.h"
-#include "Sound.h"
-#include "FourDigitsLed.h"
+
+class Joystick;
+class Sound;
+class FourDigitsLed;
+class LcdDisplay;
 
 
 class Game
@@ -27,6 +29,7 @@ public:
 	LedMatrix* GetLedMatrix();
 	Sound* GetSound();
 	FourDigitsLed* GetFourDigitsLed();
+	LcdDisplay* GetLcdDisplay();
 
 	virtual void Start() = 0;
 	virtual void Play() = 0;
@@ -42,5 +45,6 @@ private:
 	Joystick* _joystick;
 	Sound* _sound;
 	FourDigitsLed* _fourDigitsLed;
+	LcdDisplay* _lcdDisplay;
 };
 

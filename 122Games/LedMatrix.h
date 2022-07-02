@@ -25,7 +25,7 @@ public:
 	void ResetInvalidatedLeds();
 
 private:
-	static const int MAX_LEDS = 144;
+	static const int MAX_LEDS = 60 * 5; // 5 meters of 60 leds/m
 
 	uint8_t _nrOfColumns;
 	uint8_t _nrOfRows;
