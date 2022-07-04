@@ -1,10 +1,10 @@
 #ifdef WIN32
 
-// 122Games.cpp : Defines the entry point for the application.
+// LedMatrixGames.cpp : Defines the entry point for the application.
 //
 
 #include "framework.h"
-#include "122Games.h"
+#include "LedMatrixGames.h"
 
 #include "Box.h"
 #include "CppScreen.h"
@@ -137,14 +137,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    _box.loop();
-    _box.GetGames()->GetActiveGame()->Play();
-
     if (!_timersAreSet)
     {
         SetTimer(hWnd,             // handle to main window 
             IDT_TIMER1,            // timer identifier 
-            10,                     // milli second interval 
+            1,                     // milli second interval 
             (TIMERPROC)NULL);      // no timer callback 
         _timersAreSet = true;
     }
@@ -180,10 +177,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HDC hdc = BeginPaint(hWnd, &ps);
             
             Game* activeGame = _box.GetGames()->GetActiveGame();
-            if (activeGame != nullptr)
-            {
-               _cppScreen.Draw(_box.GetUi(), hdc, hWnd);
-            }
+            _cppScreen.Draw(_box.GetUi(), hdc, hWnd);
             
             EndPaint(hWnd, &ps);
         }
@@ -193,18 +187,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wParam)
         {
         case IDT_TIMER1:
-            if (!_box.GetUi()->IsInitialized())
-            {
-                break;
-            }
-                
-            Game* activeGame = _box.GetGames()->GetActiveGame();
-
-            if (activeGame != nullptr)
-            {
-                activeGame->Play();
-                RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
-            }
+            _box.loop();
+//            if (_box.GetUi()->IsInitialized())
+ //           {
+  //              Game* activeGame = _box.GetGames()->GetActiveGame();
+   //             if (activeGame != nullptr)
+    //            {
+                    RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
+    //            }
+      //      }
             
             return 0;
         }
@@ -227,6 +218,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
             case VK_NUMPAD0:
                 activeGame->HandleButton(Game::EButton::Select, true);
+                OutputDebugString(L"D1");
                 break;
 
             case VK_NUMPAD1:
@@ -289,6 +281,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
         case VK_NUMPAD0: 
             activeGame->HandleButton(Game::EButton::Select, false);
+            OutputDebugString(L"D0");
             break;
 
         case VK_NUMPAD1: // Fall through

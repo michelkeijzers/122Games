@@ -55,6 +55,18 @@ void LedMatrix::SetLed(int x, int y, int red, int green, int blue)
 }
 
 
+void LedMatrix::Clear()
+{
+	for (uint8_t y = 0; y < _nrOfRows; y++)
+	{
+		for (uint8_t x = 0; x < _nrOfColumns; x++)
+		{
+			SetLed(x, y, 0, 0, 0);
+		}
+	}
+}
+
+
 int LedMatrix::ToLedIndex(int x, int y)
 {
 	return y * _nrOfColumns + x;
@@ -74,4 +86,9 @@ void LedMatrix::ResetInvalidatedLeds()
 	{
 		_invalidateBits[index] = 0;
 	}
+}
+
+
+void LedMatrix::Refresh()
+{
 }

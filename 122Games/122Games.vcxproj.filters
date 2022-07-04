@@ -111,7 +111,7 @@
     <ClInclude Include="LiquidCrystalI2cStub.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
-    <ClInclude Include="122Games.h">
+    <ClInclude Include="LedMatrixGames.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
@@ -177,6 +177,9 @@
     <ClInclude Include="Print.h">
       <Filter>Header Files\ArduinoStub</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Framework\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -236,7 +239,7 @@
     <ClCompile Include="WinApp.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="122Games.cpp">
+    <ClCompile Include="LedMatrixGames.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="Print.cpp">
       <Filter>Source Files\ArduinoStub</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

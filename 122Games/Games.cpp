@@ -6,8 +6,8 @@
 
 void Games::Initialize()
 {
-	SetActiveGameByIndex(Games::EGameId::WORMS);
-	GetActiveGame()->Start();
+	//SetActiveGameByIndex(Games::EGameId::WORMS);
+	//GetActiveGame()->Start();
 }
 
 
@@ -33,15 +33,15 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		
 	switch ((EGameId) gameIndex)
 	{
-	case DEMO:
+	case EGameId::DEMO:
 		_activeGame = new Demo();
 		break;
 
-	case FADE_IN_OUT_DEMO:
+	case EGameId::FADE_IN_OUT_DEMO:
 		_activeGame = new FadeInOutDemo();
 		break;
 
-	case WORMS:
+	case EGameId::WORMS:
 		_activeGame = new Worms();
 		break;
 

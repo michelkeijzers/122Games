@@ -1,4 +1,4 @@
-//www.plantuml.com/plantuml/png/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8oWWiOAMd0n4wYOgK8-NCmCAcQkeAS75RA02bagm5GP6d0vfEQb0Aq20000
+﻿//www.plantuml.com/plantuml/png/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8oWWiOAMd0n4wYOgK8-NCmCAcQkeAS75RA02bagm5GP6d0vfEQb0Aq20000
 
 Windows Keyboard Button mapping
 -------------------------------
@@ -50,6 +50,52 @@ Area              : 25 x 25 cm
  14 |210 211 212 213 214 215 216 217 218 219 220 221 222 223 224
 
 
+
+ MENU
+ ====
+State, [x] if value
+
+*** Startup[0]: Startup Game
+  
+       0123456789012345
+      ┌----------------┐
+    0 │LED MATRIX GAMES│
+    1 │0.1      (c)2022│
+    2 └----------------┘
+
+  After 1 second -> Startup[1]
+
+*** Startup[1]: Startup Developer
+
+       0123456789012345
+      ┌----------------┐
+    0 │Developed by    │
+    1 │ Michel Keijzers│
+    2 └----------------┘
+
+After 1 second -> Select Game[0]
+
+*** Select Game[x]
+ 
+       0123456789012345  0123456789012345  0123456789012345   0123456789012345  
+      ┌----------------┐┌----------------┐┌----------------┐┌----------------┐
+    0 │  Select Game   ││  Select Game   ││  Select Game   ││  Select Game   │
+    1 │|    WORMS     >││<SPACE INVADERS>││<     PONG     >││< GRAPHIC DEMO |│
+    2 └----------------┘└----------------┘└----------------┘└----------------┘  
+  
+  Left/Right: Go to next/previous game
+  Select: Start game
+
+*** Playing Game
+
+       0123456789012345 
+      ┌----------------┐
+    0 │  Playing Game  │
+    1 │     WORMS      │
+    2 └----------------┘
+
+Back -> Select Game
+  
 
  HOAX / CO
 

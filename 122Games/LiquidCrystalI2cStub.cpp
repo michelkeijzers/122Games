@@ -131,7 +131,7 @@ void LiquidCrystalI2cStub::createChar(uint8_t location, const char* charmap)
 }
 
 
-void LiquidCrystalI2cStub::setCursor(uint8_t, uint8_t)
+void LiquidCrystalI2cStub::setCursor(uint8_t column, uint8_t row)
 {
 }
 

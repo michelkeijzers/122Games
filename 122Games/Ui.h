@@ -16,6 +16,8 @@ public:
 	MainUi* GetMainUi();
 	PlayerUi* GetPlayerUi();
 
+	void Refresh();
+
 private:
 	MainUi _mainUi;
 	PlayerUi _playerUi;

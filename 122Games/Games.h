@@ -6,12 +6,13 @@ class Ui;
 class Games
 {
 public:
-	enum EGameId
+	enum class EGameId
 	{
 		DEMO,
 		FADE_IN_OUT_DEMO,
 
 		WORMS,
+		LAST_GAME_INDEX
 	};
 
 	void Initialize();

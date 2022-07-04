@@ -1,32 +1,33 @@
 Technical debt
 ==============
--    Copy Joystick functionality to Game class instead of within each game (if not already done)
-Done Retest Sound/Tone class (in Worms?)
+REJ   | Copy Joystick functionality to Game class instead of within each game (if not already done)
+Done | Retest Sound/Tone class (in Worms?)
 
 IMPROVEMENTS
 ============
--    Joystick: 4 direction mode (taking into lowest/highest X/Y coordinte to define 4 directions), make a class variable for 4 or 8 direction mode
--    Separate cppscreen classes to easier reuse physical components in windows simulation.
+-    | Joystick: 4 direction mode (taking into lowest/highest X/Y coordinate to define 4 directions), make a class variable for 4 or 8 direction mode
+REJ  | Separate cppscreen classes to easier reuse physical components in windows simulation. (Do this for the next project).
+-    | Final data pin numbers
+-    | LED matrix size of led strips
 
 NEW FEATURES
 ============
--    Add buttons for main UI
--    Create menu
--    Check if bouncing works
--    Analyze LED matrix size / led strips
--    Save to Flash
--    OTA
+Done | Add buttons for main UI
+Ong  | Create menu
+-    | Check if bouncing works
+-    | Save to Flash
+-    | OTA
 
 GAMES
 =====
--    Finish Worms game
--    Create space invaders
--    Create Pong
--    Create Pattern/Demo
+-    | Finish Worms game
+-    | Create space invaders
+-    | Create Pong
+-    | Create Pattern/Demo
 
 
 DOCUMENTATION
 =============
--    Update class diagrams
+-    | Update class diagrams
 
 

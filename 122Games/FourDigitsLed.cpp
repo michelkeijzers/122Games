@@ -150,7 +150,7 @@ void FourDigitsLed::Blink(uint16_t blinkSpeedInMs)
 }
 
 
-void FourDigitsLed::BlinkRefresh()
+void FourDigitsLed::Refresh()
 {
 	// TODO
 }

@@ -1,12 +1,14 @@
 #pragma once
 
 #include "HardwareProperties.h"
+#include "Menu.h"
 
 class LcdDisplay;
 class LedMatrix;
 class FourDigitsLed;
 class Button;
 class Sound;
+
 
 
 class MainUi
@@ -21,24 +23,27 @@ public:
 	void Initialize();
 
 	void ProcessButtons();
+	void ProcessButton(Button* button, Menu::ECommand command);
 	
 	LcdDisplay* GetLcdDisplay();
 	LedMatrix* GetLedMatrix();
 	FourDigitsLed* GetFourDigitsLed();
-	Button* GetStartStopButton();
 	Button* GetSelectButton();
+	Button* GetBackButton();
 	Button* GetLeftButton();
 	Button* GetRightButton();
 	Sound* GetSound();
+
+	void Refresh();
 
 private:
 	LcdDisplay* _lcdDisplay;
 	LedMatrix *_ledMatrix;
 	FourDigitsLed *_fourDigitsLed;
-	Button* _startStopButton;
 	Button* _selectButton;
+	Button* _backButton;
 	Button* _leftButton;
 	Button* _rightButton;
 	Sound* _sound;
-
+	Menu _menu;
 };

@@ -42,9 +42,6 @@ Worms::Worms()
 }
 
 
-bool _prevState = false;
-
-
 /* virtual */ void Worms::Play()
 {
 	if (millis() >= _nextPlayMillis)
@@ -76,15 +73,9 @@ bool _prevState = false;
 		{
 			bool buttonPressed = GetJoystick()->ReadButton();
 			
-			if (_prevState != buttonPressed)
+			if (GetJoystick()->IsButtonInvalidated() && buttonPressed)
 			{
-				_prevState = buttonPressed;
-				Serial.print(buttonPressed);
-			}
-
-			if (buttonPressed)
-			{
-				ClearScreen();
+				GetLedMatrix()->Clear();
 			}
 
 			if (_rounds % CURSOR_DELAY == 0)
@@ -147,19 +138,6 @@ void Worms::MakeLedGreen(uint8_t x, uint8_t y)
 		if (red == 255)
 		{
 			GetLedMatrix()->SetLed(x, y, 0, red, 0); // Move red to green
-		}
-	}
-}
-
-
-void Worms::ClearScreen()
-{
-	LedMatrix* ledMatrix = GetUi()->GetMainUi()->GetLedMatrix();
-	for (uint8_t x = 0; x < MainUi::MAX_X; x++)
-	{
-		for (uint8_t y = 0; y < MainUi::MAX_Y; y++)
-		{
-			ledMatrix->SetLed(x, y, 0, 0, 0);
 		}
 	}
 }

@@ -28,6 +28,7 @@ public:
 	void Refresh();
 
 	void DisplayText(uint8_t row, uint8_t startColumn, const char* text);
+	void DisplayCenteredText(uint8_t row, const char* text);
 	void DisplayNumber(uint8_t row, uint8_t startColumn, int32_t number, uint8_t maxLength);
 	
 	uint8_t GetNrOfRows();

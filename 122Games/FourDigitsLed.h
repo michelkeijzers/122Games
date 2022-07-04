@@ -44,7 +44,8 @@ public:
 	uint8_t GetBrightness(uint8_t brightness);
 
 	void Blink(uint16_t blinkSpeedInMs);
-	void BlinkRefresh();
+	
+	void Refresh();
 
 	TM1637_DISPLAY_CLASS* GetDisplay();
 

@@ -12,6 +12,8 @@ public:
 	
 	Joystick* GetJoystick();
 
+	void Refresh();
+
 private:
 	Joystick* _joyStick;
 };

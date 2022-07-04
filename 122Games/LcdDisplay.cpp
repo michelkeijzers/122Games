@@ -24,6 +24,14 @@ LcdDisplay::LcdDisplay(uint32_t i2cAddress, uint8_t nrOfRows, uint8_t nrOfColumn
 	AssertUtils::MyAssert(nrOfColumns <= MAX_COLUMNS);
 
 	_liquidCrystalI2c = new LIQUID_CRYSTAL_I2C_CLASS(i2cAddress, nrOfColumns, nrOfRows);
+
+	for (uint8_t row = 0; row < MAX_ROWS; row++)
+	{
+		for (uint8_t column = 0; column < MAX_COLUMNS; column++)
+		{
+			_contentIsInvalidated[row][column] = true;
+		}
+	}
 }
 
 
@@ -116,9 +124,27 @@ void LcdDisplay::Refresh()
 void LcdDisplay::DisplayText(uint8_t row, uint8_t startColumn, const char* text)
 {
 	VerifyRowAndColumn(row, startColumn);
+
+	_liquidCrystalI2c->setCursor(startColumn, row);
 	_liquidCrystalI2c->print(text);
 	
-	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(strlen(text), _nrOfColumns - 1); textIndex++)
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min((int)strlen(text), _nrOfColumns - 1); textIndex++)
+	{
+		SetCursor(row, startColumn + textIndex);
+		write(text[textIndex]);
+	}
+}
+
+
+void LcdDisplay::DisplayCenteredText(uint8_t row, const char* text)
+{
+	int8_t startColumn = (int8_t) (_nrOfColumns - strlen(text)) / 2;
+	AssertUtils::MyAssert(startColumn >= 0);
+
+	VerifyRowAndColumn(row, startColumn);
+	_liquidCrystalI2c->print(text);
+
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min((int)strlen(text), _nrOfColumns - 1); textIndex++)
 	{
 		SetCursor(row, startColumn + textIndex);
 		write(text[textIndex]);
@@ -188,6 +214,7 @@ void LcdDisplay::ResetInvalidation()
 	
 void LcdDisplay::VerifyRowAndColumn(uint8_t row, uint8_t column)
 {
-	AssertUtils::MyAssert(column < _nrOfColumns);
 	AssertUtils::MyAssert(row < _nrOfRows);
+	AssertUtils::MyAssert(column < _nrOfColumns);
 }
+

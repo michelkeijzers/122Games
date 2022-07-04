@@ -24,6 +24,7 @@
     <ProjectGuid>{4118a226-e167-4203-8725-5730a15cb329}</ProjectGuid>
     <RootNamespace>My122Games</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>LedMatrixGames</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="122Games.h" />
+    <ClInclude Include="LedMatrixGames.h" />
     <ClInclude Include="ArduinoStringStub.h" />
     <ClInclude Include="ArduinoStub.h" />
     <ClInclude Include="AssertUtils.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="MainUi.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="MemoryUtils.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="PlayerUi.h" />
     <ClInclude Include="Print.h" />
     <ClInclude Include="Resource.h" />
@@ -180,7 +182,7 @@
     <ClInclude Include="Worms.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="122Games.cpp" />
+    <ClCompile Include="LedMatrixGames.cpp" />
     <ClCompile Include="ArduinoStringStub.cpp" />
     <ClCompile Include="ArduinoStub.cpp" />
     <ClCompile Include="AssertUtils.cpp" />
@@ -204,6 +206,7 @@
     <ClCompile Include="MainUi.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="MemoryUtils.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlayerUi.cpp" />
     <ClCompile Include="Print.cpp" />
     <ClCompile Include="Rgb.cpp" />

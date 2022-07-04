@@ -2,7 +2,6 @@
 
 #include <list>
 #include <string>
-//#include <chrono>
 
 #include "framework.h"
 #include "CppScreen.h"
@@ -40,8 +39,8 @@ static const int LCD_AREA_TOP = 250;
 static const int LCD_AREA_LEFT = 600;
 static const int LCD_CHARACTER_WIDTH = 16;
 static const int LCD_CHARACTER_HEIGHT = 20;
-static const int LCD_AREA_WIDTH = LCD_CHARACTER_WIDTH * 20;
-static const int LCD_AREA_HEIGHT = LCD_CHARACTER_HEIGHT * 4;
+static const int LCD_AREA_WIDTH = LCD_CHARACTER_WIDTH * HardwareProperties::LCD_NR_OF_COLUMNS;
+static const int LCD_AREA_HEIGHT = LCD_CHARACTER_HEIGHT * HardwareProperties::LCD_NR_OF_ROW;
 static const int LCD_MARGIN = 10;
 
 CppScreen::CppScreen()
@@ -322,15 +321,12 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
         FillRect(hdc, &_joyStickLocationRectangle, _redBrush);
     }
 
-    if (joystick->ReadButton())
+    if (joystick->IsButtonInvalidated())
     {
-        FillRect(hdc, &_joyStickButtonRectangle, _blackBrush);
-
-        if (joystick->IsButtonInvalidated())
-        {
-            SetTextColor(hdc, RGB(255, 255, 255));
-            DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
-        }
+        FillRect(hdc, &_joyStickButtonRectangle, joystick->ReadButton() ? _greenBrush : _blackBrush);
+        SetBkMode(hdc, TRANSPARENT);
+        SetTextColor(hdc, RGB(255, 255, 255));
+        DrawText(hdc, L"BUTTON", -1, &_joyStickButtonRectangle, DT_SINGLELINE | DT_NOCLIP);
     }
     
     // LCD Display
@@ -342,6 +338,7 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
         {
             if (lcdDisplay->IsContentInvalidated(row, column))
             {
+                OutputDebugString(L"_");
                 size_t size;
                 char text[] = { lcdDisplay->GetContentCharacter(row, column), '\0' };
                 wchar_t wtext[2];
@@ -362,13 +359,12 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
             }
         }
     }
-
     // Reset invalidation
-    sound->ResetInvalidation(); 
+    sound->ResetInvalidation();
     ledMatrix->ResetInvalidatedLeds();
     joystick->ResetInvalidation();
     lcdDisplay->ResetInvalidation();
-    
+
 
     // clock_t clock_end_value = clock();
     // int a = (clock_end_value - clock_value) / CLOCKS_PER_SEC;

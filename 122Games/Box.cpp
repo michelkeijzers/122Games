@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "LcdDisplay.h"
 #include "Demo.h"
-#include "Sound.h"
 
 
 using namespace std;
@@ -23,8 +22,14 @@ void Box::setup()
 
 void Box::loop()
 {
-	_ui.GetMainUi()->GetSound()->Refresh();
-	// TODO Implement Arduino Loop
+	_ui.GetMainUi()->Refresh();
+	_ui.GetMainUi()->ProcessButtons();
+	
+    Game* activeGame = GetGames()->GetActiveGame();
+    if (activeGame != nullptr)
+    {
+        activeGame->Play();
+    }
 }
 
 

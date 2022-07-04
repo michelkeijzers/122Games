@@ -34,3 +34,9 @@ Joystick* PlayerUi::GetJoystick()
 {
 	return _joyStick;
 }
+
+
+void PlayerUi::Refresh()
+{
+
+}

@@ -11,8 +11,8 @@ public:
 	static constexpr uint8_t NR_OF_LEDS_Y = 10;
 
 	static constexpr uint32_t LCD_I2C_ADDRESS = 0x123456; //TODO
-	static constexpr uint8_t  LCD_NR_OF_ROW = 4;
-	static constexpr uint8_t  LCD_NR_OF_COLUMNS = 20;
+	static constexpr uint8_t  LCD_NR_OF_ROW = 2;
+	static constexpr uint8_t  LCD_NR_OF_COLUMNS = 16;
 
 	// ESP32:
 	static const uint8_t LED_STRIP_DATA_PIN = 22; // TODO; for FastLED, cannot use all numbers (some give error for pin number, e.g. 0, 8, 9)

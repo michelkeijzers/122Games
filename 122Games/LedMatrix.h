@@ -18,11 +18,14 @@ public:
 
 	FastLedCRGB* GetLed(int x, int y);
 	void SetLed(int x, int y, int red, int green, int blue);
+	void Clear();
 
 	int ToLedIndex(int x, int y);
 
 	bool IsLedInvalidated(int x, int y);
 	void ResetInvalidatedLeds();
+
+	void Refresh();
 
 private:
 	static const int MAX_LEDS = 60 * 5; // 5 meters of 60 leds/m

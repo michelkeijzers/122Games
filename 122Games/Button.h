@@ -23,10 +23,10 @@ public:
 private:
 	uint8_t _pinNumber;
 	uint8_t _pinResistorMode;
-	uint16_t _debouncePeriod;
-	uint32_t _debouncePollingTime;
-	bool _currentState;
-	bool _firstPressed;
+	uint32_t lastDebounceTime;
+	uint32_t debounceDelay;
+	bool buttonState; // Current reading from input pin;
+	bool lastButtonState; // Previou reading from the input pin
 	bool _isInvalidated;
 };
 

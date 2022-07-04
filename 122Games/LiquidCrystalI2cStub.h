@@ -44,7 +44,7 @@ public:
 	void noAutoscroll();
 	void createChar(uint8_t, uint8_t[]);
 	void createChar(uint8_t location, const char* charmap);
-	void setCursor(uint8_t, uint8_t);
+	void setCursor(uint8_t column, uint8_t row);
 	size_t write(uint8_t);
 	void command(uint8_t);
 	void init();

@@ -5,11 +5,11 @@
 Button::Button()
   : _pinNumber(),
 	_pinResistorMode(INPUT_PULLUP),
-	_debouncePeriod(0),
-	_debouncePollingTime(0),
-    _firstPressed(false),
+    lastDebounceTime(0),
+    debounceDelay(0),
     _isInvalidated(true),
-    _currentState(false)
+    buttonState(false),
+    lastButtonState(false)
 {
 }
 
@@ -18,10 +18,11 @@ void Button::Initialize(uint8_t pinNumber, uint8_t pinResistorMode, uint16_t deb
 {	
     _pinNumber = pinNumber;
     _pinResistorMode = pinResistorMode;
-    _debouncePeriod = debouncePeriod;
-    _debouncePollingTime = 0;
-    _firstPressed = false;
+    lastDebounceTime = 0;
+    debounceDelay = debouncePeriod;
     pinMode(_pinNumber, _pinResistorMode);
+    buttonState = false;
+    lastButtonState = false;
 #ifdef WIN32
     InjectDigitalValue(pinNumber, true, true); // Depress (HIGH)
 #endif
@@ -34,38 +35,36 @@ uint8_t Button::GetPinNumber()
 }
 
 
+// See https://docs.arduino.cc/built-in-examples/digital/Debounce
 bool Button::Read()
 {
-    bool newState = false;
+    // read the state of the switch into a local variable:
+    bool reading = digitalRead(_pinNumber) == LOW ? true : false; // LOW = pressed
 
-    if (_firstPressed && (millis() - _debouncePollingTime < _debouncePeriod))
-    {
-        newState = true;
-    }
-    else if (digitalRead(_pinNumber) == LOW) 
-    {
-        _firstPressed = true;
-        if (millis() - _debouncePollingTime > _debouncePeriod)
-        {
-            _debouncePollingTime = millis();
-            newState = true;
-        }
-        else 
-        {
-            newState = false;
-        }
-    }
-    else
-    {
-        newState = false;
+    // check to see if you just pressed the button
+    // (i.e. the input went from LOW to HIGH), and you've waited long enough
+    // since the last press to ignore any noise:
+
+    // If the switch changed, due to noise or pressing:
+    if (reading != lastButtonState) {
+        // reset the debouncing timer
+        lastDebounceTime = millis();
     }
 
-    if (_currentState != newState)
-    {
-        _currentState = newState;
-        _isInvalidated = true;
+    if ((millis() - lastDebounceTime) > debounceDelay) {
+        // whatever the reading is at, it's been there for longer than the debounce
+        // delay, so take it as the actual current state:
+
+        // if the button state has changed:
+        if (reading != buttonState) {
+            buttonState = reading;
+            _isInvalidated = true;
+        }
     }
-    return newState;
+
+    // save the reading. Next time through the loop, it'll be the lastButtonState:
+    lastButtonState = reading;
+    return buttonState;
 }
 
 

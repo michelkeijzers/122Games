@@ -29,3 +29,10 @@ PlayerUi* Ui::GetPlayerUi()
 {
 	return &_playerUi;
 }
+
+
+void Ui::Refresh()
+{
+	_mainUi.Refresh();
+	_playerUi.Refresh();
+}
