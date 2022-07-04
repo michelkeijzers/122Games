@@ -14,16 +14,6 @@ public:
 	Game();
 
 	void Initialize(Ui* ui);
-	
-	enum class EButton
-	{
-		Up,
-		Right,
-		Down,
-		Left,
-		Select
-	};
-
 	Ui* GetUi();
 	Joystick* GetJoystick();
 	LedMatrix* GetLedMatrix();
@@ -35,7 +25,7 @@ public:
 	virtual void Play() = 0;
 
 #ifdef WIN32
-	virtual void HandleButton(Game::EButton button, bool pressed);
+	virtual void HandleButton(bool pressed);
 	virtual void HandleDirection(Joystick::EDirection direction);
 #endif // WIN32
 	

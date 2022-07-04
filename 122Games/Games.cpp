@@ -33,16 +33,16 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		
 	switch ((EGameId) gameIndex)
 	{
-	case EGameId::DEMO:
-		_activeGame = new Demo();
+	case EGameId::WORMS:
+		_activeGame = new Worms();
 		break;
 
 	case EGameId::FADE_IN_OUT_DEMO:
 		_activeGame = new FadeInOutDemo();
 		break;
 
-	case EGameId::WORMS:
-		_activeGame = new Worms();
+	case EGameId::GRAPHIC_DEMO:
+		_activeGame = new Demo();
 		break;
 
 	default:
@@ -53,4 +53,14 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 	GetActiveGame()->Initialize(_ui);
 
 	return _activeGame;
+}
+
+
+void Games::DeleteActiveGame()
+{
+	if (_activeGame != nullptr)
+	{
+		delete _activeGame;
+		_activeGame = nullptr;
+	}
 }

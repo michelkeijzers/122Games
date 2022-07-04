@@ -132,7 +132,7 @@ void Game::Start()
 
 #ifdef WIN32
 
-/* virtual */ void Game::HandleButton(Game::EButton button, bool pressed)
+/* virtual */ void Game::HandleButton(bool pressed)
 {
 	InjectDigitalValue(HardwareProperties::JOYSTICK_BUTTON_PIN, true, !pressed);
 }

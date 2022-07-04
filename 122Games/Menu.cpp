@@ -11,7 +11,8 @@ Menu::Menu()
 : _state(Menu::EState::Startup),
   _menuValue(0),
   _lastTransitionTime(0),
-  _lcdDisplay(nullptr)
+  _lcdDisplay(nullptr),
+  _isInvalidated(false)
 {
 }
 
@@ -29,6 +30,12 @@ Menu::EState Menu::GetState()
 }
 
 
+uint8_t Menu::GetMenuValue()
+{
+	return _menuValue;
+}
+
+
 // For timed transitions
 void Menu::Refresh()
 {
@@ -40,6 +47,7 @@ void Menu::Refresh()
 			if (_menuValue < 2)
 			{
 				_menuValue++;
+				_isInvalidated = true;
 				UpdateLcd();
 				_lastTransitionTime = millis();
 			}
@@ -47,6 +55,7 @@ void Menu::Refresh()
 			{
 				_state = EState::SelectGame;
 				_menuValue = 0;
+				_isInvalidated = true;
 				UpdateLcd();
 				_lastTransitionTime = millis();
 			}
@@ -89,16 +98,19 @@ void Menu::ProcessSelectGame(Button* button, ECommand command)
 	{
 	case ECommand::Left:
 		_menuValue = MathUtils::Max(0, _menuValue - 1);
+		_isInvalidated = true;
 		UpdateLcd();
 		break;
 
 	case ECommand::Right:
-		_menuValue = MathUtils::Min((uint8_t) Games::EGameId::LAST_GAME_INDEX, _menuValue + 1);
+		_menuValue = MathUtils::Min((uint8_t) Games::EGameId::LAST_GAME_INDEX - 1, _menuValue + 1);
+		_isInvalidated = true;
 		UpdateLcd();
 		break;
 
 	case ECommand::Select:
 		_state = EState::PlayingGame;
+		_isInvalidated = true;
 		UpdateLcd();
 		break;
 
@@ -115,6 +127,8 @@ void Menu::ProcessPlayingGame(Button* button, ECommand command)
 	{
 	case ECommand::Back:
 		_state = EState::SelectGame;
+		_isInvalidated = true;
+
 		UpdateLcd();
 		break;
 
@@ -158,16 +172,30 @@ void Menu::UpdateLcd()
 		_lcdDisplay->Clear();
 		_lcdDisplay->DisplayCenteredText(0, "Select Game");
 		_lcdDisplay->DisplayCenteredText(1, "| GAME NAME >"); // TODO
+		_lcdDisplay->DisplayNumber(1, 2, _menuValue, (uint8_t) Games::EGameId::LAST_GAME_INDEX < 10 ? 1 : 2); // IMPR: Only works for < 100 games
 		break;
 
 	case EState::PlayingGame:
 		OutputDebugString(L"d ");
 		_lcdDisplay->Clear();
-		_lcdDisplay->DisplayText(0, 0, "Playing Game");
-		_lcdDisplay->DisplayText(1, 0, "GAME NAME"); //TODO
+		_lcdDisplay->DisplayCenteredText(0, "Playing Game");
+		_lcdDisplay->DisplayCenteredText(1, "GAME NAME"); //TODO
 		break;
 
 	default:
 		AssertUtils::MyAssert(false);
 	}
 }
+
+
+bool Menu::IsInvalidated()
+{
+	return _isInvalidated;
+}
+
+
+void Menu::ResetInvalidation()
+{
+	_isInvalidated = false;
+}
+

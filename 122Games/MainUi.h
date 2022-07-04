@@ -22,6 +22,8 @@ public:
 	~MainUi();
 	void Initialize();
 
+	void HandleButton(uint8_t pinNumber, bool pressed);
+
 	void ProcessButtons();
 	void ProcessButton(Button* button, Menu::ECommand command);
 	
@@ -33,6 +35,7 @@ public:
 	Button* GetLeftButton();
 	Button* GetRightButton();
 	Sound* GetSound();
+	Menu* GetMenu();
 
 	void Refresh();
 

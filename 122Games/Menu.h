@@ -31,11 +31,15 @@ public:
 	};
 
 	EState GetState();
+	uint8_t GetMenuValue();
 
 	void Refresh();
 	void ProcessCommand(Button* button, ECommand command);
 	void ProcessSelectGame(Button* button, ECommand command);
 	void ProcessPlayingGame(Button* button, ECommand command);
+
+	bool IsInvalidated();
+	void ResetInvalidation();
 
 private:
 	void UpdateLcd();
@@ -45,5 +49,7 @@ private:
 	uint32_t _lastTransitionTime;
 
 	LcdDisplay* _lcdDisplay;
+
+	bool _isInvalidated;
 };
 

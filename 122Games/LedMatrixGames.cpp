@@ -146,6 +146,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         _timersAreSet = true;
     }
 
+    MainUi* mainUi = _box.GetUi()->GetMainUi();
+
     switch (message)
     {
     case WM_COMMAND:
@@ -188,36 +190,43 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
         case IDT_TIMER1:
             _box.loop();
-//            if (_box.GetUi()->IsInitialized())
- //           {
-  //              Game* activeGame = _box.GetGames()->GetActiveGame();
-   //             if (activeGame != nullptr)
-    //            {
-                    RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
-    //            }
-      //      }
-            
+            RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE);
             return 0;
         }
         break;
     
     case WM_KEYDOWN:
         {
+            Game* activeGame = _box.GetGames()->GetActiveGame();
+        
             if (!_box.GetUi()->IsInitialized())
             {
                 break;
             }
 
-            Game* activeGame = _box.GetGames()->GetActiveGame();
-            if (activeGame == nullptr)
-            {
-                return 0;
-            }
-
             switch (wParam)
             {
+            case VK_LEFT:
+                mainUi->HandleButton(HardwareProperties::BUTTON_LEFT, true);
+                break;
+
+            case VK_RIGHT:
+                mainUi->HandleButton(HardwareProperties::BUTTON_RIGHT, true);
+                break;
+
+            case VK_DOWN:
+                mainUi->HandleButton(HardwareProperties::BUTTON_BACK, true);
+                break;
+
+            case VK_UP:
+                mainUi->HandleButton(HardwareProperties::BUTTON_SELECT, true);
+                break;
+
             case VK_NUMPAD0:
-                activeGame->HandleButton(Game::EButton::Select, true);
+                if (activeGame != nullptr)
+                {
+                    activeGame->HandleButton(true);
+                }
                 OutputDebugString(L"D1");
                 break;
 
@@ -266,21 +275,36 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_KEYUP:
     {
+        Game* activeGame = _box.GetGames()->GetActiveGame();
+
         if (!_box.GetUi()->IsInitialized())
         {
             break;
         }
 
-        Game* activeGame = _box.GetGames()->GetActiveGame();
-        if (activeGame == nullptr)
-        {
-            return 0;
-        }
-
         switch (wParam)
         {
+        case VK_LEFT:
+            mainUi->HandleButton(HardwareProperties::BUTTON_LEFT, false);
+            break;
+
+        case VK_RIGHT:
+            mainUi->HandleButton(HardwareProperties::BUTTON_RIGHT, false);
+            break;
+
+        case VK_DOWN:
+            mainUi->HandleButton(HardwareProperties::BUTTON_BACK, false);
+            break;
+
+        case VK_UP:
+            mainUi->HandleButton(HardwareProperties::BUTTON_SELECT, false);
+            break;
+
         case VK_NUMPAD0: 
-            activeGame->HandleButton(Game::EButton::Select, false);
+            if (activeGame != nullptr)
+            {
+                activeGame->HandleButton(false);
+            }
             OutputDebugString(L"D0");
             break;
 

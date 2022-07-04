@@ -22,14 +22,48 @@ void Box::setup()
 
 void Box::loop()
 {
-	_ui.GetMainUi()->Refresh();
-	_ui.GetMainUi()->ProcessButtons();
+	MainUi* mainUi = _ui.GetMainUi();
+	mainUi->GetSelectButton()->ResetInvalidation();
+	mainUi->GetBackButton()->ResetInvalidation();
+	mainUi->GetLeftButton()->ResetInvalidation();
+	mainUi->GetRightButton()->ResetInvalidation();
+	Menu* menu = mainUi->GetMenu();
+	menu->ResetInvalidation();
+
+	mainUi->Refresh();
+	mainUi->ProcessButtons();
 	
-    Game* activeGame = GetGames()->GetActiveGame();
-    if (activeGame != nullptr)
+	
+	if (menu->IsInvalidated())
+	{
+		Game* activeGame = GetGames()->GetActiveGame();
+
+		switch (menu->GetState())
+		{
+		case Menu::EState::Startup: // Fall through
+			// No action needed
+			break;
+
+		case Menu::EState::SelectGame:
+			if (activeGame != nullptr)
+			{
+				_games.DeleteActiveGame();
+			}
+			break;
+
+		case Menu::EState::PlayingGame:
+			_games.SetActiveGameByIndex(menu->GetMenuValue());
+			_games.GetActiveGame()->Start();
+		}
+	}
+	
+	Game* activeGame = GetGames()->GetActiveGame();
+	if (activeGame != nullptr)
     {
         activeGame->Play();
     }
+
+
 }
 
 

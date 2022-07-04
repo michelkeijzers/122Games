@@ -105,7 +105,7 @@ void MainUi::Initialize()
 		_backButton = new Button();
 	}
 
-	_backButton->Initialize(HardwareProperties::BUTTON_START_STOP, INPUT_PULLUP, 50);
+	_backButton->Initialize(HardwareProperties::BUTTON_BACK, INPUT_PULLUP, 50);
 
 	if (_leftButton == nullptr)
 	{
@@ -179,6 +179,18 @@ Button* MainUi::GetRightButton()
 Sound* MainUi::GetSound()
 { 
 	return _sound;
+}
+
+
+Menu* MainUi::GetMenu()
+{
+	return &_menu;
+}
+
+
+void MainUi::HandleButton(uint8_t pinNumber, bool pressed)
+{
+	InjectDigitalValue(pinNumber, true, !pressed);
 }
 
 
