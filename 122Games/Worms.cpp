@@ -28,17 +28,13 @@ Worms::Worms()
 
 /* virtual */ void Worms::Start()
 {
-	_nextPlayMillis = millis() + MILLIS_INTERVAL;
 	Game::Start();
+
+	_nextPlayMillis = millis() + MILLIS_INTERVAL;
 	DrawCursors();
 
-	LcdDisplay* lcdDisplay = GetLcdDisplay();
-	lcdDisplay->Clear();
-
-	lcdDisplay->DisplayText(0, 2, "WORMS GAME");
-	lcdDisplay->DisplayText(1, 0, "Created");
-	//lcdDisplay->DisplayText(2, 3, "by");
-	//lcdDisplay->DisplayText(3, 4, "Michel Keijzers");
+	GetLcdDisplay()->DisplayCenteredText(0, "WORMS");
+	GetLcdDisplay()->DisplayCenteredText(1, "GET READY");
 }
 
 

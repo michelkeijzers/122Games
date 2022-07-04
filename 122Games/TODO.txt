@@ -13,8 +13,8 @@ REJ  | Separate cppscreen classes to easier reuse physical components in windows
 NEW FEATURES
 ============
 Done | Add buttons for main UI
-Ong  | Create menu (todo: buttons)
--    | Check if bouncing works
+Done | Create menu 
+Done | Check if bouncing works
 -    | Save to Flash
 -    | OTA
 

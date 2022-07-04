@@ -12,7 +12,7 @@ public:
 
 private:
     int _light;
-
     int _iteration;
+    uint32_t _nextPlayMillis;
 };
 

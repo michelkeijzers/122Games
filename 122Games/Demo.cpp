@@ -5,16 +5,24 @@
 #include "Ui.h"
 #include "LedMatrix.h"
 #include "Joystick.h"
+#include "LcdDisplay.h"
+
+
+static const uint16_t MILLIS_INTERVAL = 10;
 
 
 Demo::Demo()
-	: Game()
+	: Game(),
+	_nextPlayMillis(0)
 {
 }
 
 
 /* virtual */ void Demo::Start()
 {
+	Game::Start();
+	_nextPlayMillis = millis() + MILLIS_INTERVAL;
+	GetLcdDisplay()->DisplayCenteredTexts("GRAPHIC DEMO", "Use Joystick");
 }
 
 

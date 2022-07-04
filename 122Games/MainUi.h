@@ -22,7 +22,11 @@ public:
 	~MainUi();
 	void Initialize();
 
+	void Clear(bool clearLcdDisplay = true);
+
+#ifdef WIN32
 	void HandleButton(uint8_t pinNumber, bool pressed);
+#endif
 
 	void ProcessButtons();
 	void ProcessButton(Button* button, Menu::ECommand command);

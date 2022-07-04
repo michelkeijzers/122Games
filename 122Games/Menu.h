@@ -42,10 +42,16 @@ public:
 	void ResetInvalidation();
 
 private:
+	void DecreaseCurrentMenuValue();
+	void IncreaseCurrentMenuValue();
+	void SetState(EState state);
+
+	void DisplaySideSymbols(bool show = true);
 	void UpdateLcd();
 
 	EState _state;
-	uint8_t _menuValue;
+	uint8_t _currentMenuValue;
+	uint8_t _maxMenuValue;
 	uint32_t _lastTransitionTime;
 
 	LcdDisplay* _lcdDisplay;

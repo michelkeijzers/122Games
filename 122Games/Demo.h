@@ -12,5 +12,6 @@ public:
 
 private:
     bool _light = false;
+    uint32_t _nextPlayMillis;
 };
 

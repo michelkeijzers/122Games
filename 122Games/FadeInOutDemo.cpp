@@ -6,18 +6,27 @@
 #include "LedMatrix.h"
 #include "FourDigitsLed.h"
 #include "Sound.h"
+#include "LcdDisplay.h"
+
+
+static const uint16_t MILLIS_INTERVAL = 10;
 
 
 FadeInOutDemo::FadeInOutDemo()
 	: Game(),
 	_light(0),
-	_iteration(0)
+	_iteration(0),
+	_nextPlayMillis(0)
 {
 }
 
 
 /* virtual */ void FadeInOutDemo::Start()
 {
+	Game::Start();
+	_nextPlayMillis = millis() + MILLIS_INTERVAL;
+
+	GetLcdDisplay()->DisplayCenteredTexts("FADE IN/OUT", "DEMO");
 }
 
 

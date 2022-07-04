@@ -28,7 +28,6 @@ void Box::loop()
 	mainUi->GetLeftButton()->ResetInvalidation();
 	mainUi->GetRightButton()->ResetInvalidation();
 	Menu* menu = mainUi->GetMenu();
-	menu->ResetInvalidation();
 
 	mainUi->Refresh();
 	mainUi->ProcessButtons();
@@ -48,6 +47,7 @@ void Box::loop()
 			if (activeGame != nullptr)
 			{
 				_games.DeleteActiveGame();
+				mainUi->Clear(false);
 			}
 			break;
 
@@ -63,6 +63,7 @@ void Box::loop()
         activeGame->Play();
     }
 
+	menu->ResetInvalidation();
 
 }
 

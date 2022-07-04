@@ -19,26 +19,23 @@ public:
 		LAST_GAME_INDEX
 	};
 
-	const char* GAME_NAMES[(uint8_t) EGameId::LAST_GAME_INDEX] =
-	{
-		"WORMS",
-		"FADE IN/OUT DEMO",
-		"GRAPHIC DEMO"
-	};
+	Games(Ui* ui);
 
 	void Initialize();
-
-	Games(Ui* ui);
 
 	static const int NR_OF_GAMES = 1;
 
 	Game* GetActiveGame();
 
-	Game* SetActiveGameByIndex(int index);
+	Game* SetActiveGameByIndex(int gameIndex);
 	void DeleteActiveGame();
+
+	static const char* GetGameName(uint8_t gameIndex);
 
 private:
 	Game* _activeGame;
+	EGameId _activeGameId;
+	static const char* GAME_NAMES[(uint8_t)EGameId::LAST_GAME_INDEX];
 
 	Ui* _ui;
 };

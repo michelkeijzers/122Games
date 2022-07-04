@@ -1,4 +1,3 @@
-#include "framework.h"
 #include "Menu.h"
 #include "AssertUtils.h"
 #include "MathUtils.h"
@@ -9,7 +8,8 @@
 
 Menu::Menu()
 : _state(Menu::EState::Startup),
-  _menuValue(0),
+  _currentMenuValue(0),
+  _maxMenuValue(0),
   _lastTransitionTime(0),
   _lcdDisplay(nullptr),
   _isInvalidated(false)
@@ -19,6 +19,7 @@ Menu::Menu()
 
 void Menu::Initialize(LcdDisplay* lcdDisplay)
 {
+	SetState(EState::Startup);
 	_lcdDisplay = lcdDisplay;
 	_lastTransitionTime = millis();
 }
@@ -32,7 +33,7 @@ Menu::EState Menu::GetState()
 
 uint8_t Menu::GetMenuValue()
 {
-	return _menuValue;
+	return _currentMenuValue;
 }
 
 
@@ -44,18 +45,15 @@ void Menu::Refresh()
 	case EState::Startup:
 		if (millis() - _lastTransitionTime >= 1000)
 		{
-			if (_menuValue < 2)
+			if (_currentMenuValue < _maxMenuValue)
 			{
-				_menuValue++;
-				_isInvalidated = true;
+				IncreaseCurrentMenuValue();
 				UpdateLcd();
 				_lastTransitionTime = millis();
 			}
 			else
 			{
-				_state = EState::SelectGame;
-				_menuValue = 0;
-				_isInvalidated = true;
+				SetState(EState::SelectGame);
 				UpdateLcd();
 				_lastTransitionTime = millis();
 			}
@@ -93,30 +91,28 @@ void Menu::ProcessCommand(Button* button, ECommand command)
 
 void Menu::ProcessSelectGame(Button* button, ECommand command)
 {
-	OutputDebugString(L"SG ");
 	switch (command)
 	{
 	case ECommand::Left:
-		_menuValue = MathUtils::Max(0, _menuValue - 1);
-		_isInvalidated = true;
-		UpdateLcd();
+		DecreaseCurrentMenuValue();
 		break;
 
 	case ECommand::Right:
-		_menuValue = MathUtils::Min((uint8_t) Games::EGameId::LAST_GAME_INDEX - 1, _menuValue + 1);
-		_isInvalidated = true;
-		UpdateLcd();
+		IncreaseCurrentMenuValue();
 		break;
 
 	case ECommand::Select:
-		_state = EState::PlayingGame;
-		_isInvalidated = true;
-		UpdateLcd();
+		SetState(EState::PlayingGame);
 		break;
 
 	default:
 		// Ignore others
 		break;
+	}
+
+	if (_isInvalidated)
+	{
+		UpdateLcd();
 	}
 }
 
@@ -126,9 +122,7 @@ void Menu::ProcessPlayingGame(Button* button, ECommand command)
 	switch (command)
 	{
 	case ECommand::Back:
-		_state = EState::SelectGame;
-		_isInvalidated = true;
-
+		SetState(EState::SelectGame);
 		UpdateLcd();
 		break;
 
@@ -139,47 +133,95 @@ void Menu::ProcessPlayingGame(Button* button, ECommand command)
 }
 
 
+void Menu::DecreaseCurrentMenuValue()
+{
+	if (_currentMenuValue > 0)
+	{
+		_currentMenuValue--;
+		_isInvalidated = true;
+	}
+}
+
+
+void Menu::IncreaseCurrentMenuValue()
+{
+	if (_currentMenuValue < _maxMenuValue)
+	{
+		_currentMenuValue++;
+		_isInvalidated = true;
+	}
+}
+
+
+void Menu::SetState(EState state)
+{
+	if (_state != state)
+	{
+		_state = state;
+		_isInvalidated = true;
+
+		switch (_state)
+		{
+		case EState::Startup:
+			_maxMenuValue = 1; // Two screens
+			break;
+
+		case EState::SelectGame:
+			_maxMenuValue = (uint8_t)Games::EGameId::LAST_GAME_INDEX - 1;
+			break;
+
+		case EState::PlayingGame:
+			// No menu values
+			break;
+
+		default:
+			AssertUtils::MyAssert(false);
+		}
+	}
+}
+
+
+void Menu::DisplaySideSymbols(bool show /* = true */)
+{
+	char leftSymbol  = show ? (_currentMenuValue == 0 ? ' ' : '<') : ' ';
+	char rightSymbol = show ? (_currentMenuValue == _maxMenuValue ? ' ' : '>') : ' ';
+	_lcdDisplay->DisplayCharacter(1, 0, leftSymbol);
+	_lcdDisplay->DisplayCharacter(1, _lcdDisplay->GetNrOfColumns() - 1, rightSymbol);
+}
+
+
 void Menu::UpdateLcd()
 {
-	OutputDebugString(L"Upd ");
 	switch (_state)
 	{
 	case EState::Startup:
-		switch (_menuValue)
+		switch (_currentMenuValue)
 		{
 		case 0: 
 			// Initialization, no LCD update
 			break;
 
 		case 1:
-			OutputDebugString(L"a ");
 			_lcdDisplay->Clear();
-			_lcdDisplay->DisplayCenteredText(0, "LED MATRIX GAMES");
-			_lcdDisplay->DisplayCenteredText(1, "0.1     (c) 2022"); // IMPR: Left/Right justify
+			_lcdDisplay->DisplayCenteredTexts("LED MATRIX GAMES", "0.1     (c) 2022"); // IMPR: Left/Right justify
 			break;
 
 		case 2:
-			OutputDebugString(L"b ");
 			_lcdDisplay->Clear();
-			_lcdDisplay->DisplayCenteredText(0, "Developed by");
-			_lcdDisplay->DisplayCenteredText(1, "Michel Keijzers");
+			_lcdDisplay->DisplayCenteredTexts("Developed by", "Michel Keijzers");
 			break;
 		}
 		break;
 
 	case EState::SelectGame:
-		OutputDebugString(L"c ");
 		_lcdDisplay->Clear();
-		_lcdDisplay->DisplayCenteredText(0, "Select Game");
-		_lcdDisplay->DisplayCenteredText(1, "| GAME NAME >"); // TODO
-		_lcdDisplay->DisplayNumber(1, 2, _menuValue, (uint8_t) Games::EGameId::LAST_GAME_INDEX < 10 ? 1 : 2); // IMPR: Only works for < 100 games
+		_lcdDisplay->DisplayCenteredTexts("Select Game", Games::GetGameName(_currentMenuValue), _lcdDisplay->GetNrOfColumns() - 2);
+		DisplaySideSymbols();
 		break;
 
 	case EState::PlayingGame:
-		OutputDebugString(L"d ");
 		_lcdDisplay->Clear();
-		_lcdDisplay->DisplayCenteredText(0, "Playing Game");
-		_lcdDisplay->DisplayCenteredText(1, "GAME NAME"); //TODO
+		_lcdDisplay->DisplayCenteredTexts("Playing Game", Games::GetGameName(_currentMenuValue), _lcdDisplay->GetNrOfColumns() - 2);
 		break;
 
 	default:
@@ -198,4 +240,3 @@ void Menu::ResetInvalidation()
 {
 	_isInvalidated = false;
 }
-

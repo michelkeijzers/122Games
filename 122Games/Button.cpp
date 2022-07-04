@@ -23,9 +23,11 @@ void Button::Initialize(uint8_t pinNumber, uint8_t pinResistorMode, uint16_t deb
     pinMode(_pinNumber, _pinResistorMode);
     buttonState = false;
     lastButtonState = false;
+
 #ifdef WIN32
     InjectDigitalValue(pinNumber, true, true); // Depress (HIGH)
 #endif
+
 }
 
 

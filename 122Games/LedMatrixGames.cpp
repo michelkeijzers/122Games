@@ -199,7 +199,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             Game* activeGame = _box.GetGames()->GetActiveGame();
         
-            if (!_box.GetUi()->IsInitialized())
+            if (!_box.GetUi()->IsInitialized() ||
+                 ((activeGame == nullptr) && (wParam >= VK_NUMPAD0) && (wParam <= VK_NUMPAD9)))
             {
                 break;
             }
@@ -277,7 +278,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         Game* activeGame = _box.GetGames()->GetActiveGame();
 
-        if (!_box.GetUi()->IsInitialized())
+        if (!_box.GetUi()->IsInitialized() ||
+            ((activeGame == nullptr) && (wParam >= VK_NUMPAD0) && (wParam <= VK_NUMPAD9)))
         {
             break;
         }
@@ -318,7 +320,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case VK_NUMPAD8: // Fall through
         case VK_NUMPAD9:
         default:
-            activeGame->HandleDirection(Joystick::EDirection::Center);
+            if (activeGame != nullptr)
+            {
+                activeGame->HandleDirection(Joystick::EDirection::Center);
+            }
             break;
         }
         break;

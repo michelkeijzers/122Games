@@ -130,7 +130,19 @@ void MainUi::Initialize()
 	_sound->Initialize(HardwareProperties::SPEAKER_PIN);
 
 	_menu.Initialize(_lcdDisplay);
+}
 
+
+void MainUi::Clear(bool clearLcdDisplay /* = true */)
+{
+	if (clearLcdDisplay)
+	{
+		_lcdDisplay->Clear();
+	}
+
+	_fourDigitsLed->Clear();
+	_ledMatrix->Clear();
+	_sound->Stop();
 }
 
 
@@ -187,12 +199,14 @@ Menu* MainUi::GetMenu()
 	return &_menu;
 }
 
+#ifdef WIN32
 
 void MainUi::HandleButton(uint8_t pinNumber, bool pressed)
 {
 	InjectDigitalValue(pinNumber, true, !pressed);
 }
 
+#endif
 
 void MainUi::ProcessButtons()
 {

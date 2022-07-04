@@ -37,11 +37,11 @@ static const int JOYSTICK_TEXT_HEIGHT = 20;
 
 static const int LCD_AREA_TOP = 250;
 static const int LCD_AREA_LEFT = 600;
-static const int LCD_CHARACTER_WIDTH = 16;
+static const int LCD_CHARACTER_WIDTH = 18;
 static const int LCD_CHARACTER_HEIGHT = 20;
 static const int LCD_AREA_WIDTH = LCD_CHARACTER_WIDTH * HardwareProperties::LCD_NR_OF_COLUMNS;
 static const int LCD_AREA_HEIGHT = LCD_CHARACTER_HEIGHT * HardwareProperties::LCD_NR_OF_ROW;
-static const int LCD_MARGIN = 10;
+static const int LCD_MARGIN = 20;
 
 CppScreen::CppScreen()
     : _firstDraw(true)
@@ -346,10 +346,10 @@ RECT CppScreen::GetLedSegmentRect(int digit, int segment)
 
                 RECT charRectangle;
                 SetRect(&charRectangle,
-                    _lcdDisplayScreenRectangle.left + 5 + LCD_MARGIN + LCD_CHARACTER_WIDTH * column,
-                    _lcdDisplayScreenRectangle.top + 5 + row * LCD_CHARACTER_HEIGHT,
-                    _lcdDisplayScreenRectangle.left + 5 + LCD_MARGIN + LCD_CHARACTER_WIDTH * column + LCD_CHARACTER_WIDTH - 4,
-                    _lcdDisplayScreenRectangle.top + 5 + row * LCD_CHARACTER_HEIGHT + LCD_CHARACTER_HEIGHT - 4);
+                    _lcdDisplayScreenRectangle.left + LCD_MARGIN / 2 + LCD_CHARACTER_WIDTH * column,
+                    _lcdDisplayScreenRectangle.top + 7 + row * LCD_CHARACTER_HEIGHT,
+                    _lcdDisplayScreenRectangle.left + LCD_MARGIN / 2 + LCD_CHARACTER_WIDTH * column + LCD_CHARACTER_WIDTH - 2,
+                    _lcdDisplayScreenRectangle.top + 7 + row * LCD_CHARACTER_HEIGHT + LCD_CHARACTER_HEIGHT - 2);
                 FillRect(hdc, &charRectangle, _darkGreenBrush);
                 charRectangle.left = charRectangle.left + 1;
                 charRectangle.top = charRectangle.top + 1;
