@@ -107,7 +107,8 @@ StringUtils::StringUtils()
 }
 
 
-/* static */ void StringUtils::CopyString(char* destination, const char* source, size_t sourceLength)
+/* static */ void StringUtils::CopyString(
+	char* destination, const char* source, size_t sourceLength)
 {
 	if (destination != nullptr)
 	{

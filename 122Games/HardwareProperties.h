@@ -15,7 +15,9 @@ public:
 	static constexpr uint8_t  LCD_NR_OF_COLUMNS = 16;
 
 	// ESP32:
-	static const uint8_t LED_STRIP_DATA_PIN = 22; // TODO; for FastLED, cannot use all numbers (some give error for pin number, e.g. 0, 8, 9)
+	// TODO; for FastLED, cannot use all numbers (some give error for pin number, e.g. 0, 8, 9)
+	static const uint8_t LED_STRIP_DATA_PIN = 22; 
+
 	// Uno
 	//static const uint8_t LED_STRIP_DATA_PIN = 8;
 

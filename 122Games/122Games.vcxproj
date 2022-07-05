@@ -169,6 +169,7 @@
     <ClInclude Include="MemoryUtils.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PlayerUi.h" />
+    <ClInclude Include="Pong.h" />
     <ClInclude Include="Print.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Rgb.h" />
@@ -179,7 +180,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TM1637DisplayStub.h" />
     <ClInclude Include="Ui.h" />
-    <ClInclude Include="Worms.h" />
+    <ClInclude Include="Snake.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LedMatrixGames.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="MemoryUtils.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlayerUi.cpp" />
+    <ClCompile Include="Pong.cpp" />
     <ClCompile Include="Print.cpp" />
     <ClCompile Include="Rgb.cpp" />
     <ClCompile Include="SerialStub.cpp" />
@@ -217,7 +219,7 @@
     <ClCompile Include="TM1637DisplayStub.cpp" />
     <ClCompile Include="Ui.cpp" />
     <ClCompile Include="WinApp.cpp" />
-    <ClCompile Include="Worms.cpp" />
+    <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="122Games.rc" />
@@ -235,7 +237,11 @@
     <Text Include="Ui.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Manual.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="RelayBox.ino" />
+    <None Include="styles.css" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

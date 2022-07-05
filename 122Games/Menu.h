@@ -48,6 +48,7 @@ private:
 
 	void DisplaySideSymbols(bool show = true);
 	void UpdateLcd();
+	void UpdateLcdForSelectingOrPlayingGame(const char* text);
 
 	EState _state;
 	uint8_t _currentMenuValue;

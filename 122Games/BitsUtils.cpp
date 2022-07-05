@@ -42,7 +42,8 @@ BitsUtils::~BitsUtils()
 /*
  * Assuming bits to set are all 0, otherwise use ChangeBit.
  */
-/* static */ void BitsUtils::SetBitsFromZero(uint8_t* address, uint8_t startBit, uint8_t nrOfBits, uint32_t value)
+/* static */ void BitsUtils::SetBitsFromZero(
+	uint8_t* address, uint8_t startBit, uint8_t nrOfBits, uint32_t value)
 {
 	while (nrOfBits > 0)
 	{

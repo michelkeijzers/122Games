@@ -46,7 +46,8 @@ public:
 
 	Joystick();
 
-	void Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage);
+	void Initialize(
+		uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage);
 	
 	int16_t ReadRawX();
 	int16_t ReadRawY();

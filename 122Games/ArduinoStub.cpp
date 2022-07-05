@@ -204,7 +204,8 @@ void noTone()
 }
 
 
-// Tone (ESP32), see https://espressif-docs.readthedocs-hosted.com/projects/arduino-esp32/en/latest/api/ledc.html
+// Tone (ESP32), see 
+// https://espressif-docs.readthedocs-hosted.com/projects/arduino-esp32/en/latest/api/ledc.html
 
 void ledcSetup(uint8_t channel, double frequency, uint8_t resolutionBits)
 {

@@ -139,7 +139,8 @@ void LcdDisplay::DisplayText(uint8_t row, uint8_t startColumn, const char* text)
 	_liquidCrystalI2c->setCursor(startColumn, row);
 	_liquidCrystalI2c->print(text);
 	
-	for (uint8_t textIndex = 0; textIndex < MathUtils::Min((int)strlen(text), _nrOfColumns - 1); textIndex++)
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min((int)strlen(text), _nrOfColumns - 1); 
+		textIndex++)
 	{
 		SetCursor(row, startColumn + textIndex);
 		write(text[textIndex]);
@@ -147,8 +148,8 @@ void LcdDisplay::DisplayText(uint8_t row, uint8_t startColumn, const char* text)
 }
 
 
-void LcdDisplay::DisplayCenteredTexts(
-	const char* textRow1, const char* textRow2, uint8_t lengthRow1 /* = 0 */, uint8_t lengthRow2 /* = 0 */)
+void LcdDisplay::DisplayCenteredTexts(const char* textRow1, const char* textRow2,
+	uint8_t lengthRow1 /* = 0 */, uint8_t lengthRow2 /* = 0 */)
 {
 	DisplayCenteredText(0, textRow1, lengthRow1);
 	DisplayCenteredText(1, textRow2, lengthRow2);
@@ -164,7 +165,8 @@ void LcdDisplay::DisplayCenteredText(uint8_t row, const char* text, uint8_t leng
 	VerifyRowAndColumn(row, startColumn);
 	_liquidCrystalI2c->print(text);
 
-	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(stringLength, _nrOfColumns - 1); textIndex++)
+	for (uint8_t textIndex = 0; textIndex < MathUtils::Min(stringLength, _nrOfColumns - 1);
+		textIndex++)
 	{
 		SetCursor(row, startColumn + textIndex);
 		write(text[textIndex]);
@@ -174,13 +176,15 @@ void LcdDisplay::DisplayCenteredText(uint8_t row, const char* text, uint8_t leng
 	length = length == 0 ? 0 : MathUtils::Max(0, length - stringLength);
 	if (length > 0)
 	{
-		for (int8_t column = startColumn - 1; column >= MathUtils::Max(1, startColumn - length / 2); column--)
+		for (int8_t column = startColumn - 1;
+			column >= MathUtils::Max(1, startColumn - length / 2); column--)
 		{
 			DisplayCharacter(row, column, ' ');
 		}
 
 		for (int8_t column = startColumn + stringLength; 
-			column < MathUtils::Min(_nrOfColumns, startColumn + stringLength + (length + 1) / 2); column++)
+			column < MathUtils::Min(_nrOfColumns, startColumn + stringLength + (length + 1) / 2); 
+			column++)
 		{
 			DisplayCharacter(row, column, ' ');
 		}

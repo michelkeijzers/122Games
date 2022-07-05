@@ -15,10 +15,15 @@ public:
 	void setBrightness(uint8_t brightness, bool on);
 	void setSegments(const uint8_t segments[], uint8_t length, uint8_t pos);
 	void clear();
+	
 	void showNumberDec(int num, bool leading_zero, uint8_t length, uint8_t pos);
-	void showNumberDecExt(int num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
-	void showNumberHexEx(uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
-	void showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
+	void showNumberDecExt(
+		int num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
+	void showNumberHexEx(
+		uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
+	void showNumberBaseEx(
+		int8_t base, uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos);
+
 	void bitDelay();
 	void start();
 	void stop();

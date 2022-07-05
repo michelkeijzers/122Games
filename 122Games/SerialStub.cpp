@@ -158,7 +158,8 @@ size_t SerialClass::print(float value)
 }
 */
 
-size_t SerialClass::printf(ArduinoStringStub str, int arg1 /* = NULL */, const char* arg2 /* = NULL */)
+size_t SerialClass::printf(
+	ArduinoStringStub str, int arg1 /* = NULL */, const char* arg2 /* = NULL */)
 {
 	(void) arg1;
 	(void) arg2;

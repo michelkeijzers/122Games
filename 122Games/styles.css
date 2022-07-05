@@ -1,0 +1,110 @@
+/* Control the right side */
+.content {
+    color: ghostwhite;
+    height: 100%;
+    width: 80%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    right: 0;
+    bottom: 0;
+}
+
+.current_selection {
+    font-weight: bold;
+    color: lightgoldenrodyellow
+}
+
+body {
+    background-color: darkblue;
+    font-family: Arial, Arial, Helvetica, sans-serif, sans-serif;
+}
+
+p {
+    margin: 8px;
+    color: lightgray;
+}
+
+a {
+    color: lightcyan
+}
+
+    a.visited {
+        color: lightcyan
+    }
+
+
+table th.xapp {
+    vertical-align: top;
+    background-color: yellow;
+    border: 2px solid lightgray;
+    border-collapse: collapse;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 16px;
+    caption-side: bottom;
+    color: lightgray;
+}
+
+    table td, table th {
+        vertical-align: top;
+        padding: 4px;
+        background-color: darkslateblue;
+        border: 1px solid lightgray;
+        border-spacing: 2px;
+    }
+
+blockquote {
+    color: black;
+    background-color: black
+}
+
+pre {
+    font-size: 14px;
+}
+
+    pre a {
+        color: blue;
+    }
+
+    pre strong {
+        color: red;
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    color: lightgray;
+    padding: 8px;
+}
+
+img {
+    float: right;
+    border: 2px solid lightgray;
+    margin: 8px;
+}
+
+.profile_pic {
+    margin-top: 180px;
+    border: 2px solid lightgoldenrodyellow;
+}
+
+.left {
+    text-align: left;
+}
+
+.image_center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center
+}

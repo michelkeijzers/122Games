@@ -13,9 +13,10 @@ class Games
 public:
 	enum class EGameId
 	{
-		WORMS,
+		SNAKE,
 		FADE_IN_OUT_DEMO,
 		GRAPHIC_DEMO,
+		PONG,
 		LAST_GAME_INDEX
 	};
 
@@ -23,10 +24,7 @@ public:
 
 	void Initialize();
 
-	static const int NR_OF_GAMES = 1;
-
 	Game* GetActiveGame();
-
 	Game* SetActiveGameByIndex(int gameIndex);
 	void DeleteActiveGame();
 

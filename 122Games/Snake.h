@@ -1,11 +1,11 @@
 #pragma once
 #include "Game.h"
 
-class Worms :
+class Snake :
 	public Game
 {
 public:
-	Worms();
+	Snake();
 
 	/* virtual */ void Start();
 	/* virtual */ void Play();

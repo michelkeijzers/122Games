@@ -8,10 +8,10 @@
 #include "AssertUtils.h"
 
 
-/* Table for galaxy, each value shows the next step. There is a slow speed, starting at 1 (next step is 5)
- * and a fast speed, starting at 3 (next step is 7). When at highest brightness, the values (steps) fade 
- * out with values +1 compared to fade in. All values which do not follow the slow/fast route have numbers
- * to continue via the fast fade down route. */
+/* Table for galaxy, each value shows the next step. There is a slow speed, starting at 1 (next step
+ * is 5) and a fast speed, starting at 3 (next step is 7). When at highest brightness, the values 
+ * (steps) fade out with values +1 compared to fade in. All values which do not follow the slow/fast
+ * route have numbers to continue via the fast fade down route. */
 
 /* static */ const uint8_t LedColor::GALAXY_SLOW_SPEED_START_STEP = 1;
 /* static */ const uint8_t LedColor::GALAXY_FAST_SPEED_START_STEP = 3;
@@ -54,7 +54,8 @@
 
 
 // https://www.w3schools.com/colors/colors_hex.asp
-/* static */ void LedColor::SetRgb(uint8_t* red, uint8_t* green, uint8_t* blue, LedColor::EColor color, uint32_t step)
+/* static */ void LedColor::SetRgb(
+	uint8_t* red, uint8_t* green, uint8_t* blue, LedColor::EColor color, uint32_t step)
 {
 	switch (color)
 	{
@@ -329,7 +330,8 @@
 }
 
 
-/* static */ void LedColor::SetRgb(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t redValue, uint8_t greenValue, uint8_t blueValue)
+/* static */ void LedColor::SetRgb(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t redValue, 
+	uint8_t greenValue, uint8_t blueValue)
 {
 	*red   = redValue;
 	*green = greenValue;
@@ -337,7 +339,8 @@
 }
 
 
-/* static */ uint8_t LedColor::SetBrightness(uint8_t* red, uint8_t* green, uint8_t* blue, uint8_t percentage_0, uint8_t percentage_1)
+/* static */ uint8_t LedColor::SetBrightness(uint8_t* red, uint8_t* green, uint8_t* blue,
+	uint8_t percentage_0, uint8_t percentage_1)
 {
 	*red       *= percentage_0 * percentage_1 / 255 / 255;
 	*green     *= percentage_0 * percentage_1 / 255 / 255;

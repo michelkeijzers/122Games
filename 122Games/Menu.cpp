@@ -203,7 +203,8 @@ void Menu::UpdateLcd()
 
 		case 1:
 			_lcdDisplay->Clear();
-			_lcdDisplay->DisplayCenteredTexts("LED MATRIX GAMES", "0.1     (c) 2022"); // IMPR: Left/Right justify
+			// IMPR: Left/Right justify
+			_lcdDisplay->DisplayCenteredTexts("LED MATRIX GAMES", "0.1     (c) 2022"); 
 			break;
 
 		case 2:
@@ -214,19 +215,25 @@ void Menu::UpdateLcd()
 		break;
 
 	case EState::SelectGame:
-		_lcdDisplay->Clear();
-		_lcdDisplay->DisplayCenteredTexts("Select Game", Games::GetGameName(_currentMenuValue), _lcdDisplay->GetNrOfColumns() - 2);
-		DisplaySideSymbols();
+		UpdateLcdForSelectingOrPlayingGame("Select Game");
 		break;
 
 	case EState::PlayingGame:
-		_lcdDisplay->Clear();
-		_lcdDisplay->DisplayCenteredTexts("Playing Game", Games::GetGameName(_currentMenuValue), _lcdDisplay->GetNrOfColumns() - 2);
+		UpdateLcdForSelectingOrPlayingGame("Playing Game");
 		break;
 
 	default:
 		AssertUtils::MyAssert(false);
 	}
+}
+
+
+void Menu::UpdateLcdForSelectingOrPlayingGame(const char* text)
+{
+	_lcdDisplay->Clear();
+	_lcdDisplay->DisplayCenteredTexts(
+		"Select Game", Games::GetGameName(_currentMenuValue), _lcdDisplay->GetNrOfColumns() - 2);
+	DisplaySideSymbols();
 }
 
 

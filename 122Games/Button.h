@@ -11,7 +11,8 @@ class Button
 public:
 	Button();
 
-	void Initialize(uint8_t pinNumber, uint8_t pinResistorMode = INPUT_PULLUP, uint16_t debouncePeriod = 20);
+	void Initialize(uint8_t pinNumber, uint8_t pinResistorMode = INPUT_PULLUP, 
+		uint16_t debouncePeriod = 20);
 
 	uint8_t GetPinNumber();
 

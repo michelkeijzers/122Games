@@ -69,7 +69,7 @@
     <ClInclude Include="Rgb.h">
       <Filter>Header Files\Framework\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="Worms.h">
+    <ClInclude Include="Snake.h">
       <Filter>Header Files\Games</Filter>
     </ClInclude>
     <ClInclude Include="MathUtils.h">
@@ -180,6 +180,9 @@
     <ClInclude Include="Menu.h">
       <Filter>Header Files\Framework\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Pong.h">
+      <Filter>Header Files\Games</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Demo.cpp">
@@ -191,7 +194,7 @@
     <ClCompile Include="Rgb.cpp">
       <Filter>Source Files\Framework\Screen</Filter>
     </ClCompile>
-    <ClCompile Include="Worms.cpp">
+    <ClCompile Include="Snake.cpp">
       <Filter>Source Files\Games</Filter>
     </ClCompile>
     <ClCompile Include="MathUtils.cpp">
@@ -290,6 +293,9 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Framework\Ui</Filter>
     </ClCompile>
+    <ClCompile Include="Pong.cpp">
+      <Filter>Source Files\Games</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="122Games.rc">
@@ -324,5 +330,7 @@
     <None Include="RelayBox.ino">
       <Filter>Source Files\Framework</Filter>
     </None>
+    <None Include="Manual.htm" />
+    <None Include="styles.css" />
   </ItemGroup>
 </Project>

@@ -44,7 +44,8 @@ public:
 
 	static bool STUB_IsShowEnabled();
 
-	static CLEDController& addLeds(CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset = 0);
+	static CLEDController& addLeds(
+		CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset = 0);
 
 	template<ESPIChipsets CHIPSET, uint8_t DATA_PIN, EOrder RGB_ORDER> CLEDController& addLeds(
 		struct FastLedCRGB* data, int nLedsOrOffset)
@@ -59,7 +60,8 @@ public:
 
 	uint8_t getBrightness() {  }
 
-	inline void setMaxPowerInVoltsAndMilliamps(uint8_t volts, uint32_t milliamps) { setMaxPowerInMilliWatts(volts * milliamps); }
+	inline void setMaxPowerInVoltsAndMilliamps(uint8_t volts, uint32_t milliamps)
+		{ setMaxPowerInMilliWatts(volts * milliamps); }
 
 	inline void setMaxPowerInMilliWatts(uint32_t milliwatts) {  }
 

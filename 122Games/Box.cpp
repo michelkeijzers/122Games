@@ -1,7 +1,6 @@
 #include "Box.h"
 #include "Game.h"
 #include "LcdDisplay.h"
-#include "Demo.h"
 
 
 using namespace std;
@@ -31,8 +30,7 @@ void Box::loop()
 
 	mainUi->Refresh();
 	mainUi->ProcessButtons();
-	
-	
+		
 	if (menu->IsInvalidated())
 	{
 		Game* activeGame = GetGames()->GetActiveGame();

@@ -1,5 +1,5 @@
 #include "AssertUtils.h"
-#include "Worms.h"
+#include "Snake.h"
 #include "MathUtils.h"
 #include "PlayerUi.h"
 #include "ClassNames.h"
@@ -16,7 +16,7 @@ static const uint16_t MILLIS_INTERVAL = 10;
 static const uint16_t CURSOR_DELAY = 5; // Every x rounds
 
 
-Worms::Worms()
+Snake::Snake()
   : Game(),
 	_playerX(6),
 	_playerY(6),
@@ -26,19 +26,19 @@ Worms::Worms()
 }
 
 
-/* virtual */ void Worms::Start()
+/* virtual */ void Snake::Start()
 {
 	Game::Start();
 
 	_nextPlayMillis = millis() + MILLIS_INTERVAL;
 	DrawCursors();
 
-	GetLcdDisplay()->DisplayCenteredText(0, "WORMS");
+	GetLcdDisplay()->DisplayCenteredText(0, "SNAKE");
 	GetLcdDisplay()->DisplayCenteredText(1, "GET READY");
 }
 
 
-/* virtual */ void Worms::Play()
+/* virtual */ void Snake::Play()
 {
 	if (millis() >= _nextPlayMillis)
 	{
@@ -110,14 +110,14 @@ Worms::Worms()
 }
 
 
-void Worms::DrawCursors()
+void Snake::DrawCursors()
 {
 	MakeSurroundingLedsGreen();
 	GetLedMatrix()->SetLed(_playerX, _playerY, 255, 0, 0);
 }
 
 
-void Worms::MakeSurroundingLedsGreen()
+void Snake::MakeSurroundingLedsGreen()
 {
 	MakeLedGreen(_playerX - 1, _playerY);
 	MakeLedGreen(_playerX + 1, _playerY);
@@ -126,7 +126,7 @@ void Worms::MakeSurroundingLedsGreen()
 }
 
 
-void Worms::MakeLedGreen(uint8_t x, uint8_t y)
+void Snake::MakeLedGreen(uint8_t x, uint8_t y)
 {
 	if ((x >= 0) && (x < MainUi::MAX_X) && (y >= 0) && (y < MainUi::MAX_Y))
 	{

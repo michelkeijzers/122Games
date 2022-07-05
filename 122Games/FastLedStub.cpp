@@ -35,7 +35,8 @@ CFastLED::CFastLED()
 /* static */ bool CFastLED::STUB_IsShowEnabled() { return _showEnabled; }
 
 
-/* static */ CLEDController& CFastLED::addLeds(CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset /* = 0 */)
+/* static */ CLEDController& CFastLED::addLeds(
+	CLEDController* pLed, struct FastLedCRGB* data, int nLedsOrOffset, int nLedsIfOffset /* = 0 */)
 {
 	_data[_nrOfLedStrips] = data;
 	_nrOfUsedLeds[_nrOfLedStrips] = nLedsOrOffset;

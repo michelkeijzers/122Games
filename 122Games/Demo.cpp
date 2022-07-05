@@ -35,13 +35,7 @@ Demo::Demo()
 		int x = rand() % MainUi::MAX_X;
 		int y = rand() % MainUi::MAX_Y;
 
-		//for (int x = 0; x < Canvas::MAX_X; x++)
-		//{
-		//	for (int y = 0; y < Canvas::MAX_Y; y++)
-		//	{
 		GetLedMatrix()->SetLed(x, y, rand() % 255, rand() % 255, rand() % 255);
-	//	}
-	//}
 	}
 
 	_light = !_light;

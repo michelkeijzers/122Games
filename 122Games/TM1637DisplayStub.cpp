@@ -26,25 +26,29 @@ void TM1637DisplayStub::clear()
 }
 
 
-void TM1637DisplayStub::showNumberDec(int num, bool leading_zero, uint8_t length, uint8_t pos)
+void TM1637DisplayStub::showNumberDec(
+	int num, bool leading_zero, uint8_t length, uint8_t pos)
 {
 
 }
 
 
-void TM1637DisplayStub::showNumberDecExt(int num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+void TM1637DisplayStub::showNumberDecExt(
+	int num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
 {
 
 }
 
 
-void TM1637DisplayStub::showNumberHexEx(uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+void TM1637DisplayStub::showNumberHexEx(
+	uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
 {
 
 }
 
 
-void TM1637DisplayStub::showNumberBaseEx(int8_t base, uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
+void TM1637DisplayStub::showNumberBaseEx(
+	int8_t base, uint16_t num, uint8_t dots, bool leading_zero, uint8_t length, uint8_t pos)
 {
 
 }

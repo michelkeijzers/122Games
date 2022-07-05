@@ -25,7 +25,8 @@ Joystick::Joystick()
 }
 
 
-void Joystick::Initialize(uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage)
+void Joystick::Initialize(
+	uint8_t switchPin, uint8_t xAxisPotPin, uint8_t yAxisPotPin, uint8_t centerPercentage)
 {
 	_xAxisPotPin = xAxisPotPin;
 	_yAxisPotPin = yAxisPotPin;

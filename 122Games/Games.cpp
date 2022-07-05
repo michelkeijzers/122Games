@@ -2,14 +2,16 @@
 #include "Games.h"
 #include "Demo.h"
 #include "FadeInOutDemo.h"
-#include "Worms.h"
+#include "Snake.h"
+#include "Pong.h"
 
 
 /* static */ const char* Games::GAME_NAMES[(uint8_t)Games::EGameId::LAST_GAME_INDEX] =
 {
-	"WORMS",
+	"SNAKE",
 	"FADE DEMO",
-	"GRAPHIC DEMO"
+	"GRAPHIC DEMO",
+	"PONG"
 };
 
 
@@ -17,14 +19,15 @@ Games::Games(Ui* ui)
 	: _activeGame(nullptr),
 	_activeGameId(EGameId::LAST_GAME_INDEX)
 {
-	AssertUtils::MyAssert((sizeof(GAME_NAMES) / sizeof(const char*) == (uint8_t) EGameId::LAST_GAME_INDEX));
+	AssertUtils::MyAssert(
+		(sizeof(GAME_NAMES) / sizeof(const char*) == (uint8_t) EGameId::LAST_GAME_INDEX));
 	_ui = ui;
 }
 
 
 void Games::Initialize()
 {
-	//SetActiveGameByIndex(Games::EGameId::WORMS);
+	//SetActiveGameByIndex(Games::EGameId::SNAKE);
 	//GetActiveGame()->Start();
 }
 
@@ -49,8 +52,8 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 		
 	switch ((EGameId) gameIndex)
 	{
-	case EGameId::WORMS:
-		_activeGame = new Worms();
+	case EGameId::SNAKE:
+		_activeGame = new Snake();
 		break;
 
 	case EGameId::FADE_IN_OUT_DEMO:
@@ -59,6 +62,10 @@ Game* Games::SetActiveGameByIndex(int gameIndex)
 
 	case EGameId::GRAPHIC_DEMO:
 		_activeGame = new Demo();
+		break;
+
+	case EGameId::PONG:
+		_activeGame = new Pong();
 		break;
 
 	default:

@@ -5,8 +5,10 @@ Done | Retest Sound/Tone class (in Worms?)
 
 IMPROVEMENTS
 ============
--    | Joystick: 4 direction mode (taking into lowest/highest X/Y coordinate to define 4 directions), make a class variable for 4 or 8 direction mode
-REJ  | Separate cppscreen classes to easier reuse physical components in windows simulation. (Do this for the next project).
+-    | Joystick: 4 direction mode (taking into lowest/highest X/Y coordinate to define 4
+       directions), make a class variable for 4 or 8 direction mode
+REJ  | Separate cppscreen classes to easier reuse physical components in windows 
+       simulation. (Do this for the next project).
 -    | Final data pin numbers
 -    | LED matrix size of led strips
 
@@ -20,11 +22,14 @@ Done | Check if bouncing works
 
 GAMES
 =====
--    | Finish Worms game
+
+-    | Finish Worms game, change to snake, changes rules/settings:
+       https://www.quora.com/What-is-the-easiest-game-to-program-Pong-or-Snake-assuming-Im-
+       using-the-same-beginner-platform-such-as-processing-org-or-love2d-org
 -    | Create space invaders
 -    | Create Pong
 -    | Create Graphic Demo
-
+-    | More games, see Manual.html
 
 DOCUMENTATION
 =============

@@ -5,7 +5,8 @@
 #include "LiquidCrystalI2CStub.h"
 
 
-LiquidCrystalI2cStub::LiquidCrystalI2cStub(uint8_t i2cAddress, uint8_t lcd_columns, uint8_t lcd_rows)
+LiquidCrystalI2cStub::LiquidCrystalI2cStub(
+	uint8_t i2cAddress, uint8_t lcd_columns, uint8_t lcd_rows)
 {
 }
 
@@ -15,7 +16,8 @@ LiquidCrystalI2cStub::~LiquidCrystalI2cStub()
 }
 
 
-void LiquidCrystalI2cStub::begin(uint8_t columns, uint8_t rows, uint8_t charsize /* = LCD_5x8DOTS */)
+void LiquidCrystalI2cStub::begin(
+	uint8_t columns, uint8_t rows, uint8_t charsize /* = LCD_5x8DOTS */)
 {
 }
 
