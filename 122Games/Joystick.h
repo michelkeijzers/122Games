@@ -60,9 +60,9 @@ public:
 	EHorizontalDirection GetHorizontalDirection();
 	EVerticalDirection GetVerticalDirection();
 
-	// Calibrate with center values, range to [-100, 0 (center), 100].
-	int8_t ReadX();
-	int8_t ReadY();
+	// Calibrate with center values, range to [-1000, 0 (center), 1000].
+	int16_t ReadX();
+	int16_t ReadY();
 
 	void CalibrateCenter();
 
@@ -73,13 +73,13 @@ public:
 	void ResetInvalidation();
 
 private:
-	int8_t RangeAndMap(uint16_t calibratedValue);
+	int16_t RangeAndMap(int16_t calibratedValue);
 
 	uint8_t _xAxisPotPin;
 	uint8_t _yAxisPotPin;
 
-	uint16_t _xCenterValue;
-	uint16_t _yCenterValue;
+	int16_t _xCenterValue;
+	int16_t _yCenterValue;
 
 	uint8_t _centerPercentage;
 

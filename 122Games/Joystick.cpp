@@ -54,15 +54,15 @@ int16_t Joystick::ReadRawY()
 }
 
 
-int8_t Joystick::ReadX()
+int16_t Joystick::ReadX()
 {
 	return RangeAndMap(MathUtils::Trim(ReadRawX() + (2048 - _xCenterValue), 0, 4095));
 }
 
 
-int8_t Joystick::ReadY()
+int16_t Joystick::ReadY()
 {
-	return RangeAndMap(MathUtils::Trim(ReadRawY() + (2048 - _yCenterValue), 0, 4095));
+	return -RangeAndMap(MathUtils::Trim(ReadRawY() + (2048 - _yCenterValue), 0, 4095));
 }
 
 
@@ -72,55 +72,35 @@ bool Joystick::ReadButton()
 }
 
 
+// Use https://www.desmos.com/calculator
 Joystick::EDirection Joystick::GetDirection()
 {
-	int8_t x = ReadX();
-	int8_t y = ReadY();
-
 	EDirection newDirection = EDirection::Center;
 
-	if (x <= -_centerPercentage)
-	{
-		if (y <= -_centerPercentage)
-		{
-			newDirection = EDirection::LeftUp;
-		}
-		else if (y >= _centerPercentage)
-		{
-			newDirection = EDirection::LeftDown;
-		}
-		else
-		{
-			newDirection = EDirection::Left;
-		}
-	}
-	else if (x >= _centerPercentage)
-	{
-		if (y <= -_centerPercentage)
-		{
-			newDirection = EDirection::RightUp;
-		}
-		else if (y >= _centerPercentage)
-		{
-			newDirection = EDirection::RightDown;
-		}
-		else
-		{
-			newDirection = EDirection::Right;
-		}
-	}
-	else
-	{
-		if (y <= -_centerPercentage)
-		{
-			newDirection = EDirection::Up;
-		}
-		else if (y >= _centerPercentage)
-		{
-			newDirection = EDirection::Down;
-		}
-	}
+	int16_t x = ReadX();
+	int16_t y = ReadY();
 
+	if (x * x + y * y >= _centerPercentage * _centerPercentage)
+	{
+		newDirection =
+			x <= 0 ? (y <= 0 ? (2 * x <  y ? (x / 2 >  y ? EDirection::LeftDown 
+				                                         : EDirection::Left)
+				                           : (x / 2 >  y ? EDirection::Down     
+											             : EDirection::Center))
+				             : (2 * x < -y ? (x / 2 > -y ? EDirection::LeftUp   
+								                         : EDirection::Left)
+				                           : (x / 2 > -y ? EDirection::Up       
+											             : EDirection::Center)))
+				   : (y <= 0 ? (2 * x < -y ? (x / 2 > -y ? EDirection::Center   
+					                                     : EDirection::Down)
+				                           : (x / 2 > -y ? EDirection::Right  
+											             : EDirection::RightDown))
+				             : (2 * x <  y ? (x / 2 >  y ? EDirection::Center 
+								                         : EDirection::Up)
+				                           : (x / 2 >  y ? EDirection::Right
+											             : EDirection::RightUp)));
+	}
+	
 	if (_currentDirection != newDirection)
 	{
 		_currentDirection = newDirection;
@@ -131,40 +111,27 @@ Joystick::EDirection Joystick::GetDirection()
 }
 
 
+// Use https://www.desmos.com/calculator
 Joystick::ENonDiagonalDirection Joystick::GetNonDiagonalDirection()
 {
 	ENonDiagonalDirection newDirection = ENonDiagonalDirection::Center;
 
-	switch (GetDirection())
+	int16_t x = ReadX();
+	int16_t y = ReadY();
+
+	if (x * x + y * y >= _centerPercentage * _centerPercentage)
 	{
-	case EDirection::Up:
-		newDirection = ENonDiagonalDirection::Up;
-		break;
-
-	case EDirection::RightUp: // Fall through
-	case EDirection::Right: // Fall through
-	case EDirection::RightDown:
-		newDirection = ENonDiagonalDirection::Right;
-		break;
-
-	case EDirection::Down:
-		newDirection = ENonDiagonalDirection::Down;
-		break;
-
-	case EDirection::LeftUp: // Fall through
-	case EDirection::Left: // Fall through
-	case EDirection::LeftDown:
-		newDirection = ENonDiagonalDirection::Left;
-		break;
-
-	case EDirection::Center:
-		// Do nothing
-		break;
-
-	default:
-		// Do nothing
-		break;
+		newDirection =
+			x <= 0 ? (y <= 0 ? (x <  y ? ENonDiagonalDirection::Left 
+									   : ENonDiagonalDirection::Down)
+				             : (x < -y ? ENonDiagonalDirection::Left 
+								       : ENonDiagonalDirection::Up))
+			       : (y <= 0 ? (x < -y ? ENonDiagonalDirection::Down 
+					                   : ENonDiagonalDirection::Right)
+				             : (x <  y ? ENonDiagonalDirection::Up   
+								       : ENonDiagonalDirection::Right));
 	}
+
 
 	if (_currentNonDiagonalDirection != newDirection)
 	{
@@ -249,10 +216,10 @@ void Joystick::CalibrateCenter()
 }
 
 
-int8_t Joystick::RangeAndMap(uint16_t calibratedValue)
+int16_t Joystick::RangeAndMap(int16_t calibratedValue)
 {
-	uint16_t rangedValue = MathUtils::Trim(calibratedValue, -HALF_POT_RANGE, HALF_POT_RANGE - 1);
-	return MathUtils::Map(calibratedValue, 0, 4096 - 1, -100, 100);
+	int16_t rangedValue = MathUtils::Trim(calibratedValue, -HALF_POT_RANGE, HALF_POT_RANGE - 1);
+	return MathUtils::Map(calibratedValue, 0, 4096 - 1, -1000, 1000);
 
 }
 
